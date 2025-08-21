@@ -27,11 +27,11 @@
     .dot { width: 12px; height: 12px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,.25); }
     .dot.red { background: #ff5f56; } .dot.yellow { background: #ffbd2e; } .dot.green { background: #27c93f; }
     .logo-link { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; }
-    .logo-img { width: 32px; height: 32px; border-radius: 50%; }
     .logo-name { font-family: "Inter", sans-serif; font-weight: 200; font-size: 18px; }
+    .brand-logo-char { font-family: "JetBrains Mono", monospace; font-weight: 700; color: var(--accent-6); font-size: 22px; line-height: 1; }
     nav.menu { display: flex; gap: 16px; font-family: "JetBrains Mono", monospace; font-size: 14px; }
     nav.menu a { text-decoration: none; padding: 6px 10px; border-radius: 6px; border: 1px solid transparent; transition: .2s ease; cursor: pointer; }
-    nav.menu a.active { color: white; background: linear-gradient(135deg, #171a24, #121420); border-color: #232736; }
+    nav.menu a.active { color: #ffffff; font-weight: 500; background: #1e222f; border-color: #3a4052; box-shadow: inset 0 1px 2px rgba(0,0,0,.2), 0 0 8px rgba(152, 195, 121, 0.4); }
     nav.menu a:nth-child(1) { color: var(--accent-3); }
     nav.menu a:nth-child(2) { color: var(--accent-5); }
     nav.menu a:nth-child(3) { color: var(--accent-2); }
@@ -83,6 +83,7 @@
     .contact-btn:hover { color: white !important; transform: translateY(-2px) scale(1.03); }
     .status { margin-top: 16px; border-top: 1px solid #1b2030; display: flex; gap: 16px; padding: 10px 12px; color: #7a8295; font: 500 12px "JetBrains Mono", monospace; background: linear-gradient(0deg, #0b0d13, #0c0e15); border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
     footer { text-align: center; padding: 20px; margin-top: 40px; color: var(--muted); font-size: 14px; }
+    footer .brand-logo-char { font-size: inherit; }
     a { color: var(--link); } a:hover { color: #8cc5ff; }
     ::selection { background: rgba(97, 175, 239, .25); }
     .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
@@ -97,8 +98,8 @@
     .main-contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .contact-card { text-align: center; }
     .modal-qr { margin: 16px auto; width: 160px; height: 160px; background: white; border-radius: 8px; padding: 8px; }
-    .modal-qr.placeholder { display:flex; align-items:center; justify-content:center; }
-    .modal-qr.placeholder img { width: 80px; height: 80px; }
+    .modal-qr.placeholder { display:flex; align-items:center; justify-content:center; background: var(--bg); border: 1px solid #242a3a;}
+    .placeholder-icon { color: var(--muted); }
     .modal-contact-info { font-family: "JetBrains Mono", monospace; font-size: 18px; color: white; min-height: 1.5em; margin: 16px 0; }
     .modal-actions { display: flex; gap: 12px; justify-content: center; margin-top: 24px; }
     .hamburger-menu, .mobile-nav { display: none; }
@@ -117,6 +118,7 @@
       @keyframes mobile-gradient-flow { 0% { background-position: 0% 0%; } 50% { background-position: 100% 100%; } 100% { background-position: 0% 0%; } }
       .bg-gradient::before { display: none; }
       .bg-gradient { background: radial-gradient(circle at 10% 20%, rgba(255, 106, 0, 0.2) 0%, transparent 70%), radial-gradient(circle at 90% 80%, #11141e 0%, transparent 80%), var(--bg); background-size: 200% 200%; animation: mobile-gradient-flow 25s ease infinite; }
+      .contacts-grid { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .gradient-text, .btn:hover, .caret, .modal-content, .modal-close, .bg-gradient, .hamburger-menu .bar, .mobile-nav { animation: none !important; transition: none !important; } }
   </style>
@@ -128,8 +130,8 @@
       <div class="topbar-inner">
         <div class="traffic" aria-hidden="true"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
         <a href="#home" class="logo-link">
-          <img src="logo.jpg" alt="Логотип Э." class="logo-img">
           <span class="gradient-text logo-name">Алексей Бронников</span>
+          <span class="brand-logo-char">Э.</span>
         </a>
         <nav class="menu" role="navigation"><a href="#home" class="active">Главная</a><a href="#cases">Кейсы</a><a href="#">Бриф</a><a data-modal-trigger="main-contact-modal">Контакты</a></nav>
         <button class="hamburger-menu" aria-label="Открыть меню" aria-expanded="false"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
@@ -169,14 +171,14 @@
           </section>
         </div><div class="status"><span>UTF‑8</span><span>LF</span><span>Spaces: 2</span><span>JetBrains Mono</span></div></div>
     </main>
-    <footer><p>Сайт разработал Алексей Бронников</p><p>2025</p></footer>
+    <footer><p>Сайт разработал Алексей <span class="brand-logo-char">Э.</span> Бронников</p><p>2025</p></footer>
   </div>
 
   
   <div class="modal" id="telegram-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content single"><button class="modal-close" data-modal-close>&times;</button><h2 class="section-title" style="color:var(--telegram-color)">// Telegram</h2><div class="modal-qr" data-qr-text="https://t.me/example"></div><div class="modal-contact-info" data-modal-text="@example"></div><div class="modal-actions"><a href="https://t.me/example" target="_blank" class="btn">Перейти</a><button class="btn secondary" data-copy-text="@example">Копировать</button></div></div></div>
   <div class="modal" id="whatsapp-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content single"><button class="modal-close" data-modal-close>&times;</button><h2 class="section-title" style="color:var(--whatsapp-color)">// WhatsApp</h2><div class="modal-qr" data-qr-text="https://wa.me/71234567890"></div><div class="modal-contact-info" data-modal-text="+7 (123) 456-78-90"></div><div class="modal-actions"><a href="https://wa.me/71234567890" target="_blank" class="btn">Перейти</a><button class="btn secondary" data-copy-text="+71234567890">Копировать</button></div></div></div>
   <div class="modal" id="max-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content single"><button class="modal-close" data-modal-close>&times;</button><h2 class="section-title" style="color:var(--max-color)">// Max</h2><div class="modal-qr" data-qr-text="+71234567890"></div><div class="modal-contact-info" data-modal-text="+7 (123) 456-78-90"></div><div class="modal-actions"><a href="#" class="btn">Перейти</a><button class="btn secondary" data-copy-text="+71234567890">Копировать</button></div></div></div>
-  <div class="modal" id="phone-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content single"><button class="modal-close" data-modal-close>&times;</button><h2 class="section-title" style="color:var(--phone-color)">// Телефон</h2><div class="modal-qr placeholder"><img src="phone.icon.jpg" alt="Phone icon"></div><div class="modal-contact-info" data-modal-text="+7 (123) 456-78-90"></div><div class="modal-actions"><a href="tel:+71234567890" class="btn">Позвонить</a><button class="btn secondary" data-copy-text="+71234567890">Копировать</button></div></div></div>
+  <div class="modal" id="phone-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content single"><button class="modal-close" data-modal-close>&times;</button><h2 class="section-title" style="color:var(--phone-color)">// Телефон</h2><div class="modal-qr placeholder"><svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div><div class="modal-contact-info" data-modal-text="+7 (123) 456-78-90"></div><div class="modal-actions"><a href="tel:+71234567890" class="btn">Позвонить</a><button class="btn secondary" data-copy-text="+71234567890">Копировать</button></div></div></div>
   
   
   <div class="modal" id="main-contact-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content main-contacts"><button class="modal-close" data-modal-close>&times;</button>
@@ -184,7 +186,7 @@
         <div class="contact-card"><h2 class="section-title" style="color:var(--telegram-color)">// Telegram</h2><div class="modal-qr" data-qr-text="https://t.me/example"></div><div class="modal-contact-info" data-modal-text="@example"></div><div class="modal-actions"><a href="https://t.me/example" target="_blank" class="btn">Перейти</a><button class="btn secondary" data-copy-text="@example">Копировать</button></div></div>
         <div class="contact-card"><h2 class="section-title" style="color:var(--whatsapp-color)">// WhatsApp</h2><div class="modal-qr" data-qr-text="https://wa.me/71234567890"></div><div class="modal-contact-info" data-modal-text="+7 (123) 456-78-90"></div><div class="modal-actions"><a href="https://wa.me/71234567890" target="_blank" class="btn">Перейти</a><button class="btn secondary" data-copy-text="+71234567890">Копировать</button></div></div>
         <div class="contact-card"><h2 class="section-title" style="color:var(--max-color)">// Max</h2><div class="modal-qr" data-qr-text="+71234567890"></div><div class="modal-contact-info" data-modal-text="+7 (123) 456-78-90"></div><div class="modal-actions"><a href="#" class="btn">Перейти</a><button class="btn secondary" data-copy-text="+71234567890">Копировать</button></div></div>
-        <div class="contact-card"><h2 class="section-title" style="color:var(--phone-color)">// Телефон</h2><div class="modal-qr placeholder"><img src="phone.icon.jpg" alt="Phone icon"></div><div class="modal-contact-info" data-modal-text="+7 (123) 456-78-90"></div><div class="modal-actions"><a href="tel:+71234567890" class="btn">Позвонить</a><button class="btn secondary" data-copy-text="+71234567890">Копировать</button></div></div>
+        <div class="contact-card"><h2 class="section-title" style="color:var(--phone-color)">// Телефон</h2><div class="modal-qr placeholder"><svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div><div class="modal-contact-info" data-modal-text="+7 (123) 456-78-90"></div><div class="modal-actions"><a href="tel:+71234567890" class="btn">Позвонить</a><button class="btn secondary" data-copy-text="+71234567890">Копировать</button></div></div>
       </div>
   </div></div>
   
