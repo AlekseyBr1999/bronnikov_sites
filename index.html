@@ -11,94 +11,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0f111a;
-      --panel: #12141b;
-      --text: #abb2bf;
-      --muted: #5c6370;
-      --accent-2: #e5c07b;
-      --accent-3: #98c379;
-      --accent-5: #61afef;
-      --accent-6: #c678dd;
-      --link: #61afef;
-      --success: #98c379;
-      --shadow: 0 10px 30px rgba(0, 0, 0, .35);
-      --glow: 0 0 15px rgba(97, 175, 239, .3);
-      --telegram-color: #2AABEE;
-      --whatsapp-color: #25D366;
-      --max-color: #FF4E00;
-      --phone-color: #737373;
-      --mouse-x: 50%; --mouse-y: 50%;
+      --bg: #0f111a; --panel: #12141b; --text: #abb2bf; --muted: #5c6370; --accent-2: #e5c07b; --accent-3: #98c379; --accent-5: #61afef; --accent-6: #c678dd; --link: #61afef; --success: #98c379; --shadow: 0 10px 30px rgba(0, 0, 0, .35); --glow: 0 0 15px rgba(97, 175, 239, .3); --telegram-color: #2AABEE; --whatsapp-color: #25D366; --max-color: #FF4E00; --phone-color: #737373; --mouse-x: 50%; --mouse-y: 50%;
     }
     * { box-sizing: border-box; }
     html, body { height: 100%; }
-    html {
-      scroll-behavior: smooth;
-      scrollbar-width: thin;
-      scrollbar-color: var(--accent-6) var(--panel);
-    }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, sans-serif;
-      color: var(--text);
-      background-color: var(--bg);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    .bg-gradient {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-      background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), #1a1d28 0%, transparent 40%),
-                  radial-gradient(circle at 80% -10%, #11141e 0%, transparent 30%),
-                  radial-gradient(circle at -10% 120%, #11141e 0%, transparent 30%),
-                  var(--bg);
-      transition: background 0.2s linear;
-    }
-    .main-wrapper {
-      padding: 8px;
-    }
-    .topbar {
-      position: sticky; top: 8px; z-index: 50;
-      backdrop-filter: blur(8px);
-      background: color-mix(in srgb, var(--panel) 86%, transparent);
-      border: 1px solid #1b1f2a;
-      border-radius: 8px;
-    }
-    .topbar-inner {
-      max-width: 1000px; margin: 0 auto;
-      padding: 10px 16px; display: flex;
-      align-items: center; gap: 18px;
-    }
+    html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--accent-6) var(--panel); }
+    body { margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text); background-color: var(--bg); line-height: 1.6; overflow-x: hidden; }
+    .bg-gradient { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), #1a1d28 0%, transparent 40%), radial-gradient(circle at 80% -10%, #11141e 0%, transparent 30%), radial-gradient(circle at -10% 120%, #11141e 0%, transparent 30%), var(--bg); transition: background 0.2s linear; }
+    .main-wrapper { padding: 8px; }
+    .topbar { position: sticky; top: 8px; z-index: 50; backdrop-filter: blur(8px); background: color-mix(in srgb, var(--panel) 86%, transparent); border: 1px solid #1b1f2a; border-radius: 8px; }
+    .topbar-inner { max-width: 1000px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; gap: 18px; }
     .traffic { display: flex; gap: 8px; align-items: center; }
     .dot { width: 12px; height: 12px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,.25); }
     .dot.red { background: #ff5f56; } .dot.yellow { background: #ffbd2e; } .dot.green { background: #27c93f; }
-    nav.menu {
-      margin-left: auto; display: flex; gap: 16px;
-      font-family: "JetBrains Mono", monospace; font-size: 14px;
-    }
-    nav.menu a {
-      color: var(--text); text-decoration: none;
-      padding: 6px 10px; border-radius: 6px;
-      border: 1px solid transparent; transition: .2s ease; cursor: pointer;
-    }
+    nav.menu { margin-left: auto; display: flex; gap: 16px; font-family: "JetBrains Mono", monospace; font-size: 14px; }
+    nav.menu a { color: var(--text); text-decoration: none; padding: 6px 10px; border-radius: 6px; border: 1px solid transparent; transition: .2s ease; cursor: pointer; }
     nav.menu a:hover { color: white; border-color: #232736; background: #171a24; box-shadow: var(--glow); }
     nav.menu a.active { color: white; background: linear-gradient(135deg, #171a24, #121420); border-color: #232736; }
     .editor { max-width: 1000px; margin: 16px auto; padding: 0 16px 40px; }
-    .file-tab {
-      display: inline-flex; align-items: center; gap: 10px;
-      color: var(--muted); font: 500 13px "JetBrains Mono", monospace;
-      background: linear-gradient(135deg, #151827, #10121c); border: 1px solid #242a3a;
-      border-bottom: none; padding: 10px 14px; border-top-left-radius: 10px; border-top-right-radius: 10px;
-      transform: translateY(1px);
-    }
-    .panel {
-      background: linear-gradient(180deg, rgba(255,255,255,.02), transparent 40%),
-                  repeating-linear-gradient(180deg, rgba(255,255,255,.02) 0 1px, transparent 1px 32px),
-                  linear-gradient(135deg, #0e111a, #0b0d13);
-      border: 1px solid #242a3a; border-radius: 12px;
-      box-shadow: var(--shadow); overflow: hidden;
-    }
+    .file-tab { display: inline-flex; align-items: center; gap: 10px; color: var(--muted); font: 500 13px "JetBrains Mono", monospace; background: linear-gradient(135deg, #151827, #10121c); border: 1px solid #242a3a; border-bottom: none; padding: 10px 14px; border-top-left-radius: 10px; border-top-right-radius: 10px; transform: translateY(1px); }
+    .panel { background: linear-gradient(180deg, rgba(255,255,255,.02), transparent 40%), repeating-linear-gradient(180deg, rgba(255,255,255,.02) 0 1px, transparent 1px 32px), linear-gradient(135deg, #0e111a, #0b0d13); border: 1px solid #242a3a; border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
     .panel-body { padding: 28px 24px; }
     .hero { display: grid; gap: 16px; padding-top: 8px; }
     .name { font-weight: 200; font-size: clamp(28px, 4vw, 44px); letter-spacing: .4px; margin: 0; line-height: 1.15; color: white; }
@@ -141,42 +73,33 @@
     .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
     .modal.is-open { opacity: 1; pointer-events: auto; }
     .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); cursor: pointer; }
-    .modal-content { position: relative; z-index: 1001; background: var(--panel); border: 1px solid #242a3a; border-radius: 12px; padding: 28px; max-width: 400px; width: 90%; box-shadow: var(--shadow); transform: scale(0.95); transition: transform .3s ease; text-align: center; }
+    .modal-content { position: relative; z-index: 1001; background: var(--panel); border: 1px solid #242a3a; border-radius: 12px; padding: 28px; max-width: 800px; width: 90%; box-shadow: var(--shadow); transform: scale(0.95); transition: transform .3s ease; max-height: 90vh; overflow-y: auto; }
     .modal.is-open .modal-content { transform: scale(1); }
-    .modal-close { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; font-size: 24px; color: var(--muted); background: none; border: none; cursor: pointer; line-height: 1; transition: .2s ease; }
+    .modal-close { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; font-size: 24px; color: var(--muted); background: none; border: none; cursor: pointer; line-height: 1; transition: .2s ease; z-index: 1002; }
     .modal-close:hover { color: white; transform: rotate(90deg); }
+    .main-contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .contact-card { text-align: center; }
     .modal-qr { margin: 16px auto; width: 160px; height: 160px; background: white; border-radius: 8px; padding: 8px; }
-    .modal-qr.placeholder { display:flex; align-items:center; justify-content:center; font-size:14px; color: black; font-family:"JetBrains Mono", monospace; }
+    .modal-qr.placeholder { display:flex; align-items:center; justify-content:center; }
+    .modal-qr.placeholder svg { width: 80px; height: 80px; color: var(--muted); }
     .modal-contact-info { font-family: "JetBrains Mono", monospace; font-size: 18px; color: white; min-height: 1.5em; margin: 16px 0; }
     .modal-actions { display: flex; gap: 12px; justify-content: center; margin-top: 24px; }
     .hamburger-menu, .mobile-nav { display: none; }
     @media (max-width: 768px) {
+      .main-contact-grid { grid-template-columns: 1fr; }
       nav.menu { display: none; }
-      .hamburger-menu { display: flex; flex-direction: column; gap: 5px; margin-left: auto; background: none; border: none; cursor: pointer; padding: 8px; }
+      .hamburger-menu { display: flex; flex-direction: column; gap: 5px; margin-left: auto; background: none; border: none; cursor: pointer; padding: 8px; z-index: 100; }
       .hamburger-menu .bar { width: 25px; height: 3px; background: var(--text); border-radius: 3px; transition: .3s ease; }
       .hamburger-menu.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
       .hamburger-menu.is-active .bar:nth-child(2) { opacity: 0; }
       .hamburger-menu.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-      .mobile-nav { position: fixed; top: 0; right: -100%; z-index: 40; width: 250px; height: 100%; background: var(--panel); box-shadow: -10px 0 30px rgba(0,0,0,.5); padding: 80px 20px; transition: right .4s ease-in-out; }
+      .mobile-nav { display: block; position: fixed; top: 0; right: -100%; z-index: 40; width: 250px; height: 100%; background: var(--panel); box-shadow: -10px 0 30px rgba(0,0,0,.5); padding: 80px 20px; transition: right .4s ease-in-out; }
       .mobile-nav.is-active { right: 0; }
       .mobile-nav nav.menu { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; font-size: 18px; }
-      @keyframes mobile-gradient-flow {
-        0% { background-position: 0% 0%; }
-        50% { background-position: 100% 100%; }
-        100% { background-position: 0% 0%; }
-      }
-      .bg-gradient {
-        background: radial-gradient(circle at 10% 20%, #1a1d28 0%, transparent 80%),
-                    radial-gradient(circle at 90% 80%, #11141e 0%, transparent 80%),
-                    var(--bg);
-        background-size: 200% 200%;
-        animation: mobile-gradient-flow 25s ease infinite;
-      }
+      @keyframes mobile-gradient-flow { 0% { background-position: 0% 0%; } 50% { background-position: 100% 100%; } 100% { background-position: 0% 0%; } }
+      .bg-gradient { background: radial-gradient(circle at 10% 20%, #1a1d28 0%, transparent 80%), radial-gradient(circle at 90% 80%, #11141e 0%, transparent 80%), var(--bg); background-size: 200% 200%; animation: mobile-gradient-flow 25s ease infinite; }
     }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .gradient-text, .btn:hover, .caret, .modal-content, .modal-close, .bg-gradient, .hamburger-menu .bar, .mobile-nav { animation: none !important; transition: none !important; }
-    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .gradient-text, .btn:hover, .caret, .modal-content, .modal-close, .bg-gradient, .hamburger-menu .bar, .mobile-nav { animation: none !important; transition: none !important; } }
   </style>
 </head>
 <body>
@@ -184,30 +107,16 @@
   <div class="main-wrapper">
     <header class="topbar">
       <div class="topbar-inner">
-        <div class="traffic" aria-hidden="true">
-          <span class="dot red"></span>
-          <span class="dot yellow"></span>
-          <span class="dot green"></span>
-        </div>
-        <nav class="menu" role="navigation" aria-label="Главное меню">
-          <a href="#home" class="active">Главная</a>
-          <a href="#cases">Кейсы</a>
-          <a href="#">Бриф</a>
-          <a href="#contacts">Контакты</a>
-        </nav>
-        <button class="hamburger-menu" aria-label="Открыть меню" aria-expanded="false">
-          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-        </button>
+        <div class="traffic" aria-hidden="true"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+        <nav class="menu" role="navigation"><a href="#home" class="active">Главная</a><a href="#cases">Кейсы</a><a href="#">Бриф</a><a data-modal-trigger="main-contact-modal">Контакты</a></nav>
+        <button class="hamburger-menu" aria-label="Открыть меню" aria-expanded="false"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
       </div>
     </header>
-    <div class="mobile-nav">
-      <nav class="menu" role="navigation"></nav>
-    </div>
+    <div class="mobile-nav"><nav class="menu" role="navigation"></nav></div>
 
     <main class="editor" id="home">
       <div class="file-tab">index.html</div>
-      <div class="panel" role="region" aria-label="Главный блок">
-        <div class="panel-body">
+      <div class="panel" role="region"><div class="panel-body">
           <section class="hero">
             <p class="subtitle"><span class="com">// Сайты для вас и вашего бизнеса</span></p>
             <h1 class="name"><span class="gradient-text">Алексей Бронников</span></h1>
@@ -218,160 +127,156 @@
               <li class="code-item"><div class="gutter"></div><div class="code" data-text='Только <span class="kw">честные отзывы</span> на КАЖДОЕ решение'></div></li>
             </ul>
           </section>
-          
           <section id="cases" aria-label="Кейсы">
             <h2 class="section-title">// Кейсы</h2>
-            <div class="stats-grid">
-              <div class="stat-item">
-                <div id="counter" class="stat-number" data-target="2">0</div>
-                <div class="stat-label">Готовых решений</div>
-              </div>
-            </div>
+            <div class="stats-grid"><div class="stat-item"><div id="counter" class="stat-number" data-target="2">0</div><div class="stat-label">Готовых решений</div></div></div>
             <div class="centered-block"><a class="btn secondary" href="portfolio.html">Смотреть отзывы</a></div>
           </section>
-
           <section id="contacts" aria-label="Контакты">
             <h2 class="section-title">// Контакты</h2>
             <div class="contacts-grid">
-              <button class="btn contact-btn telegram" data-modal-trigger="telegram-modal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.59c-.27 1.04-1.04 1.3-1.73.82l-4.74-3.51l-2.27 2.15c-.25.24-.47.47-.97.47z"></path></svg>Telegram</button>
-              <button class="btn contact-btn whatsapp" data-modal-trigger="whatsapp-modal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 14c-.2-.1-1.5-.7-1.7-.8c-.2-.1-.4-.1-.6.1c-.2.2-.6.7-.8.9c-.1.1-.3.2-.4.1c-.2 0-.8-.3-1.6-1c-.6-.5-1-1.1-1.2-1.3c-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.3-.4c.1-.2 0-.3-.1-.4c0-.1-.6-1.5-.8-2.1c-.2-.5-.4-.5-.5-.5h-.5c-.2 0-.4.1-.6.3c-.2.2-.8.8-.8 1.9c0 1.1.8 2.2 1 2.4c.1.2 1.5 2.3 3.7 3.2c.5.2.9.4 1.2.5c.5.2.9.1 1.2-.1c.4-.2.6-.7.8-.9c.1-.2.1-.4 0-.5c-.1-.1-.2-.2-.4-.3zM12 2a10 10 0 0 0-10 10a10 10 0 0 0 10 10c.2 0 .5 0 .7-.1l3.5 1V18c1.3-1.2 2.1-2.8 2.1-4.7c0-5.5-4.5-10-10-10z"></path></svg>WhatsApp</button>
-              <button class="btn contact-btn max" data-modal-trigger="max-modal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 24C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12s-5.373 12-12 12zm-3.2-6.57l3.2-4.33l3.2 4.33h3.6L12 10.12L5.2 17.43h3.6zm6.4-7.66l-3.2 4.33l-3.2-4.33H5.2L12 13.88l6.8-9.11h-3.6z"></path></svg>Max</svg></button>
-              <button class="btn contact-btn phone" data-modal-trigger="phone-modal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24c1.12.37 2.33.57 3.57.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1c-9.39 0-17-7.61-17-17c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1c0 1.25.2 2.45.57 3.57c.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>Телефон</button>
+              <button class="btn contact-btn telegram" data-modal-trigger="main-contact-modal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.59c-.27 1.04-1.04 1.3-1.73.82l-4.74-3.51l-2.27 2.15c-.25.24-.47.47-.97.47z"></path></svg>Telegram</button>
+              <button class="btn contact-btn whatsapp" data-modal-trigger="main-contact-modal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 14c-.2-.1-1.5-.7-1.7-.8c-.2-.1-.4-.1-.6.1c-.2.2-.6.7-.8.9c-.1.1-.3.2-.4.1c-.2 0-.8-.3-1.6-1c-.6-.5-1-1.1-1.2-1.3c-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.3-.4c.1-.2 0-.3-.1-.4c0-.1-.6-1.5-.8-2.1c-.2-.5-.4-.5-.5-.5h-.5c-.2 0-.4.1-.6.3c-.2.2-.8.8-.8 1.9c0 1.1.8 2.2 1 2.4c.1.2 1.5 2.3 3.7 3.2c.5.2.9.4 1.2.5c.5.2.9.1 1.2-.1c.4-.2.6-.7.8-.9c.1-.2.1-.4 0-.5c-.1-.1-.2-.2-.4-.3zM12 2a10 10 0 0 0-10 10a10 10 0 0 0 10 10c.2 0 .5 0 .7-.1l3.5 1V18c1.3-1.2 2.1-2.8 2.1-4.7c0-5.5-4.5-10-10-10z"></path></svg>WhatsApp</button>
+              <button class="btn contact-btn max" data-modal-trigger="main-contact-modal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 24C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12s-5.373 12-12 12zm-3.2-6.57l3.2-4.33l3.2 4.33h3.6L12 10.12L5.2 17.43h3.6zm6.4-7.66l-3.2 4.33l-3.2-4.33H5.2L12 13.88l6.8-9.11h-3.6z"></path></svg>Max</button>
+              <button class="btn contact-btn phone" data-modal-trigger="main-contact-modal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24c1.12.37 2.33.57 3.57.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1c-9.39 0-17-7.61-17-17c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1c0 1.25.2 2.45.57 3.57c.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>Телефон</button>
             </div>
           </section>
-        </div>
-        <div class="status"><span>UTF‑8</span><span>LF</span><span>Spaces: 2</span><span>JetBrains Mono</span></div>
-      </div>
+        </div><div class="status"><span>UTF‑8</span><span>LF</span><span>Spaces: 2</span><span>JetBrains Mono</span></div></div>
     </main>
-    
     <footer><p>Сайт разработал Алексей Бронников</p><p>2025</p></footer>
   </div>
 
-  
-  <div class="modal" id="telegram-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content"><button class="modal-close" data-modal-close>&times;</button><h2 class="section-title" style="color:var(--telegram-color)">// Telegram</h2><div class="modal-qr" data-qr-text="https://t.me/example"></div><div class="modal-contact-info" data-modal-text="@example"></div><div class="modal-actions"><a href="https://t.me/example" target="_blank" class="btn">Перейти</a><button class="btn secondary" data-copy-text="@example">Копировать</button></div></div></div>
-  <div class="modal" id="whatsapp-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content"><button class="modal-close" data-modal-close>&times;</button><h2 class="section-title" style="color:var(--whatsapp-color)">// WhatsApp</h2><div class="modal-qr" data-qr-text="https://wa.me/71234567890"></div><div class="modal-contact-info" data-modal-text="+7 (123) 456-78-90"></div><div class="modal-actions"><a href="https://wa.me/71234567890" target="_blank" class="btn">Перейти</a><button class="btn secondary" data-copy-text="+71234567890">Копировать</button></div></div></div>
-  <div class="modal" id="max-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content"><button class="modal-close" data-modal-close>&times;</button><h2 class="section-title" style="color:var(--max-color)">// Max</h2><div class="modal-qr" data-qr-text="+71234567890"></div><div class="modal-contact-info" data-modal-text="+7 (123) 456-78-90"></div><div class="modal-actions"><a href="#" class="btn">Перейти</a><button class="btn secondary" data-copy-text="+71234567890">Копировать</button></div></div></div>
-  <div class="modal" id="phone-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content"><button class="modal-close" data-modal-close>&times;</button><h2 class="section-title" style="color:var(--phone-color)">// Телефон</h2><div class="modal-qr placeholder">Нет QR</div><div class="modal-contact-info" data-modal-text="+7 (123) 456-78-90"></div><div class="modal-actions"><a href="tel:+71234567890" class="btn">Позвонить</a><button class="btn secondary" data-copy-text="+71234567890">Копировать</button></div></div></div>
+  <div class="modal" id="main-contact-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content"><button class="modal-close" data-modal-close>&times;</button>
+      <div class="main-contact-grid">
+        <div class="contact-card"><h2 class="section-title" style="color:var(--telegram-color)">// Telegram</h2><div class="modal-qr" data-qr-text="https://t.me/example"></div><div class="modal-contact-info" data-modal-text="@example"></div><div class="modal-actions"><a href="https://t.me/example" target="_blank" class="btn">Перейти</a><button class="btn secondary" data-copy-text="@example">Копировать</button></div></div>
+        <div class="contact-card"><h2 class="section-title" style="color:var(--whatsapp-color)">// WhatsApp</h2><div class="modal-qr" data-qr-text="https://wa.me/71234567890"></div><div class="modal-contact-info" data-modal-text="+7 (123) 456-78-90"></div><div class="modal-actions"><a href="https://wa.me/71234567890" target="_blank" class="btn">Перейти</a><button class="btn secondary" data-copy-text="+71234567890">Копировать</button></div></div>
+        <div class="contact-card"><h2 class="section-title" style="color:var(--max-color)">// Max</h2><div class="modal-qr" data-qr-text="+71234567890"></div><div class="modal-contact-info" data-modal-text="+7 (123) 456-78-90"></div><div class="modal-actions"><a href="#" class="btn">Перейти</a><button class="btn secondary" data-copy-text="+71234567890">Копировать</button></div></div>
+        <div class="contact-card"><h2 class="section-title" style="color:var(--phone-color)">// Телефон</h2><div class="modal-qr placeholder"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24c1.12.37 2.33.57 3.57.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1c-9.39 0-17-7.61-17-17c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1c0 1.25.2 2.45.57 3.57c.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg></div><div class="modal-contact-info" data-modal-text="+7 (123) 456-78-90"></div><div class="modal-actions"><a href="tel:+71234567890" class="btn">Позвонить</a><button class="btn secondary" data-copy-text="+71234567890">Копировать</button></div></div>
+      </div>
+  </div></div>
   
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <script>
-    // --- Main Typewriter Effect ---
-    (function() { /* ... (code unchanged) ... */ })();
-
-    // --- Counter Animation ---
-    (function() { /* ... (code unchanged) ... */ })();
-
-    // --- Dynamic Background Gradient ---
-    (function() {
-      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-      if (!isTouchDevice) {
-        document.body.addEventListener('mousemove', e => {
-          const { clientX: x, clientY: y } = e;
-          const { innerWidth: width, innerHeight: height } = window;
-          document.documentElement.style.setProperty('--mouse-x', `${(x/width)*100}%`);
-          document.documentElement.style.setProperty('--mouse-y', `${(y/height)*100}%`);
-        });
-      }
-    })();
-    
-    // --- Modal Logic with QR & Typewriter ---
-    (function() {
-        const triggers = document.querySelectorAll('[data-modal-trigger]');
-        triggers.forEach(trigger => {
-            trigger.addEventListener('click', () => openModal(trigger.dataset.modalTrigger));
-        });
-
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (!modal) return;
-            modal.classList.add('is-open');
-            
-            // Typewriter for modal contact info
-            const textEl = modal.querySelector('[data-modal-text]');
-            if (textEl && !textEl.dataset.typed) {
-              typeSlower(textEl, textEl.dataset.modalText);
-              textEl.dataset.typed = 'true';
-            }
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- Main Typewriter Effect ---
+      (function() {
+        const lines = Array.from(document.querySelectorAll('.code-list .code'));
+        async function runTyping() {
+          await new Promise(r => setTimeout(r, 300));
+          for (const el of lines) {
+            const text = el.getAttribute('data-text') || '';
+            el.innerHTML = '';
+            await typeLine(el, text, 25, 20);
+          }
         }
+        runTyping();
+      })();
 
-        document.querySelectorAll('[data-modal-close]').forEach(el => {
-            el.addEventListener('click', () => el.closest('.modal').classList.remove('is-open'));
-        });
+      // --- Counter Animation ---
+      (function() {
+        const counter = document.getElementById('counter');
+        if (!counter) return;
+        const animateCounter = () => {
+          const target = +counter.getAttribute('data-target');
+          const duration = 1000;
+          const stepTime = Math.abs(Math.floor(duration / target));
+          let current = 0;
+          const timer = setInterval(() => {
+            current += 1;
+            counter.innerText = current;
+            if (current === target) clearInterval(timer);
+          }, stepTime);
+        };
+        const observer = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            animateCounter();
+            observer.disconnect();
+          }
+        }, { threshold: 0.5 });
+        observer.observe(counter);
+      })();
 
-        document.addEventListener('keydown', e => {
-            if (e.key === "Escape") document.querySelector('.modal.is-open')?.classList.remove('is-open');
-        });
-
-        // Generate QR codes
-        document.querySelectorAll('[data-qr-text]').forEach(el => {
-          new QRCode(el, {
-            text: el.dataset.qrText,
-            width: 144, height: 144,
-            colorDark : "#0f111a", colorLight : "#ffffff",
-            correctLevel : QRCode.CorrectLevel.H
+      // --- Dynamic Background Gradient ---
+      (function() {
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        if (!isTouchDevice) {
+          document.body.addEventListener('mousemove', e => {
+            const { clientX: x, clientY: y } = e;
+            const { innerWidth: width, innerHeight: height } = window;
+            document.documentElement.style.setProperty('--mouse-x', `${(x/width)*100}%`);
+            document.documentElement.style.setProperty('--mouse-y', `${(y/height)*100}%`);
           });
-        });
+        }
+      })();
+      
+      // --- Modal Logic with QR & Typewriter ---
+      (function() {
+          const modal = document.getElementById('main-contact-modal');
+          document.querySelectorAll('[data-modal-trigger]').forEach(trigger => {
+              trigger.addEventListener('click', () => openModal(modal));
+          });
 
-        // Copy buttons logic
-        document.querySelectorAll('[data-copy-text]').forEach(button => {
-          button.addEventListener('click', () => {
-            navigator.clipboard.writeText(button.dataset.copyText).then(() => {
-              const originalText = button.textContent;
-              button.textContent = 'Скопировано!';
-              setTimeout(() => button.textContent = originalText, 1500);
+          function openModal(modal) {
+              if (!modal) return;
+              modal.classList.add('is-open');
+              
+              modal.querySelectorAll('.contact-card').forEach(card => {
+                const textEl = card.querySelector('[data-modal-text]');
+                if (textEl && !textEl.dataset.typed) {
+                  typeLine(textEl, textEl.dataset.modalText, 80, 60);
+                  textEl.dataset.typed = 'true';
+                }
+                const qrEl = card.querySelector('[data-qr-text]');
+                if (qrEl && !qrEl.dataset.generated) {
+                  new QRCode(qrEl, { text: qrEl.dataset.qrText, width: 144, height: 144, colorDark : "#0f111a", colorLight : "#ffffff", correctLevel : QRCode.CorrectLevel.H });
+                  qrEl.dataset.generated = 'true';
+                }
+              });
+          }
+
+          modal.querySelectorAll('[data-modal-close]').forEach(el => {
+              el.addEventListener('click', () => el.closest('.modal').classList.remove('is-open'));
+          });
+
+          document.addEventListener('keydown', e => {
+              if (e.key === "Escape") modal.classList.remove('is-open');
+          });
+
+          modal.querySelectorAll('[data-copy-text]').forEach(button => {
+            button.addEventListener('click', () => {
+              navigator.clipboard.writeText(button.dataset.copyText).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Скопировано!';
+                setTimeout(() => button.textContent = originalText, 1500);
+              });
             });
           });
-        });
-    })();
-    
-    // --- Slower Typewriter for Modals ---
-    function typeSlower(el, text) { /* ... (code similar to main typewriter, but with higher speed values) ... */ }
-
-    // --- Mobile Navigation ---
-    (function() {
-      const hamburger = document.querySelector('.hamburger-menu');
-      const mobileNav = document.querySelector('.mobile-nav');
-      const desktopNavMenu = document.querySelector('.topbar nav.menu');
+      })();
       
-      // Clone desktop menu items to mobile nav
-      mobileNav.querySelector('.menu').innerHTML = desktopNavMenu.innerHTML;
+      // --- Mobile Navigation ---
+      (function() {
+        const hamburger = document.querySelector('.hamburger-menu');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const desktopNavMenu = document.querySelector('.topbar nav.menu');
+        const mobileNavMenu = mobileNav.querySelector('.menu');
 
-      hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('is-active');
-        mobileNav.classList.toggle('is-active');
-        hamburger.setAttribute('aria-expanded', hamburger.classList.contains('is-active'));
-      });
+        mobileNavMenu.innerHTML = desktopNavMenu.innerHTML;
 
-      mobileNav.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          hamburger.classList.remove('is-active');
-          mobileNav.classList.remove('is-active');
-          hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.addEventListener('click', () => {
+          hamburger.classList.toggle('is-active');
+          mobileNav.classList.toggle('is-active');
         });
-      });
-    })();
 
-    // --- (Paste full unchanged functions here for completeness) ---
-    (function() {
-      const BASE_SPEED = 25, SPEED_VARIATION = 20, START_DELAY = 300;
-      const lines = Array.from(document.querySelectorAll('.code-list .code'));
-      async function runTyping() {
-        await new Promise(r => setTimeout(r, START_DELAY));
-        for (const el of lines) {
-          const text = el.getAttribute('data-text') || '';
-          el.innerHTML = '';
-          await typeLine(el, text, BASE_SPEED, SPEED_VARIATION);
-        }
-      }
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', runTyping); else runTyping();
-    })();
+        mobileNavMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            hamburger.classList.remove('is-active');
+            mobileNav.classList.remove('is-active');
+          });
+        });
+      })();
+    });
 
-    function typeLine(el, html, baseSpeed, speedVariation) { /* Full function code */ }
-    function typeSlower(el, text) {
-      el.innerHTML = '';
-      typeLine(el, text, 80, 60);
-    }
-    
+    // --- Universal Typewriter Function ---
     function typeLine(el, html, baseSpeed, speedVariation) {
         return new Promise(resolve => {
           const tempDiv = document.createElement('div');
@@ -394,10 +299,7 @@
                   el.insertBefore(document.createTextNode(currentNode.textContent[textIndex]), caret);
                   textIndex++;
                   setTimeout(typeTextNode, baseSpeed + Math.random() * speedVariation);
-                } else {
-                  nodeIndex++;
-                  typeChar();
-                }
+                } else { nodeIndex++; typeChar(); }
               }
               typeTextNode();
             } else {
@@ -409,29 +311,6 @@
           typeChar();
         });
       }
-
-    (function() {
-      const counter = document.getElementById('counter');
-      if (!counter) return;
-      const animateCounter = () => {
-        const target = +counter.getAttribute('data-target');
-        const duration = 1000;
-        const stepTime = Math.abs(Math.floor(duration / target));
-        let current = 0;
-        const timer = setInterval(() => {
-          current += 1;
-          counter.innerText = current;
-          if (current === target) clearInterval(timer);
-        }, stepTime);
-      };
-      const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          animateCounter();
-          observer.disconnect();
-        }
-      }, { threshold: 0.5 });
-      observer.observe(counter);
-    })();
   </script>
 </body>
 </html>
