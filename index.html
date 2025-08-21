@@ -17,15 +17,29 @@
     html, body { height: 100%; }
     html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--accent-6) var(--panel); }
     body { margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text); background-color: var(--bg); line-height: 1.6; overflow-x: hidden; }
+    
+    /* --- ИЗМЕНЕНИЯ ФОНА ЗДЕСЬ --- */
+    @keyframes bonfirePulse {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
+      50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.25; }
+      100% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.22; }
+    }
     .bg-gradient { 
       position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
-      /* ИЗМЕНЕНИЕ ЗДЕСЬ: серый цвет заменен на теплый полупрозрачный, градиент стал шире */
-      background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(229, 192, 123, 0.15) 0%, transparent 50%), 
-                  radial-gradient(circle at 80% -10%, #11141e 0%, transparent 30%), 
-                  radial-gradient(circle at -10% 120%, #11141e 0%, transparent 30%), 
+      background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255, 140, 0, 0.2) 0%, transparent 60%), 
                   var(--bg); 
       transition: background 0.2s linear; 
     }
+    .bg-gradient::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 80vmax; height: 80vmax;
+      background: radial-gradient(circle, rgba(255, 180, 0, 0.1) 0%, rgba(255, 106, 0, 0.2) 20%, transparent 70%);
+      animation: bonfirePulse 12s ease-in-out infinite alternate;
+    }
+    /* --- КОНЕЦ ИЗМЕНЕНИЙ ФОНА --- */
+
     .main-wrapper { padding: 8px; }
     .topbar { position: sticky; top: 8px; z-index: 50; backdrop-filter: blur(8px); background: color-mix(in srgb, var(--panel) 86%, transparent); border: 1px solid #1b1f2a; border-radius: 8px; }
     .topbar-inner { max-width: 1000px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; gap: 18px; }
@@ -116,9 +130,9 @@
       .mobile-nav.is-active { right: 0; }
       .mobile-nav nav.menu { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; font-size: 18px; }
       @keyframes mobile-gradient-flow { 0% { background-position: 0% 0%; } 50% { background-position: 100% 100%; } 100% { background-position: 0% 0%; } }
+      .bg-gradient::before { display: none; } /* Отключаем пульсацию на мобильных, оставляем общую анимацию */
       .bg-gradient { 
-        /* ИЗМЕНЕНИЕ ЗДЕСЬ: мобильный градиент тоже стал теплее */
-        background: radial-gradient(circle at 10% 20%, rgba(229, 192, 123, 0.1) 0%, transparent 70%), 
+        background: radial-gradient(circle at 10% 20%, rgba(255, 106, 0, 0.2) 0%, transparent 70%), 
                     radial-gradient(circle at 90% 80%, #11141e 0%, transparent 80%), 
                     var(--bg); 
         background-size: 200% 200%; 
