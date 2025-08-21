@@ -180,7 +180,39 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // --- Universal Typewriter Function ---
-      function typeLine(el, html, baseSpeed, speedVariation) { /* (code is the same, can be collapsed) */ }
+      function typeLine(el, html, baseSpeed, speedVariation) {
+        return new Promise(resolve => {
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = html;
+          const nodes = Array.from(tempDiv.childNodes);
+          const caret = document.createElement('span');
+          caret.className = 'caret';
+          el.innerHTML = '';
+          el.appendChild(caret);
+          let nodeIndex = 0;
+          function typeChar() {
+            if (nodeIndex >= nodes.length) {
+              setTimeout(() => { caret.remove(); resolve(); }, 400); return;
+            }
+            const currentNode = nodes[nodeIndex];
+            if (currentNode.nodeType === Node.TEXT_NODE) {
+              let textIndex = 0;
+              function typeTextNode() {
+                if (textIndex < currentNode.textContent.length) {
+                  el.insertBefore(document.createTextNode(currentNode.textContent[textIndex]), caret);
+                  textIndex++;
+                  setTimeout(typeTextNode, baseSpeed + Math.random() * speedVariation);
+                } else { nodeIndex++; typeChar(); }
+              }
+              typeTextNode();
+            } else {
+              el.insertBefore(currentNode.cloneNode(true), caret);
+              nodeIndex++; setTimeout(typeChar, baseSpeed + Math.random() * speedVariation);
+            }
+          }
+          typeChar();
+        });
+      }
 
       // --- Main Hero & Preference Note Typewriter ---
       (async function() {
@@ -194,14 +226,50 @@
 
       // --- Counter Animation ---
       const counter = document.getElementById('counter');
-      if (counter) { /* (code is the same, can be collapsed) */ }
+      if (counter) {
+        new IntersectionObserver((entries, observer) => {
+          if (entries[0].isIntersecting) {
+            const target = +counter.dataset.target;
+            let current = 0;
+            const timer = setInterval(() => {
+              current++;
+              counter.innerText = current;
+              if (current === target) clearInterval(timer);
+            }, 1000 / target);
+            observer.disconnect();
+          }
+        }, { threshold: 0.5 }).observe(counter);
+      }
 
       // --- Dynamic Background Gradient ---
       const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-      if (!isTouchDevice) { /* (code is the same, can be collapsed) */ }
+      if (!isTouchDevice) {
+        document.body.addEventListener('mousemove', e => {
+          const { clientX: x, clientY: y } = e;
+          const { innerWidth: w, innerHeight: h } = window;
+          document.documentElement.style.setProperty('--mouse-x', `${(x/w)*100}%`);
+          document.documentElement.style.setProperty('--mouse-y', `${(y/h)*100}%`);
+        });
+      }
 
       // --- Modal Logic ---
-      function openModal(modalId) { /* (code is the same, can be collapsed) */ }
+      function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+        modal.classList.add('is-open');
+        modal.querySelectorAll('.contact-card, .modal-content.single').forEach(card => {
+          const textEl = card.querySelector('[data-modal-text]');
+          if (textEl && !textEl.dataset.typed) {
+            typeLine(textEl, textEl.dataset.modalText, 80, 60);
+            textEl.dataset.typed = 'true';
+          }
+          const qrEl = card.querySelector('[data-qr-text]');
+          if (qrEl && !qrEl.dataset.generated) {
+            new QRCode(qrEl, { text: qrEl.dataset.qrText, width: 144, height: 144, colorDark : "#0f111a", colorLight : "#ffffff", correctLevel : QRCode.CorrectLevel.H });
+            qrEl.dataset.generated = 'true';
+          }
+        });
+      }
       document.querySelectorAll('[data-modal-trigger]').forEach(trigger => {
         trigger.addEventListener('click', (e) => {
           e.preventDefault();
@@ -216,8 +284,16 @@
       document.addEventListener('keydown', e => {
         if (e.key === "Escape") document.querySelector('.modal.is-open')?.classList.remove('is-open');
       });
-      document.querySelectorAll('[data-copy-text]').forEach(button => { /* (code is the same, can be collapsed) */ });
-
+      document.querySelectorAll('[data-copy-text]').forEach(button => {
+        button.addEventListener('click', () => {
+          navigator.clipboard.writeText(button.dataset.copyText).then(() => {
+            const originalText = button.textContent;
+            button.textContent = 'Скопировано!';
+            setTimeout(() => button.textContent = originalText, 1500);
+          });
+        });
+      });
+      
       // --- Mobile Navigation ---
       const hamburger = document.querySelector('.hamburger-menu');
       const mobileNav = document.querySelector('.mobile-nav');
@@ -239,92 +315,6 @@
         });
       });
     });
-
-    // --- (Paste full unchanged functions here for completeness) ---
-    function typeLine(el, html, baseSpeed, speedVariation) {
-        return new Promise(resolve => {
-          const tempDiv = document.createElement('div');
-          tempDiv.innerHTML = html;
-          const nodes = Array.from(tempDiv.childNodes);
-          const caret = document.createElement('span');
-          caret.className = 'caret';
-          el.appendChild(caret);
-          let nodeIndex = 0;
-          function typeChar() {
-            if (nodeIndex >= nodes.length) {
-              setTimeout(() => { caret.remove(); resolve(); }, 400);
-              return;
-            }
-            const currentNode = nodes[nodeIndex];
-            if (currentNode.nodeType === Node.TEXT_NODE) {
-              let textIndex = 0;
-              function typeTextNode() {
-                if (textIndex < currentNode.textContent.length) {
-                  el.insertBefore(document.createTextNode(currentNode.textContent[textIndex]), caret);
-                  textIndex++;
-                  setTimeout(typeTextNode, baseSpeed + Math.random() * speedVariation);
-                } else { nodeIndex++; typeChar(); }
-              }
-              typeTextNode();
-            } else {
-              el.insertBefore(currentNode.cloneNode(true), caret);
-              nodeIndex++;
-              setTimeout(typeChar, baseSpeed + Math.random() * speedVariation);
-            }
-          }
-          typeChar();
-        });
-      }
-    const counter = document.getElementById('counter');
-      if (counter) {
-        new IntersectionObserver((entries, observer) => {
-          if (entries[0].isIntersecting) {
-            const target = +counter.dataset.target;
-            let current = 0;
-            const timer = setInterval(() => {
-              current++;
-              counter.innerText = current;
-              if (current === target) clearInterval(timer);
-            }, 1000 / target);
-            observer.disconnect();
-          }
-        }, { threshold: 0.5 }).observe(counter);
-      }
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-      if (!isTouchDevice) {
-        document.body.addEventListener('mousemove', e => {
-          const { clientX: x, clientY: y } = e;
-          const { innerWidth: w, innerHeight: h } = window;
-          document.documentElement.style.setProperty('--mouse-x', `${(x/w)*100}%`);
-          document.documentElement.style.setProperty('--mouse-y', `${(y/h)*100}%`);
-        });
-      }
-    function openModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (!modal) return;
-        modal.classList.add('is-open');
-        modal.querySelectorAll('.contact-card, .modal-content.single').forEach(card => {
-          const textEl = card.querySelector('[data-modal-text]');
-          if (textEl && !textEl.dataset.typed) {
-            typeLine(textEl, textEl.dataset.modalText, 80, 60);
-            textEl.dataset.typed = 'true';
-          }
-          const qrEl = card.querySelector('[data-qr-text]');
-          if (qrEl && !qrEl.dataset.generated) {
-            new QRCode(qrEl, { text: qrEl.dataset.qrText, width: 144, height: 144, colorDark : "#0f111a", colorLight : "#ffffff", correctLevel : QRCode.CorrectLevel.H });
-            qrEl.dataset.generated = 'true';
-          }
-        });
-      }
-    document.querySelectorAll('[data-copy-text]').forEach(button => {
-        button.addEventListener('click', () => {
-          navigator.clipboard.writeText(button.dataset.copyText).then(() => {
-            const originalText = button.textContent;
-            button.textContent = 'Скопировано!';
-            setTimeout(() => button.textContent = originalText, 1500);
-          });
-        });
-      });
   </script>
 </body>
 </html>
