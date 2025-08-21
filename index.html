@@ -17,7 +17,15 @@
     html, body { height: 100%; }
     html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--accent-6) var(--panel); }
     body { margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text); background-color: var(--bg); line-height: 1.6; overflow-x: hidden; }
-    .bg-gradient { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), #1a1d28 0%, transparent 40%), radial-gradient(circle at 80% -10%, #11141e 0%, transparent 30%), radial-gradient(circle at -10% 120%, #11141e 0%, transparent 30%), var(--bg); transition: background 0.2s linear; }
+    .bg-gradient { 
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
+      /* ИЗМЕНЕНИЕ ЗДЕСЬ: серый цвет заменен на теплый полупрозрачный, градиент стал шире */
+      background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(229, 192, 123, 0.15) 0%, transparent 50%), 
+                  radial-gradient(circle at 80% -10%, #11141e 0%, transparent 30%), 
+                  radial-gradient(circle at -10% 120%, #11141e 0%, transparent 30%), 
+                  var(--bg); 
+      transition: background 0.2s linear; 
+    }
     .main-wrapper { padding: 8px; }
     .topbar { position: sticky; top: 8px; z-index: 50; backdrop-filter: blur(8px); background: color-mix(in srgb, var(--panel) 86%, transparent); border: 1px solid #1b1f2a; border-radius: 8px; }
     .topbar-inner { max-width: 1000px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; gap: 18px; }
@@ -108,7 +116,14 @@
       .mobile-nav.is-active { right: 0; }
       .mobile-nav nav.menu { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; font-size: 18px; }
       @keyframes mobile-gradient-flow { 0% { background-position: 0% 0%; } 50% { background-position: 100% 100%; } 100% { background-position: 0% 0%; } }
-      .bg-gradient { background: radial-gradient(circle at 10% 20%, #1a1d28 0%, transparent 80%), radial-gradient(circle at 90% 80%, #11141e 0%, transparent 80%), var(--bg); background-size: 200% 200%; animation: mobile-gradient-flow 25s ease infinite; }
+      .bg-gradient { 
+        /* ИЗМЕНЕНИЕ ЗДЕСЬ: мобильный градиент тоже стал теплее */
+        background: radial-gradient(circle at 10% 20%, rgba(229, 192, 123, 0.1) 0%, transparent 70%), 
+                    radial-gradient(circle at 90% 80%, #11141e 0%, transparent 80%), 
+                    var(--bg); 
+        background-size: 200% 200%; 
+        animation: mobile-gradient-flow 25s ease infinite; 
+      }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .gradient-text, .btn:hover, .caret, .modal-content, .modal-close, .bg-gradient, .hamburger-menu .bar, .mobile-nav { animation: none !important; transition: none !important; } }
   </style>
@@ -277,7 +292,7 @@
         });
       });
       document.querySelectorAll('.modal').forEach(modal => {
-        modal.querySelectorAll('[data-modal-close]').forEach(el => {
+        modal.querySelectorAll('[data-modal-close], .modal-overlay').forEach(el => {
           el.addEventListener('click', () => modal.classList.remove('is-open'));
         });
       });
