@@ -1,16 +1,16 @@
 <!doctype html>
-
 <html lang="ru">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ваше Имя Фамилия — Сайты-визитки и лендинги под ключ</title>
-  <meta name="description" content="Создаю сайты-визитки и лендинги под ключ. Дизайн, копирайт, домен и хостинг — все в одном месте." />
+  <title>Алексей Бронников — Сайты для вас и вашего бизнеса</title>
+  <meta name="description" content="Создаю современные сайты-визитки и лендинги под ключ. Дизайн, копирайт, домен и хостинг — все в одном месте." />
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    :root{
+    :root {
       --bg: #0f111a;
       --panel: #12141b;
       --panel-2: #0b0d13;
@@ -24,304 +24,441 @@
       --accent-6: #c678dd;
       --link: #61afef;
       --success: #98c379;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --shadow: 0 10px 30px rgba(0, 0, 0, .35);
     }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
     html {
       scroll-behavior: smooth;
       /* Custom scrollbar (Firefox) */
       scrollbar-width: thin;
       scrollbar-color: var(--accent-6) var(--panel);
     }
-    body{
+
+    body {
       margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
       color: var(--text);
       background: radial-gradient(1200px 1200px at 80% -10%, #1a1d28 0%, transparent 60%),
-                  radial-gradient(800px 800px at -10% 120%, #11141e 0%, transparent 60%),
-                  var(--bg);
+        radial-gradient(800px 800px at -10% 120%, #11141e 0%, transparent 60%),
+        var(--bg);
       background-attachment: fixed;
       line-height: 1.6;
-    }/* Top bar like an editor window header */
-.topbar{
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  backdrop-filter: blur(8px);
-  background: color-mix(in srgb, var(--panel) 86%, transparent);
-  border-bottom: 1px solid #1b1f2a;
-}
-.topbar-inner{
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-.traffic{
-  display: flex; gap: 8px; align-items: center;
-}
-.dot{
-  width: 12px; height: 12px; border-radius: 50%;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
-}
-.dot.red{ background: #ff5f56; }
-.dot.yellow{ background: #ffbd2e; }
-.dot.green{ background: #27c93f; }
-nav.menu{
-  margin-left: auto;
-  display: flex; gap: 16px;
-  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 14px;
-}
-nav.menu a{
-  color: var(--text);
-  text-decoration: none;
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: 1px solid transparent;
-  transition: .2s ease;
-}
-nav.menu a:hover{
-  color: white;
-  border-color: #232736;
-  background: #171a24;
-}
-nav.menu a.active{
-  color: white;
-  background: linear-gradient(135deg, #171a24, #121420);
-  border-color: #232736;
-}
-/* Editor-like container */
-.editor{
-  max-width: 1000px;
-  margin: 24px auto;
-  padding: 0 16px 40px;
-}
-.file-tab{
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--muted);
-  font: 500 13px "JetBrains Mono", ui-monospace, monospace;
-  background: linear-gradient(135deg, #151827, #10121c);
-  border: 1px solid #242a3a;
-  border-bottom: none;
-  padding: 10px 14px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  transform: translateY(1px);
-}
-.panel{
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.02), transparent 40%),
-    repeating-linear-gradient(180deg, rgba(255,255,255,.02) 0 1px, transparent 1px 32px),
-    linear-gradient(135deg, #0e111a, #0b0d13);
-  border: 1px solid #242a3a;
-  border-radius: 12px;
-  box-shadow: var(--shadow);
-  overflow: hidden;
-}
-.panel-body{
-  padding: 28px 24px;
-}
-/* Hero */
-.hero{
-  display: grid;
-  gap: 16px;
-  padding-top: 8px;
-}
-.name{
-  font-weight: 200;
-  font-size: clamp(28px, 4vw, 44px);
-  letter-spacing: .4px;
-  margin: 0;
-  line-height: 1.15;
-  color: white;
-}
-.gradient-text{
-  background: linear-gradient(90deg,
-    var(--accent-1),
-    var(--accent-2),
-    var(--accent-3),
-    var(--accent-4),
-    var(--accent-5),
-    var(--accent-6),
-    var(--accent-1));
-  background-size: 400% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: flow 18s linear infinite;
-}
-@keyframes flow{
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-.subtitle{
-  color: var(--muted);
-  margin: 0 0 8px 0;
-  font-size: 15px;
-}
-/* Code-styled bullet list with typing */
-.code-list{
-  list-style: none;
-  margin: 8px 0 0;
-  padding: 0;
-  counter-reset: line;
-  font: 400 16px "JetBrains Mono", ui-monospace, monospace;
-  background: linear-gradient(180deg, rgba(97,175,239,.08), transparent 70%) no-repeat;
-  border: 1px solid #1e2433;
-  border-radius: 10px;
-  overflow: hidden;
-}
-.code-item{
-  display: grid;
-  grid-template-columns: 48px 1fr;
-  align-items: start;
-  gap: 0;
-  padding: 10px 12px;
-  border-bottom: 1px solid #161a26;
-  background-image:
-    linear-gradient(180deg, rgba(255,255,255,.02), transparent);
-}
-.code-item:last-child{ border-bottom: none; }
-.gutter{
-  color: #4b5263;
-  text-align: right;
-  padding-right: 12px;
-  user-select: none;
-}
-.gutter::before{
-  counter-increment: line;
-  content: counter(line);
-}
-.code{
-  color: #d7dae0;
-  min-height: 1.5em;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-.code .kw { color: var(--accent-6); }
-.code .op { color: var(--accent-2); }
-.code .str { color: var(--success); }
-.code .com { color: #596175; }
-/* typing caret */
-.caret{
-  display: inline-block;
-  width: .6ch;
-  height: 1.1em;
-  vertical-align: -0.1em;
-  background: #d7dae0;
-  margin-left: 2px;
-  animation: blink 1.1s steps(1) infinite;
-}
-@keyframes blink{
-  50% { opacity: 0; }
-}
-/* Sections */
-section{
-  margin-top: 28px;
-}
-.section-title{
-  font: 700 14px "JetBrains Mono", ui-monospace, monospace;
-  color: var(--muted);
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  margin: 0 0 8px 0;
-}
-.cases-grid{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 14px;
-}
-.card{
-  border: 1px solid #242a3a;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #0f1220, #0b0d13);
-  padding: 16px;
-  transition: .2s ease;
-}
-.card:hover{ transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,.3); }
-.card h3{
-  margin: 0 0 6px 0;
-  font-size: 16px;
-  color: #e6e9ef;
-}
-.card p{
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-}
-.contacts{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
-}
-.btn{
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border: 1px solid #242a3a;
-  color: white;
-  text-decoration: none;
-  padding: 10px 14px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #171a24, #121420);
-  transition: .2s ease;
-  font: 500 14px "JetBrains Mono", ui-monospace, monospace;
-}
-.btn:hover{
-  transform: translateY(-1px);
-  border-color: #2b3145;
-  box-shadow: 0 8px 20px rgba(0,0,0,.25);
-}
-.btn.secondary{
-  background: transparent;
-  color: var(--link);
-}
-/* Status bar (bottom like VS Code) */
-.status{
-  margin-top: 16px;
-  border-top: 1px solid #1b2030;
-  display: flex;
-  gap: 16px;
-  padding: 10px 12px;
-  color: #7a8295;
-  font: 500 12px "JetBrains Mono", ui-monospace, monospace;
-  background: linear-gradient(0deg, #0b0d13, #0c0e15);
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-}
-.status span{ opacity: .9; }
-/* Links */
-a{ color: var(--link); }
-a:hover{ color: #8cc5ff; }
-/* Selection */
-::selection{ background: rgba(97,175,239,.25); }
-/* Custom scrollbar (WebKit) */
-::-webkit-scrollbar { width: 12px; height: 12px; }
-::-webkit-scrollbar-track { background: #11141a; }
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--accent-5), var(--accent-6));
-  border-radius: 8px;
-  border: 2px solid #11141a;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--accent-6), var(--accent-5));
-}
-::-webkit-scrollbar-corner { background: #11141a; }
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce){
-  html{ scroll-behavior: auto; }
-  .gradient-text, .btn:hover, .card:hover, .caret { animation: none !important; }
-}
+    }
 
+    /* Top bar like an editor window header */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+      background: color-mix(in srgb, var(--panel) 86%, transparent);
+      border-bottom: 1px solid #1b1f2a;
+    }
+
+    .topbar-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .traffic {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .25);
+    }
+
+    .dot.red {
+      background: #ff5f56;
+    }
+
+    .dot.yellow {
+      background: #ffbd2e;
+    }
+
+    .dot.green {
+      background: #27c93f;
+    }
+
+    nav.menu {
+      margin-left: auto;
+      display: flex;
+      gap: 16px;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 14px;
+    }
+
+    nav.menu a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      transition: .2s ease;
+    }
+
+    nav.menu a:hover {
+      color: white;
+      border-color: #232736;
+      background: #171a24;
+    }
+
+    nav.menu a.active {
+      color: white;
+      background: linear-gradient(135deg, #171a24, #121420);
+      border-color: #232736;
+    }
+
+    /* Editor-like container */
+    .editor {
+      max-width: 1000px;
+      margin: 24px auto;
+      padding: 0 16px 40px;
+    }
+
+    .file-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font: 500 13px "JetBrains Mono", ui-monospace, monospace;
+      background: linear-gradient(135deg, #151827, #10121c);
+      border: 1px solid #242a3a;
+      border-bottom: none;
+      padding: 10px 14px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      transform: translateY(1px);
+    }
+
+    .panel {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .02), transparent 40%),
+        repeating-linear-gradient(180deg, rgba(255, 255, 255, .02) 0 1px, transparent 1px 32px),
+        linear-gradient(135deg, #0e111a, #0b0d13);
+      border: 1px solid #242a3a;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-body {
+      padding: 28px 24px;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      gap: 16px;
+      padding-top: 8px;
+    }
+
+    .name {
+      font-weight: 200;
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: .4px;
+      margin: 0;
+      line-height: 1.15;
+      color: white;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg,
+          var(--accent-1),
+          var(--accent-2),
+          var(--accent-3),
+          var(--accent-4),
+          var(--accent-5),
+          var(--accent-6),
+          var(--accent-1));
+      background-size: 400% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: flow 18s linear infinite;
+    }
+
+    @keyframes flow {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin: 0 0 8px 0;
+      font-size: 15px;
+    }
+
+    /* Code-styled bullet list with typing */
+    .code-list {
+      list-style: none;
+      margin: 8px 0 0;
+      padding: 0;
+      counter-reset: line;
+      font: 400 16px "JetBrains Mono", ui-monospace, monospace;
+      background: linear-gradient(180deg, rgba(97, 175, 239, .08), transparent 70%) no-repeat;
+      border: 1px solid #1e2433;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .code-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      align-items: start;
+      gap: 0;
+      padding: 10px 12px;
+      border-bottom: 1px solid #161a26;
+      background-image:
+        linear-gradient(180deg, rgba(255, 255, 255, .02), transparent);
+    }
+
+    .code-item:last-child {
+      border-bottom: none;
+    }
+
+    .gutter {
+      color: #4b5263;
+      text-align: right;
+      padding-right: 12px;
+      user-select: none;
+    }
+
+    .gutter::before {
+      counter-increment: line;
+      content: counter(line);
+    }
+
+    .code {
+      color: #d7dae0;
+      min-height: 1.5em;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .code .kw {
+      color: var(--accent-6);
+    }
+
+    .code .op {
+      color: var(--accent-2);
+    }
+
+    .code .str {
+      color: var(--success);
+    }
+
+    .code .com {
+      color: #596175;
+    }
+
+    /* typing caret */
+    .caret {
+      display: inline-block;
+      width: .6ch;
+      height: 1.1em;
+      vertical-align: -0.1em;
+      background: #d7dae0;
+      margin-left: 2px;
+      animation: blink 1.1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* Sections */
+    section {
+      margin-top: 28px;
+    }
+
+    .section-title {
+      font: 700 14px "JetBrains Mono", ui-monospace, monospace;
+      color: var(--muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin: 0 0 12px 0;
+    }
+
+    /* Stats Section */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-item {
+      border: 1px solid #242a3a;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #0f1220, #0b0d13);
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 32px;
+      font-weight: 700;
+      color: white;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--muted);
+    }
+    
+    .centered-button {
+      text-align: center;
+    }
+
+    .contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #242a3a;
+      color: white;
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #171a24, #121420);
+      transition: .2s ease;
+      font: 500 14px "JetBrains Mono", ui-monospace, monospace;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: #2b3145;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .25);
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--link);
+    }
+    
+    .btn.primary {
+      background: var(--accent-5);
+      border-color: var(--accent-5);
+      color: white;
+    }
+    .btn.primary:hover {
+      background: #73c0ff;
+      border-color: #73c0ff;
+    }
+
+    /* Status bar (bottom like VS Code) */
+    .status {
+      margin-top: 16px;
+      border-top: 1px solid #1b2030;
+      display: flex;
+      gap: 16px;
+      padding: 10px 12px;
+      color: #7a8295;
+      font: 500 12px "JetBrains Mono", ui-monospace, monospace;
+      background: linear-gradient(0deg, #0b0d13, #0c0e15);
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
+
+    .status span {
+      opacity: .9;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Links */
+    a {
+      color: var(--link);
+    }
+
+    a:hover {
+      color: #8cc5ff;
+    }
+
+    /* Selection */
+    ::selection {
+      background: rgba(97, 175, 239, .25);
+    }
+
+    /* Custom scrollbar (WebKit) */
+    ::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #11141a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--accent-5), var(--accent-6));
+      border-radius: 8px;
+      border: 2px solid #11141a;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, var(--accent-6), var(--accent-5));
+    }
+
+    ::-webkit-scrollbar-corner {
+      background: #11141a;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .gradient-text,
+      .btn:hover,
+      .card:hover,
+      .caret {
+        animation: none !important;
+      }
+    }
   </style>
 </head>
+
 <body>
   <header class="topbar">
     <div class="topbar-inner">
@@ -332,105 +469,169 @@ a:hover{ color: #8cc5ff; }
       </div>
       <nav class="menu" role="navigation" aria-label="Главное меню">
         <a href="#home" class="active">Главная</a>
-        <a href="#cases">Кейсы</a>
+        <a href="#stats">Статистика</a>
         <a href="#contacts">Контакты</a>
       </nav>
     </div>
-  </header>  <main class="editor" id="home">
+  </header>
+  <main class="editor" id="home">
     <div class="file-tab">index.html</div>
     <div class="panel" role="region" aria-label="Главный блок">
       <div class="panel-body">
         <section class="hero">
-          <p class="subtitle">// Портфолио фронтенд‑разработчика</p>
+          <p class="subtitle">Сайты для вас и вашего бизнеса</p>
           <h1 class="name">
-            <span class="gradient-text">Ваше Имя Фамилия</span>
-          </h1>      <ul class="code-list" aria-live="polite">
-        <li class="code-item">
-          <div class="gutter" aria-hidden="true"></div>
-          <div class="code" data-text="Создаю сайты под ключ: визитки и лэндинги, личные и для компаний"></div>
-        </li>
-        <li class="code-item">
-          <div class="gutter" aria-hidden="true"></div>
-          <div class="code" data-text="Предлагаю решения под ключ: сайт, копирайт, хостинг на домене"></div>
-        </li>
-      </ul>
-    </section>
-    <section id="cases" aria-label="Кейсы">
-      <h2 class="section-title">// Кейсы</h2>
-      <div class="cases-grid">
-        <article class="card">
-          <h3>Landing: IT курс</h3>
-          <p>Рост конверсии на 34%. SPA, анимации, интеграция с CRM.</p>
-        </article>
-        <article class="card">
-          <h3>Сайт-визитка: фотограф</h3>
-          <p>Мгновенная загрузка, ретушь в портфолио, бронирование.</p>
-        </article>
-        <article class="card">
-          <h3>Лэндинг: локальный бизнес</h3>
-          <p>SEO-оптимизация, карта, форма заявки, отзывы.</p>
-        </article>
-      </div>
-    </section>
-    <section id="contacts" aria-label="Контакты">
-      <h2 class="section-title">// Контакты</h2>
-      <div class="contacts">
-        <a class="btn" href="mailto:your-email@example.com" aria-label="Написать на email">
-          ✉️ Email
-        </a>
-        <a class="btn secondary" href="https://t.me/yourhandle" target="_blank" rel="noopener" aria-label="Написать в Telegram">
-          💬 Telegram
-        </a>
-      </div>
-    </section>
-  </div>
-  <div class="status" role="status" aria-label="Статус редактора">
-    <span>UTF‑8</span>
-    <span>LF</span>
-    <span>Spaces: 2</span>
-    <span>JetBrains Mono</span>
-  </div>
-</div>
+            <span class="gradient-text">Алексей Бронников</span>
+          </h1>
+          <ul class="code-list" aria-live="polite">
+            <li class="code-item">
+              <div class="gutter" aria-hidden="true"></div>
+              <div class="code" data-text='<span class="kw">Готовые решения</span><span class="op">:</span> <span class="str">сайт + копирайт + хостинг</span>'></div>
+            </li>
+            <li class="code-item">
+              <div class="gutter" aria-hidden="true"></div>
+              <div class="code" data-text='<span class="kw">Удобные решения</span> для <span class="str">персоны</span> и <span class="str">компании</span>'></div>
+            </li>
+          </ul>
+        </section>
+        
+        <section id="stats" aria-label="Статистика">
+          <h2 class="section-title">// Статистика</h2>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-number">1</div>
+              <div class="stat-label">Готовый сайт</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">1</div>
+              <div class="stat-label">Довольный клиент</div>
+            </div>
+          </div>
+          <div class="centered-button">
+            <a class="btn primary" href="portfolio.html">Смотреть отзывы</a>
+          </div>
+        </section>
 
-  </main>  <script>
+        <section id="contacts" aria-label="Контакты">
+          <h2 class="section-title">// Контакты</h2>
+          <div class="contacts">
+            <a class="btn" href="https://t.me/yourhandle" target="_blank" rel="noopener" aria-label="Написать в Telegram">
+              💬 Telegram
+            </a>
+            <a class="btn" href="https://wa.me/yourphonenumber" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
+              💬 WhatsApp
+            </a>
+            <a class="btn secondary" href="https://play.google.com/store/apps/details?id=ru.oneme.app" target="_blank" rel="noopener" aria-label="Написать в Max">
+              💬 Max
+            </a>
+            <a class="btn secondary" href="tel:+70000000000" aria-label="Позвонить">
+              📞 Телефон
+            </a>
+          </div>
+        </section>
+      </div>
+      <div class="status" role="status" aria-label="Статус редактора">
+        <span>UTF‑8</span>
+        <span>LF</span>
+        <span>Spaces: 2</span>
+        <span>JetBrains Mono</span>
+      </div>
+    </div>
+  </main>
+  
+  <footer>
+    <p>Сайт разработал Алексей Бронников</p>
+    <p>2025</p>
+  </footer>
+
+  <script>
     // Simple typewriter for lines with .code and data-text
-    (function(){
-      const SPEED = 28; // ms per char
+    (function() {
+      const BASE_SPEED = 50; // Base speed in ms
+      const SPEED_VARIATION = 40; // Max random addition to speed
       const START_DELAY = 300; // ms before typing starts
-      const lines = Array.from(document.querySelectorAll('.code-list .code'));  function typeLine(el, text){
-    return new Promise(resolve => {
-      const caret = document.createElement('span');
-      caret.className = 'caret';
-      el.appendChild(caret);
-      let i = 0;
-      const timer = setInterval(() => {
-        el.insertBefore(document.createTextNode(text[i]), caret);
-        i++;
-        if(i >= text.length){
-          clearInterval(timer);
-          // Small pause then remove caret
-          setTimeout(() => {
-            caret.remove();
-            resolve();
-          }, 200);
-        }
-      }, SPEED);
-    });
-  }
-  async function run(){
-    await new Promise(r => setTimeout(r, START_DELAY));
-    for(const el of lines){
-      const text = el.getAttribute('data-text') || '';
-      await typeLine(el, text);
-    }
-  }
-  if (document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', run);
-  } else {
-    run();
-  }
-})();
+      const lines = Array.from(document.querySelectorAll('.code-list .code'));
 
+      function typeLine(el, html) {
+        return new Promise(resolve => {
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = html;
+          const nodes = Array.from(tempDiv.childNodes);
+          
+          const caret = document.createElement('span');
+          caret.className = 'caret';
+          el.appendChild(caret);
+
+          let nodeIndex = 0;
+          let textIndex = 0;
+
+          function typeChar() {
+            if (nodeIndex >= nodes.length) {
+              setTimeout(() => {
+                caret.remove();
+                resolve();
+              }, 200);
+              return;
+            }
+
+            const currentNode = nodes[nodeIndex];
+
+            if (currentNode.nodeType === Node.TEXT_NODE) {
+              if (textIndex < currentNode.textContent.length) {
+                el.insertBefore(document.createTextNode(currentNode.textContent[textIndex]), caret);
+                textIndex++;
+              } else {
+                nodeIndex++;
+                textIndex = 0;
+              }
+            } else if (currentNode.nodeType === Node.ELEMENT_NODE) {
+                const newNode = currentNode.cloneNode(true);
+                newNode.innerHTML = '';
+                el.insertBefore(newNode, caret);
+                
+                let innerHtml = currentNode.innerHTML;
+                let i = 0;
+                
+                function typeInner() {
+                    if (i < innerHtml.length) {
+                        newNode.innerHTML += innerHtml[i];
+                        i++;
+                        setTimeout(typeInner, BASE_SPEED + Math.random() * SPEED_VARIATION);
+                    } else {
+                        nodeIndex++;
+                        textIndex = 0;
+                        setTimeout(typeChar, BASE_SPEED + Math.random() * SPEED_VARIATION);
+                    }
+                }
+                typeInner();
+                return; // Prevent double timeout
+            } else {
+                nodeIndex++;
+            }
+            
+            setTimeout(typeChar, BASE_SPEED + Math.random() * SPEED_VARIATION);
+          }
+          
+          typeChar();
+        });
+      }
+
+      async function run() {
+        await new Promise(r => setTimeout(r, START_DELAY));
+        for (const el of lines) {
+          const text = el.getAttribute('data-text') || '';
+          el.innerHTML = ''; // Clear existing content before typing
+          await typeLine(el, text);
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', run);
+      } else {
+        run();
+      }
+    })();
   </script>
 </body>
+
 </html>
