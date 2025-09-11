@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Портфолио — Алексей Бронников</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='Exo 2, sans-serif' font-weight='700' fill='%23ffb700'>Э.</text></svg>">
+  <meta name="description" content="Примеры выполненных работ по созданию сайтов-визиток, лендингов и портфолио. Посмотрите на реализованные проекты." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;700&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-organic-dark: #22201e;
+      --bg-panel-glass: rgba(43, 40, 37, 0.5);
+      --accent-warm: #ffb700;
+      --accent-glow: rgba(255, 183, 0, 0.5);
+      --text-primary: #f0ede9;
+      --text-secondary: #b8b0a6;
+      --border-color: rgba(255, 183, 0, 0.2);
+      --border-hover: rgba(255, 183, 0, 0.7);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Manrope', sans-serif;
+      color: var(--text-primary);
+      background-color: var(--bg-organic-dark);
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: default;
+    }
+    
+    /* --- ЖИВОЙ ФОН (аналогично index.html) --- */
+    #background-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden; }
+    #living-glow { position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background: radial-gradient(circle at 25% 25%, var(--accent-glow) 0%, transparent 30%), radial-gradient(circle at 75% 75%, rgba(121, 45, 255, 0.15) 0%, transparent 35%); animation: living-glow-rotate 40s ease-in-out infinite alternate; }
+    @keyframes living-glow-rotate { from { transform: rotate(0deg) scale(1); } to { transform: rotate(360deg) scale(1.2); } }
+    #particle-container { position: absolute; top:0; left:0; width:100%; height:100%; }
+    .particle { position: absolute; border-radius: 50%; background: var(--accent-warm); opacity: 0; animation: rise 15s infinite ease-in; }
+    @keyframes rise { 0% { transform: translateY(100vh) scale(0.5); opacity: 0; } 10% { opacity: 0.6; } 90% { opacity: 0.2; } 100% { transform: translateY(-10vh) scale(1); opacity: 0; } }
+    .particle:nth-child(1){width:4px;height:4px;left:10%;animation-delay:0s;animation-duration:15s}.particle:nth-child(2){width:2px;height:2px;left:20%;animation-delay:2s;animation-duration:12s}.particle:nth-child(3){width:5px;height:5px;left:30%;animation-delay:4s;animation-duration:18s}.particle:nth-child(4){width:3px;height:3px;left:40%;animation-delay:1s;animation-duration:14s}.particle:nth-child(5){width:2px;height:2px;left:50%;animation-delay:7s;animation-duration:11s}.particle:nth-child(6){width:4px;height:4px;left:60%;animation-delay:3s;animation-duration:16s}.particle:nth-child(7){width:6px;height:6px;left:70%;animation-delay:8s;animation-duration:20s}.particle:nth-child(8){width:2px;height:2px;left:80%;animation-delay:5s;animation-duration:13s}.particle:nth-child(9){width:3px;height:3px;left:90%;animation-delay:6s;animation-duration:17s}.particle:nth-child(10){width:5px;height:5px;left:5%;animation-delay:9s;animation-duration:19s}
+
+    /* --- ОБЩАЯ СТРУКТУРА И ХЭДЕР (аналогично index.html) --- */
+    .main-wrapper { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+    .topbar { position: sticky; top: 1rem; z-index: 50; backdrop-filter: blur(16px) saturate(150%); background: var(--bg-panel-glass); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 4px 30px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.05); }
+    .topbar-inner { display: flex; align-items: center; padding: 0.8rem 1.5rem; }
+    .logo-link { display: flex; align-items: center; gap: 1rem; text-decoration: none; margin-right: auto; }
+    .brand-logo-char { font-family: 'Exo 2', sans-serif; font-weight: 700; font-size: 2rem; color: var(--accent-warm); text-shadow: 0 0 15px var(--accent-glow); line-height: 1; }
+    .logo-name { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 1.1rem; color: var(--text-primary); }
+    nav.menu { display: flex; gap: 0.5rem; font-family: 'Exo 2', sans-serif; font-size: 0.9rem; font-weight: 500; }
+    nav.menu a { text-decoration: none; padding: 0.5rem 1rem; color: var(--text-secondary); position: relative; transition: color 0.3s ease, text-shadow 0.3s ease; cursor: pointer; }
+    nav.menu a:hover, nav.menu a.active { color: var(--text-primary); text-shadow: 0 0 8px var(--accent-glow); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; font-family: 'Exo 2', sans-serif; font-size: 1rem; font-weight: 500; text-decoration: none; text-transform: uppercase; color: var(--text-primary); border: 1px solid var(--border-color); background-color: transparent; padding: 0.9rem 2rem; border-radius: 50px; position: relative; overflow: hidden; transition: all 0.4s ease; z-index: 1; cursor: pointer; }
+    .btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--accent-warm); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: -1; }
+    .btn:hover, .btn:focus { color: var(--bg-organic-dark); border-color: var(--accent-warm); box-shadow: 0 0 25px var(--accent-glow); }
+    .btn:hover::before { transform: scaleX(1); }
+    .btn:active { transform: translateY(1px) scale(0.98); }
+
+    /* --- НОВЫЕ СТИЛИ ДЛЯ СТРАНИЦЫ ПОРТФОЛИО --- */
+    .portfolio-hero {
+      text-align: center;
+      padding: 4rem 0;
+    }
+    .section-title { font-family: 'Exo 2', sans-serif; font-size: 2.5rem; letter-spacing: 0.05em; color: var(--text-primary); text-align: center; margin: 0 0 1rem 0; }
+    .subtitle { font-family: 'Manrope', sans-serif; font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+    .content-section { padding-top: 4rem; }
+    .category-title {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+      margin: 0 0 2.5rem 0;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .project-card {
+      background: var(--bg-panel-glass);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      transition: box-shadow 0.4s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .project-card:hover {
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px var(--accent-glow);
+      }
+    }
+    .project-preview {
+      min-height: 450px;
+      overflow: hidden;
+      position: relative;
+    }
+    .project-preview iframe {
+      width: 100%; height: 100%; border: 0; transform: scale(0.8); transform-origin: top left; width: 125%; height: 125%; pointer-events: none;
+    }
+    .project-preview .placeholder {
+        display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: rgba(0,0,0,0.2);
+    }
+    .project-details {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-title {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0 0 1rem 0;
+    }
+    .project-description {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .project-tags span {
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: rgba(255, 183, 0, 0.1);
+      color: var(--accent-warm);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 183, 0, 0.2);
+    }
+    .project-review-box {
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-top: auto; /* Прижимает блок к низу */
+    }
+    .project-review-box blockquote {
+      margin: 0;
+      padding-left: 1rem;
+      border-left: 2px solid var(--accent-warm);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--text-primary);
+    }
+    .project-review-box cite {
+      display: block;
+      margin-top: 0.8rem;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-align: right;
+    }
+    .project-actions {
+      margin-top: 2rem;
+    }
+    .placeholder-text {
+        color: var(--text-secondary);
+        font-style: italic;
+    }
+
+    /* --- АНИМАЦИИ ПОЯВЛЕНИЯ --- */
+    .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+    .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+    
+    /* --- ФУТЕР --- */
+    footer { text-align: center; font-size: 0.9rem; color: var(--text-secondary); padding: 2.5rem 0; margin-top: 5rem; border-top: 1px solid var(--border-color); }
+    
+    /* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
+    .hamburger-menu, .mobile-nav { display: none; }
+    @media (max-width: 900px) {
+      .project-card { grid-template-columns: 1fr; }
+      .project-preview { min-height: 300px; }
+    }
+    @media (max-width: 768px) {
+      .main-wrapper { padding: 1rem; }
+      nav.menu { display: none; }
+      .logo-name { display: none; }
+      .hamburger-menu{display:flex;flex-direction:column;gap:6px;margin-left:auto;background:0 0;border:none;cursor:pointer;padding:8px;z-index:100}.hamburger-menu .bar{width:28px;height:3px;background:var(--text-primary);border-radius:2px;transition:.3s ease}.hamburger-menu.is-active .bar:nth-child(1){transform:translateY(9px) rotate(45deg)}.hamburger-menu.is-active .bar:nth-child(2){opacity:0}.hamburger-menu.is-active .bar:nth-child(3){transform:translateY(-9px) rotate(-45deg)}.mobile-nav{display:block;position:fixed;top:0;right:-100%;z-index:40;width:min(80vw,320px);height:100%;backdrop-filter:blur(16px);background:color-mix(in srgb,var(--bg-panel-glass) 95%,transparent);border-left:1px solid var(--border-color);padding:100px 30px;transition:right .4s cubic-bezier(.25,1,.5,1)}.mobile-nav.is-active{right:0;box-shadow:-10px 0 40px rgba(0,0,0,.5)}.mobile-nav nav.menu{display:flex;flex-direction:column;align-items:flex-start;gap:1.5rem;font-size:1.2rem}
+    }
+  </style>
+</head>
+
+<body>
+  
+  <div id="background-wrapper">
+    <div id="living-glow"></div>
+    <div id="particle-container">
+      <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+      <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    </div>
+  </div>
+
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a href="index.html" class="logo-link magnetic-item">
+          <span class="brand-logo-char">Э.</span>
+          <span class="logo-name">Алексей Бронников</span>
+        </a>
+        <nav class="menu" role="navigation">
+            <a href="index.html" class="magnetic-item">ГЛАВНАЯ</a>
+            <a href="portfolio.html" class="active magnetic-item">РАБОТЫ</a>
+            <a href="index.html#brief" class="magnetic-item">БРИФ</a>
+            <a data-modal-trigger="main-contact-modal" class="magnetic-item">КОНТАКТЫ</a>
+        </nav>
+        <button class="hamburger-menu magnetic-item" aria-label="Открыть меню" aria-expanded="false">
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+      </div>
+    </header>
+    <div class="mobile-nav"><nav class="menu" role="navigation"></nav></div>
+
+    <main>
+      <section class="portfolio-hero animate-on-scroll">
+        <h1 class="section-title">Портфолио</h1>
+        <p class="subtitle">Примеры реализованных проектов, отражающие мой подход к дизайну, вниманию к деталям и пользовательскому опыту.</p>
+      </section>
+
+      <section id="category-landing" class="content-section">
+        <h2 class="category-title animate-on-scroll">Сайты-визитки и портфолио</h2>
+        <div class="project-grid">
+
+          
+          <div class="project-card animate-on-scroll">
+            <div class="project-preview">
+              <iframe src="https://www.sapstudio.ru/" scrolling="no" title="Превью сайта sapstudio.ru"></iframe>
+            </div>
+            <div class="project-details">
+              <h3 class="project-title">Студия красоты "Сапфир"</h3>
+              <p class="project-description">Сайт-визитка для салона красоты в Тольятти. Основной задачей было создание стильного, современного и чистого дизайна, который бы отражал премиальный уровень услуг. Интеграция с Яндекс.Картами позволяет клиентам легко найти салон.</p>
+              <div class="project-tags">
+                <span>Дизайн</span><span>Адаптивность</span><span>Интеграция карт</span><span>Копирайтинг</span>
+              </div>
+              <div class="project-review-box">
+                <blockquote>Теперь у нас есть стильный сайт, который привлекает новых клиентов. Все было сделано быстро и профессионально!</blockquote>
+                <cite>— Управляющая салона "Сапфир"</cite>
+              </div>
+              <div class="project-actions">
+                <a href="https://www.sapstudio.ru/" target="_blank" class="btn magnetic-item"><span>Посетить сайт</span></a>
+              </div>
+            </div>
+          </div>
+
+          
+          <div class="project-card animate-on-scroll">
+            <div class="project-preview">
+              <iframe src="https://www.arinanett.ru/" scrolling="no" title="Превью сайта arinanett.ru"></iframe>
+            </div>
+            <div class="project-details">
+              <h3 class="project-title">Арина Петрова</h3>
+              <p class="project-description">Сайт-портфолио для PR-специалиста и копирайтера. Минималистичный и строгий дизайн был выбран, чтобы не отвлекать внимание от главного — кейсов и экспертных статей. Акцент сделан на удобстве чтения и навигации по работам.</p>
+              <div class="project-tags">
+                <span>Минимализм</span><span>Портфолио</span><span>SEO-копирайтинг</span>
+              </div>
+              <div class="project-review-box">
+                <blockquote>Профессионал своего дела! Редко встречал настолько исполнительных, ответственных и талантливых авторов.</blockquote>
+                <cite>— Эльвег Евгенов, Head of Content Planeta.ru</cite>
+              </div>
+              <div class="project-actions">
+                 <a href="https://www.arinanett.ru/" target="_blank" class="btn magnetic-item"><span>Посетить сайт</span></a>
+              </div>
+            </div>
+          </div>
+          
+          
+          <div class="project-card animate-on-scroll">
+            <div class="project-preview placeholder">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-warm); opacity: 0.5;"><path d="M10 20H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"></path><path d="M14 16l6-6-6-6"></path></svg>
+            </div>
+            <div class="project-details">
+              <h3 class="project-title">Алексей Бронников</h3>
+              <p class="project-description">Мой личный сайт-портфолио, который вы сейчас просматриваете. Цель — продемонстрировать навыки в создании современных интерфейсов с использованием эффекта "glassmorphism", bento-grid и плавных анимаций для создания приятного пользовательского опыта.</p>
+              <div class="project-tags">
+                <span>Glassmorphism</span><span>Bento Grid</span><span>Анимации</span><span>UI/UX</span>
+              </div>
+              <div class="project-review-box">
+                <blockquote>Ну неплохо, сделал как сам захотел.</blockquote>
+                <cite>— Довольный заказчик</cite>
+              </div>
+              <div class="project-actions">
+                 <a href="index.html" class="btn magnetic-item"><span>Вернуться на главную</span></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+      
+      <section id="category-business" class="content-section">
+        <h2 class="category-title animate-on-scroll">Корпоративные сайты и магазины</h2>
+        <p class="placeholder-text animate-on-scroll">Проекты в этой категории скоро появятся. Идет работа над новыми интересными задачами!</p>
+      </section>
+        
+    </main>
+
+    <footer class="animate-on-scroll">
+      <p>Сайт разработал Алексей <span class="brand-logo-char">Э.</span> Бронников</p>
+      <p>© 2025</p>
+    </footer>
+  </div>
+
+  <script>
+    // Скрипты аналогичны index.html для сохранения функциональности
+    document.addEventListener('DOMContentLoaded', () => {
+      const isTouchDevice = 'ontouchstart' in window;
+
+      // --- "МАГНИТНЫЙ" ЭФФЕКТ ---
+      const magneticItems = document.querySelectorAll('.magnetic-item');
+      if (!isTouchDevice) {
+        magneticItems.forEach(item => {
+          item.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            this.style.transition = 'transform 0.1s ease-out';
+            this.style.transform = `translate(${x * 0.3}px, ${y * 0.4}px)`;
+          });
+          item.addEventListener('mouseleave', function() {
+            this.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
+            this.style.transform = 'translate(0,0)';
+          });
+        });
+      }
+
+      // --- АНИМАЦИИ ПРИ СКРОЛЛЕ ---
+      const animatedEls = document.querySelectorAll('.animate-on-scroll');
+      const animationObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      animatedEls.forEach(el => animationObserver.observe(el));
+
+      // --- МОБИЛЬНАЯ НАВИГАЦИЯ ---
+      const hamburger = document.querySelector('.hamburger-menu');
+      const mobileNav = document.querySelector('.mobile-nav');
+      const desktopNavMenu = document.querySelector('header nav.menu');
+      const mobileNavMenu = mobileNav.querySelector('nav.menu');
+      mobileNavMenu.innerHTML = desktopNavMenu.innerHTML;
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('is-active');
+        mobileNav.classList.toggle('is-active');
+      });
+      mobileNavMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('is-active');
+          mobileNav.classList.remove('is-active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
