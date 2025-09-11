@@ -12,10 +12,10 @@
   
   <style>
     :root {
-      --bg-organic-dark: #2c2a28; /* Сделали фон светлее */
-      --bg-panel-glass: rgba(43, 40, 37, 0.6); /* Прозрачность для глассморфизма */
-      --accent-warm: #ffb700; /* Сделали акцент ярче */
-      --accent-glow: rgba(255, 183, 0, 0.4);
+      --bg-organic-dark: #22201e; /* Сделали фон чуть темнее для контраста */
+      --bg-panel-glass: rgba(43, 40, 37, 0.5);
+      --accent-warm: #ffb700;
+      --accent-glow: rgba(255, 183, 0, 0.5); /* Усилили свечение */
       --text-primary: #f0ede9;
       --text-secondary: #b8b0a6;
       --border-color: rgba(255, 183, 0, 0.2);
@@ -36,20 +36,37 @@
       background-color: var(--bg-organic-dark);
       line-height: 1.7;
       overflow-x: hidden;
+      /* Скрываем стандартный курсор для кастомного */
+      cursor: none;
     }
 
+    /* --- ИНТЕРАКТИВНЫЙ КУРСОР --- */
+    #cursor-glow {
+      position: fixed;
+      z-index: 9999;
+      pointer-events: none;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--accent-glow);
+      backdrop-filter: blur(5px);
+      transition: transform 0.2s ease-out, width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+      transform: translate(-50%, -50%);
+      will-change: transform, width, height;
+      display: none; /* Скрыт по умолчанию, показываем JS'ом для не-тач устройств */
+    }
+    body:hover #cursor-glow { display: block; }
+    #cursor-glow.interact {
+      transform: translate(-50%, -50%) scale(1.5);
+      background-color: rgba(255, 183, 0, 0.7);
+    }
+    
     /* --- ЖИВОЙ ФОН V2.0 --- */
     #background-wrapper {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -2;
-      overflow: hidden;
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%; z-index: -2; overflow: hidden;
     }
     #living-glow {
-      position: absolute;
-      width: 200%; height: 200%;
-      top: -50%; left: -50%;
+      position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
       background: 
         radial-gradient(circle at 25% 25%, var(--accent-glow) 0%, transparent 30%),
         radial-gradient(circle at 75% 75%, rgba(121, 45, 255, 0.15) 0%, transparent 35%);
@@ -57,25 +74,16 @@
     }
     @keyframes living-glow-rotate {
       from { transform: rotate(0deg) scale(1); }
-      to { transform: rotate(360deg) scale(1.1); }
+      to { transform: rotate(360deg) scale(1.2); } /* Увеличили масштаб для динамики */
     }
-    #particle-container {
-      position: absolute; top:0; left:0; width:100%; height:100%;
-    }
-    .particle {
-      position: absolute;
-      border-radius: 50%;
-      background: var(--accent-warm);
-      opacity: 0;
-      animation: rise 15s infinite ease-in;
-    }
+    #particle-container { position: absolute; top:0; left:0; width:100%; height:100%; }
+    .particle { position: absolute; border-radius: 50%; background: var(--accent-warm); opacity: 0; animation: rise 15s infinite ease-in; }
     @keyframes rise {
       0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
       10% { opacity: 0.6; }
       90% { opacity: 0.2; }
       100% { transform: translateY(-10vh) scale(1); opacity: 0; }
     }
-    /* Генерация частиц через CSS для простоты */
     .particle:nth-child(1) { width: 4px; height: 4px; left: 10%; animation-delay: 0s; animation-duration: 15s; }
     .particle:nth-child(2) { width: 2px; height: 2px; left: 20%; animation-delay: 2s; animation-duration: 12s; }
     .particle:nth-child(3) { width: 5px; height: 5px; left: 30%; animation-delay: 4s; animation-duration: 18s; }
@@ -88,12 +96,9 @@
     .particle:nth-child(10) { width: 5px; height: 5px; left: 5%; animation-delay: 9s; animation-duration: 19s; }
 
     /* --- ОБЩАЯ СТРУКТУРА --- */
-    .main-wrapper {
-      max-width: 1000px; margin: 0 auto;
-      padding: 1.5rem;
-    }
+    .main-wrapper { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
 
-    /* --- ХЭДЕР (ГЛАССМОРФИЗМ) --- */
+    /* --- ХЭДЕР --- */
     .topbar {
       position: sticky; top: 1rem; z-index: 50;
       backdrop-filter: blur(16px) saturate(150%);
@@ -102,151 +107,82 @@
       border-radius: 12px;
       box-shadow: 0 4px 30px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.05);
     }
-    .topbar-inner {
-      display: flex; align-items: center;
-      padding: 0.8rem 1.5rem;
-    }
-    .logo-link {
-      display: flex; align-items: center; gap: 1rem;
-      text-decoration: none; margin-right: auto;
-      transition: transform 0.3s ease;
-    }
-    .logo-link:hover { transform: scale(1.05); }
-    .brand-logo-char {
-      font-family: 'Exo 2', sans-serif; font-weight: 700; font-size: 2rem;
-      color: var(--accent-warm); text-shadow: 0 0 15px var(--accent-glow);
-      line-height: 1;
-    }
-    .logo-name {
-      font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 1.1rem;
-      color: var(--text-primary);
-    }
-    nav.menu {
-      display: flex; gap: 0.5rem;
-      font-family: 'Exo 2', sans-serif; font-size: 0.9rem;
-      font-weight: 500;
-    }
-    nav.menu a {
-      text-decoration: none; padding: 0.5rem 1rem;
-      color: var(--text-secondary);
-      position: relative; transition: color 0.3s ease, text-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    nav.menu a:hover, nav.menu a.active {
-      color: var(--text-primary);
-      text-shadow: 0 0 8px var(--accent-glow);
-    }
+    .topbar-inner { display: flex; align-items: center; padding: 0.8rem 1.5rem; }
+    .logo-link { display: flex; align-items: center; gap: 1rem; text-decoration: none; margin-right: auto; }
+    .brand-logo-char { font-family: 'Exo 2', sans-serif; font-weight: 700; font-size: 2rem; color: var(--accent-warm); text-shadow: 0 0 15px var(--accent-glow); line-height: 1; }
+    .logo-name { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 1.1rem; color: var(--text-primary); }
+    nav.menu { display: flex; gap: 0.5rem; font-family: 'Exo 2', sans-serif; font-size: 0.9rem; font-weight: 500; }
+    nav.menu a { text-decoration: none; padding: 0.5rem 1rem; color: var(--text-secondary); position: relative; transition: color 0.3s ease, text-shadow 0.3s ease; cursor: none; }
+    nav.menu a:hover, nav.menu a.active { color: var(--text-primary); text-shadow: 0 0 8px var(--accent-glow); }
 
-
-    /* --- ГЛАВНЫЙ ЭКРАН (HERO) --- */
-    .hero-section {
-      min-height: calc(100vh - 150px);
-      display: flex; align-items: center;
-      padding: 4rem 0;
-      text-align: center;
+    /* --- УЛУЧШЕННЫЙ ГЛАВНЫЙ ЭКРАН (BENTO GRID) --- */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: minmax(200px, auto);
+      gap: 1.5rem;
+      padding-top: 4rem;
     }
-    .hero-content { width: 100%; }
-    .subtitle {
-      font-family: 'Exo 2', sans-serif; font-size: 1rem;
-      color: var(--text-secondary); margin: 0 0 1rem 0;
-      letter-spacing: 0.1em;
-    }
-    .name {
-      font-family: 'Exo 2', sans-serif; font-weight: 700;
-      font-size: clamp(2.5rem, 8vw, 4.5rem);
-      line-height: 1.1; margin: 0 0 2.5rem 0;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    /* Анимация букв */
-    .name .char {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(30px) scale(0.8);
-      animation: fadeInUpLetter 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    }
-    @keyframes fadeInUpLetter { to { opacity: 1; transform: translateY(0) scale(1); } }
-
-    .tech-list { 
-      display: flex; flex-direction: column; gap: 1rem; 
-      max-width: 600px; margin: 0 auto; text-align: left;
-    }
-    .tech-item {
-      display: flex; align-items: center; gap: 1rem;
-      font-size: 1.1rem;
-      font-weight: 300;
-    }
-    .tech-item .tech-icon {
-      width: 12px; height: 12px; flex-shrink: 0;
-      background-color: var(--accent-warm);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--accent-glow);
-      transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    .tech-item:hover .tech-icon {
-        transform: scale(1.3) translateY(-3px);
-    }
-    .tech-item strong { color: #fff; font-weight: 500; }
-
-    /* --- ОБЩИЕ СТИЛИ СЕКЦИЙ --- */
-    .content-section {
-      padding: 5rem 0;
-    }
-    .section-title {
-      font-family: 'Exo 2', sans-serif; font-size: 1.8rem;
-      letter-spacing: 0.05em; color: var(--text-primary);
-      text-align: center;
-      margin: 0 0 3rem 0; position: relative;
-    }
-    .section-title::after {
-        content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -12px;
-        width: 60px; height: 2px; background: var(--accent-warm);
-        box-shadow: 0 0 10px var(--accent-glow);
-    }
-
-    /* --- АНИМАЦИИ ПОЯВЛЕНИЯ --- */
-    .animate-on-scroll {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    .animate-on-scroll.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .centered-block { text-align: center; margin-top: 2.5rem; }
-
-    /* --- СЕКЦИЯ КЕЙСЫ И БРИФ (3D-КАРТОЧКИ) --- */
-    .tilt-card {
+    .bento-card {
       padding: 2.5rem;
       border: 1px solid var(--border-color);
       background: var(--bg-panel-glass);
       backdrop-filter: blur(16px) saturate(150%);
       border-radius: 24px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.05);
-      transform-style: preserve-3d;
-      transform: perspective(1000px);
-      will-change: transform;
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: none;
     }
-    .tilt-card .stat-number, .tilt-card .icon, .tilt-card .section-title, .tilt-card p, .tilt-card .btn {
-      transform: translateZ(20px);
+    /* --- УЛУЧШЕННЫЙ ХОВЕР-ЭФФЕКТ: ГОЛОГРАФИЧЕСКАЯ КАРТОЧКА --- */
+    .bento-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.1), transparent 40%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
     }
-    .stat-number {
-      font-family: 'Exo 2', sans-serif; font-size: 4.5rem; font-weight: 700;
-      line-height: 1.1; color: var(--accent-warm);
-      text-shadow: 0 0 20px var(--accent-glow);
+    .bento-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px var(--accent-glow);
+      border-color: var(--border-hover);
     }
-    .stat-label { font-size: 1.1rem; color: var(--text-secondary); transform: translateZ(40px); }
+    .bento-card:hover::before {
+      opacity: 1;
+    }
 
-    .cta-card .icon { color: var(--accent-warm); margin-bottom: 1.5rem; transform: scale(1.3) translateZ(50px); }
-    .cta-card .section-title { margin-bottom: 2.5rem; }
-    .cta-card p {
-      color: var(--text-secondary); font-size: 1.1rem;
-      max-width: 550px; margin: 0 auto 2rem;
+    .hero-intro {
+      grid-column: span 2;
+      grid-row: span 2;
+      display: flex; flex-direction: column; justify-content: center;
     }
+    .subtitle { font-family: 'Exo 2', sans-serif; font-size: 1rem; color: var(--text-secondary); margin: 0 0 1rem 0; letter-spacing: 0.1em; }
+    .name {
+      font-family: 'Exo 2', sans-serif; font-weight: 700;
+      font-size: clamp(2.5rem, 7vw, 4rem); /* Немного уменьшили для сетки */
+      line-height: 1.1; margin: 0 0 1.5rem 0;
+      color: #fff; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .name .char { display: inline-block; opacity: 0; transform: translateY(30px) scale(0.8); animation: fadeInUpLetter 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+    @keyframes fadeInUpLetter { to { opacity: 1; transform: translateY(0) scale(1); } }
+    .hero-text { font-size: 1.1rem; max-width: 500px; color: var(--text-secondary); }
 
-    /* --- КНОПКИ --- */
+    .services-card { grid-column: span 1; grid-row: span 2; }
+    .tech-list { display: flex; flex-direction: column; gap: 1rem; height: 100%; justify-content: center;}
+    .tech-item { display: flex; align-items: center; gap: 1rem; font-size: 1rem; font-weight: 300; }
+    .tech-icon { width: 10px; height: 10px; flex-shrink: 0; background-color: var(--accent-warm); border-radius: 50%; box-shadow: 0 0 10px var(--accent-glow); transition: transform 0.3s ease; }
+    .tech-item:hover .tech-icon { transform: scale(1.5); }
+    .tech-item strong { color: #fff; font-weight: 500; }
+    
+    .cases-card { grid-column: 1 / 2; grid-row: 3 / 4; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .brief-card { grid-column: 2 / 4; grid-row: 3 / 4; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .stat-number { font-family: 'Exo 2', sans-serif; font-size: 4.5rem; font-weight: 700; line-height: 1.1; color: var(--accent-warm); text-shadow: 0 0 20px var(--accent-glow); }
+    .stat-label { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
+
+    /* --- УЛУЧШЕННЫЕ КНОПКИ С ХОВЕР-ЭФФЕКТОМ ЗАПОЛНЕНИЯ --- */
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
       font-family: 'Exo 2', sans-serif; font-size: 1rem; font-weight: 500;
@@ -257,53 +193,55 @@
       padding: 0.9rem 2rem;
       border-radius: 50px;
       position: relative; overflow: hidden;
-      transition: all 0.4s ease;
-      cursor: pointer;
+      transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s ease, box-shadow 0.4s ease;
+      z-index: 1;
+      cursor: none;
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: var(--accent-warm);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: -1;
     }
     .btn:hover, .btn:focus {
       color: var(--bg-organic-dark);
-      background-color: var(--accent-warm);
       border-color: var(--accent-warm);
       box-shadow: 0 0 25px var(--accent-glow);
-      transform: translateY(-3px);
+    }
+    .btn:hover::before {
+      transform: scaleX(1);
+    }
+    /* Анимация для мобильных устройств при нажатии */
+    .btn:active {
+      transform: scale(0.97);
     }
 
-    /* --- СЕКЦИЯ КОНТАКТЫ --- */
-    .contacts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-    }
+    /* --- ОБЩИЕ СТИЛИ СЕКЦИЙ --- */
+    .content-section { padding: 5rem 0; }
+    .section-title { font-family: 'Exo 2', sans-serif; font-size: 1.8rem; letter-spacing: 0.05em; color: var(--text-primary); text-align: center; margin: 0 0 3rem 0; position: relative; }
+    .section-title::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -12px; width: 60px; height: 2px; background: var(--accent-warm); box-shadow: 0 0 10px var(--accent-glow); }
+    .contacts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
 
-    /* --- ФУТЕР --- */
-    footer {
-      text-align: center; font-size: 0.9rem; color: var(--text-secondary);
-      padding: 2.5rem 0; margin-top: 3rem;
-      border-top: 1px solid var(--border-color);
-    }
-    
-    /* --- МОДАЛЬНЫЕ ОКНА (ГЛАССМОРФИЗМ) --- */
-    .modal-content {
-      background: var(--bg-panel-glass);
-      border: 1px solid var(--border-color);
-      backdrop-filter: blur(20px) saturate(180%);
-      padding: 2.5rem; width: 90%;
-      border-radius: 20px;
-      box-shadow: 0 0 50px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.05);
-    }
-    
-    /* Сохраняем остальные стили модальных окон без изменений */
+    /* --- АНИМАЦИИ ПОЯВЛЕНИЯ --- */
+    .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+    .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* --- ФУТЕР И МОДАЛЬНЫЕ ОКНА --- */
+    footer { text-align: center; font-size: 0.9rem; color: var(--text-secondary); padding: 2.5rem 0; margin-top: 3rem; border-top: 1px solid var(--border-color); }
     .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
     .modal.is-open { opacity: 1; pointer-events: auto; }
     .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(26, 24, 22, 0.5); backdrop-filter: blur(5px); cursor: pointer; }
-    .modal-content { position: relative; z-index: 1001; transform: scale(0.95); transition: transform .3s ease; max-height: 90vh; overflow-y: auto; }
+    .modal-content { position: relative; z-index: 1001; transform: scale(0.95); transition: transform .3s ease; max-height: 90vh; overflow-y: auto; background: var(--bg-panel-glass); border: 1px solid var(--border-color); backdrop-filter: blur(20px) saturate(180%); padding: 2.5rem; width: 90%; border-radius: 20px; box-shadow: 0 0 50px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.05); }
     .modal.is-open .modal-content { transform: scale(1); }
     .modal-content.single { max-width: 400px; text-align: center; }
     .modal-content.main-contacts { max-width: 800px; }
     .modal-close { position: absolute; top: 15px; right: 15px; width: 30px; height: 30px; font-size: 24px; color: var(--text-secondary); background: none; border: none; cursor: pointer; line-height: 1; transition: .2s ease; z-index: 1002; }
     .modal-close:hover { color: var(--accent-warm); transform: rotate(90deg); }
     .main-contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .contact-card { text-align: center; }
     .modal-qr { margin: 16px auto; width: 160px; height: 160px; border-radius: 12px; padding: 8px; background: #fff; }
     .modal-qr.placeholder { background: transparent; border: 1px solid var(--border-color); display:flex; align-items:center; justify-content:center; }
     .modal-contact-info { font-family: 'Exo 2', monospace; font-size: 1.2rem; color: white; min-height: 1.5em; margin: 16px 0; }
@@ -311,12 +249,27 @@
 
     /* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
     .hamburger-menu, .mobile-nav { display: none; }
+    @media (max-width: 900px) {
+      .bento-grid {
+        grid-template-columns: 1fr; /* Перестраиваем сетку в одну колонку */
+      }
+      .hero-intro, .services-card, .cases-card, .brief-card {
+        grid-column: span 1;
+        grid-row: auto;
+      }
+      .hero-intro { order: 1; }
+      .services-card { order: 2; }
+      .brief-card { order: 3; }
+      .cases-card { order: 4; }
+    }
     @media (max-width: 768px) {
+      body { cursor: auto; } /* Возвращаем стандартный курсор на мобильных */
+      #cursor-glow { display: none !important; }
+      .btn, nav.menu a { cursor: pointer; }
+
       .main-wrapper { padding: 1rem; }
       nav.menu { display: none; }
       .logo-name { display: none; }
-      .hero-section { text-align: left; }
-      .tech-list { margin: 0; }
       .main-contact-grid { grid-template-columns: 1fr; }
       .hamburger-menu { display: flex; flex-direction: column; gap: 6px; margin-left: auto; background: none; border: none; cursor: pointer; padding: 8px; z-index: 100; }
       .hamburger-menu .bar { width: 28px; height: 3px; background: var(--text-primary); border-radius: 2px; transition: .3s ease; }
@@ -331,6 +284,7 @@
 </head>
 
 <body>
+  <div id="cursor-glow"></div>
   
   <div id="background-wrapper">
     <div id="living-glow"></div>
@@ -343,70 +297,64 @@
   <div class="main-wrapper">
     <header class="topbar">
       <div class="topbar-inner">
-        <a href="#home" class="logo-link magnetic-item">
+        <a href="#home" class="logo-link">
           <span class="brand-logo-char">Э.</span>
           <span class="logo-name">Алексей Бронников</span>
         </a>
         <nav class="menu" role="navigation">
-            <a href="#home" class="active magnetic-item">ГЛАВНАЯ</a>
-            <a href="#cases" class="magnetic-item">КЕЙСЫ</a>
-            <a href="#brief" class="magnetic-item">БРИФ</a>
-            <a data-modal-trigger="main-contact-modal" class="magnetic-item">КОНТАКТЫ</a>
+            <a href="#home" class="active">ГЛАВНАЯ</a>
+            <a href="#cases">КЕЙСЫ</a>
+            <a href="#brief">БРИФ</a>
+            <a data-modal-trigger="main-contact-modal">КОНТАКТЫ</a>
         </nav>
-        <button class="hamburger-menu magnetic-item" aria-label="Открыть меню" aria-expanded="false">
+        <button class="hamburger-menu" aria-label="Открыть меню" aria-expanded="false">
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
       </div>
     </header>
     <div class="mobile-nav"><nav class="menu" role="navigation"></nav></div>
 
-    <main class="content-grid" id="home">
-      
-      <section class="hero-section">
-        <div class="hero-content">
-          <p class="subtitle animate-on-scroll">Сайты для вас и вашего бизнеса</p>
+    <main id="home">
+      <div class="bento-grid">
+        
+        <section class="bento-card hero-intro animate-on-scroll">
+          <p class="subtitle">Сайты для вас и вашего бизнеса</p>
           <h1 class="name">АЛЕКСЕЙ БРОННИКОВ</h1>
-          <div class="tech-list animate-on-scroll">
-            <div class="tech-item"><div class="tech-icon"></div><span>Готовые решения: сайт + копирайт + хостинг</span></div>
-            <div class="tech-item"><div class="tech-icon"></div><span>Расскажите о <strong>себе</strong> или о своей <strong>компании</strong></span></div>
-            <div class="tech-item"><div class="tech-icon"></div><span>Интеграция <strong>Яндекс карт</strong></span></div>
-            <div class="tech-item"><div class="tech-icon"></div><span><strong>SEO оптимизация</strong>: возможно наполнение контентом</span></div>
-            <div class="tech-item"><div class="tech-icon"></div><span>Подключение <strong>Яндекс.Метрики</strong> и <strong>Google Analytics</strong></span></div>
-            <div class="tech-item"><div class="tech-icon"></div><span><strong>Гарантия 6</strong> месяцев на все сайты</span></div>
-            <div class="tech-item"><div class="tech-icon"></div><span>Только <strong>честные отзывы</strong> на КАЖДОЕ решение</span></div>
-          </div>
-        </div>
-      </section>
-      
-      <section id="cases" class="content-section animate-on-scroll" aria-label="Кейсы">
-        <h2 class="section-title">КЕЙСЫ</h2>
-        <div class="tilt-card" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
-            <div id="counter" class="stat-number" data-target="3">0</div>
-            <div class="stat-label">Готовых решений</div>
-        </div>
-        <div class="centered-block">
-            <a class="btn magnetic-item" href="portfolio.html"><span>Смотреть отзывы</span></a>
-        </div>
-      </section>
+          <p class="hero-text">Создаю современные сайты-визитки и лендинги под ключ. Дизайн, копирайт, домен и хостинг — все в одном месте.</p>
+        </section>
 
-      <section id="brief" class="content-section animate-on-scroll" aria-label="Заполнить бриф">
-        <div class="cta-card tilt-card" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
-            <div class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-            </div>
-            <h2 class="section-title">Готовы начать проект?</h2>
-            <p>Лучший способ начать — заполнить бриф. Это поможет мне лучше понять вашу задачу и предложить наиболее эффективное решение.</p>
-            <a href="#" class="btn magnetic-item"><span>Заполнить бриф</span></a>
-        </div>
-      </section>
+        <section class="bento-card services-card animate-on-scroll" style="animation-delay: 0.2s;">
+          <div class="tech-list">
+            <div class="tech-item"><div class="tech-icon"></div><span>Готовые решения: сайт + копирайт + хостинг</span></div>
+            <div class="tech-item"><div class="tech-icon"></div><span>Интеграция <strong>Яндекс карт</strong></span></div>
+            <div class="tech-item"><div class="tech-icon"></div><span><strong>SEO оптимизация</strong> и наполнение контентом</span></div>
+            <div class="tech-item"><div class="tech-icon"></div><span>Подключение <strong>аналитики</strong></span></div>
+            <div class="tech-item"><div class="tech-icon"></div><span><strong>Гарантия 6</strong> месяцев на все сайты</span></div>
+            <div class="tech-item"><div class="tech-icon"></div><span>Только <strong>честные отзывы</strong></span></div>
+          </div>
+        </section>
+
+        <section id="cases" class="bento-card cases-card animate-on-scroll">
+          <div id="counter" class="stat-number" data-target="3">0</div>
+          <div class="stat-label">Готовых решений</div>
+          <a class="btn" href="portfolio.html"><span>Смотреть отзывы</span></a>
+        </section>
+
+        <section id="brief" class="bento-card brief-card animate-on-scroll">
+          <h2 class="section-title" style="margin-bottom: 1.5rem; font-size: 1.5rem;">Готовы начать проект?</h2>
+          <p style="color: var(--text-secondary); margin-top: 0; margin-bottom: 2rem; font-size: 1rem;">Заполните бриф, чтобы я лучше понял вашу задачу.</p>
+          <a href="#" class="btn"><span>Заполнить бриф</span></a>
+        </section>
+
+      </div>
 
       <section id="contacts" class="content-section animate-on-scroll" aria-label="Контакты">
         <h2 class="section-title">Контакты</h2>
         <div class="contacts-grid">
-          <button class="btn contact-btn magnetic-item" data-modal-trigger="telegram-modal"><span>Telegram</span></button>
-          <button class="btn contact-btn magnetic-item" data-modal-trigger="whatsapp-modal"><span>WhatsApp</span></button>
-          <button class="btn contact-btn magnetic-item" data-modal-trigger="max-modal"><span>Max</span></button>
-          <button class="btn contact-btn magnetic-item" data-modal-trigger="phone-modal"><span>Телефон</span></button>
+          <button class="btn contact-btn" data-modal-trigger="telegram-modal"><span>Telegram</span></button>
+          <button class="btn contact-btn" data-modal-trigger="whatsapp-modal"><span>WhatsApp</span></button>
+          <button class="btn contact-btn" data-modal-trigger="max-modal"><span>Max</span></button>
+          <button class="btn contact-btn" data-modal-trigger="phone-modal"><span>Телефон</span></button>
         </div>
       </section>
         
@@ -419,16 +367,16 @@
   </div>
 
   
-  <div class="modal" id="telegram-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content single"><button class="modal-close magnetic-item" data-modal-close>&times;</button><h2 class="section-title" style="color:var(--telegram-color)">Telegram</h2><div class="modal-qr" data-qr-text="https://t.me/alexeybronnikov"></div><div class="modal-contact-info" data-modal-text="@alexeybronnikov">@alexeybronnikov</div><div class="modal-actions"><a href="https://t.me/alexeybronnikov" target="_blank" class="btn magnetic-item">Перейти</a><button class="btn secondary magnetic-item" data-copy-text="@alexeybronnikov">Копировать</button></div></div></div>
-  <div class="modal" id="whatsapp-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content single"><button class="modal-close magnetic-item" data-modal-close>&times;</button><h2 class="section-title" style="color:var(--whatsapp-color)">WhatsApp</h2><div class="modal-qr" data-qr-text="https://wa.me/qr/PZNL54WWEV4GI1"></div><div class="modal-contact-info" data-modal-text="+7 (995) 131-28-28">+7 (995) 131-28-28</div><div class="modal-actions"><a href="https://wa.me/qr/PZNL54WWEV4GI1" target="_blank" class="btn magnetic-item">Перейти</a><button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button></div></div></div>
-  <div class="modal" id="max-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content single"><button class="modal-close magnetic-item" data-modal-close>&times;</button><h2 class="section-title" style="color:var(--max-color)">Max</h2><div class="modal-qr" data-qr-text="+79951312828"></div><div class="modal-contact-info" data-modal-text="+7 (995) 131-28-28">+7 (995) 131-28-28</div><div class="modal-actions"><a href="#" class="btn magnetic-item">Перейти</a><button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button></div></div></div>
-  <div class="modal" id="phone-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content single"><button class="modal-close magnetic-item" data-modal-close>&times;</button><h2 class="section-title" style="color:var(--phone-color)">Телефон</h2><div class="modal-qr placeholder"><svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div><div class="modal-contact-info" data-modal-text="+7 (995) 131-28-28">+7 (995) 131-28-28</div><div class="modal-actions"><a href="tel:+79951312828" class="btn magnetic-item">Позвонить</a><button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button></div></div></div>
+  <div class="modal" id="telegram-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content single"><button class="modal-close" data-modal-close>&times;</button><h2 class="section-title" style="color:var(--telegram-color)">Telegram</h2><div class="modal-qr" data-qr-text="https://t.me/alexeybronnikov"></div><div class="modal-contact-info" data-modal-text="@alexeybronnikov">@alexeybronnikov</div><div class="modal-actions"><a href="https://t.me/alexeybronnikov" target="_blank" class="btn">Перейти</a><button class="btn secondary" data-copy-text="@alexeybronnikov">Копировать</button></div></div></div>
+  <div class="modal" id="whatsapp-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content single"><button class="modal-close" data-modal-close>&times;</button><h2 class="section-title" style="color:var(--whatsapp-color)">WhatsApp</h2><div class="modal-qr" data-qr-text="https://wa.me/qr/PZNL54WWEV4GI1"></div><div class="modal-contact-info" data-modal-text="+7 (995) 131-28-28">+7 (995) 131-28-28</div><div class="modal-actions"><a href="https://wa.me/qr/PZNL54WWEV4GI1" target="_blank" class="btn">Перейти</a><button class="btn secondary" data-copy-text="+79951312828">Копировать</button></div></div></div>
+  <div class="modal" id="max-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content single"><button class="modal-close" data-modal-close>&times;</button><h2 class="section-title" style="color:var(--max-color)">Max</h2><div class="modal-qr" data-qr-text="+79951312828"></div><div class="modal-contact-info" data-modal-text="+7 (995) 131-28-28">+7 (995) 131-28-28</div><div class="modal-actions"><a href="#" class="btn">Перейти</a><button class="btn secondary" data-copy-text="+79951312828">Копировать</button></div></div></div>
+  <div class="modal" id="phone-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content single"><button class="modal-close" data-modal-close>&times;</button><h2 class="section-title" style="color:var(--phone-color)">Телефон</h2><div class="modal-qr placeholder"><svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div><div class="modal-contact-info" data-modal-text="+7 (995) 131-28-28">+7 (995) 131-28-28</div><div class="modal-actions"><a href="tel:+79951312828" class="btn">Позвонить</a><button class="btn secondary" data-copy-text="+79951312828">Копировать</button></div></div></div>
   <div class="modal" id="main-contact-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content main-contacts"><button class="modal-close" data-modal-close>&times;</button><div class="main-contact-grid"></div></div></div>
   
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      const isTouchDevice = 'ontouchstart' in window;
 
       // --- АНИМАЦИЯ ЗАГОЛОВКА ПО БУКВАМ ---
       const title = document.querySelector('.name');
@@ -444,31 +392,32 @@
         });
       }
       
-      // --- ИНИЦИАЛИЗАЦИЯ 3D TILT ЭФФЕКТА ---
-      VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-        glare: true,
-        "max-glare": 0.1
-      });
-
-      // --- "МАГНИТНЫЕ" КНОПКИ ---
-      const magneticItems = document.querySelectorAll('.magnetic-item');
-      const isTouchDevice = 'ontouchstart' in window;
+      // --- ИНТЕРАКТИВНЫЙ КУРСОР ---
       if (!isTouchDevice) {
-        magneticItems.forEach(item => {
-          item.addEventListener('mousemove', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            this.style.transition = 'transform 0.1s ease-out';
-            this.style.transform = `translate(${x * 0.3}px, ${y * 0.4}px)`;
-          });
-          item.addEventListener('mouseleave', function() {
-            this.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
-            this.style.transform = 'translate(0,0)';
-          });
+        const cursor = document.getElementById('cursor-glow');
+        const interactiveElements = document.querySelectorAll('a, button, .bento-card, .logo-link');
+        
+        window.addEventListener('mousemove', e => {
+          cursor.style.left = e.clientX + 'px';
+          cursor.style.top = e.clientY + 'px';
+        });
+
+        interactiveElements.forEach(el => {
+          el.addEventListener('mouseenter', () => cursor.classList.add('interact'));
+          el.addEventListener('mouseleave', () => cursor.classList.remove('interact'));
         });
       }
 
+      // --- ХОВЕР-ЭФФЕКТ ДЛЯ BENTO-КАРТОЧЕК ---
+      document.querySelectorAll('.bento-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--x', `${x}px`);
+          card.style.setProperty('--y', `${y}px`);
+        });
+      });
 
       // --- АНИМАЦИИ ПРИ СКРОЛЛЕ ---
       const animatedEls = document.querySelectorAll('.animate-on-scroll');
