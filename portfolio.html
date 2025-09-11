@@ -21,6 +21,10 @@
       --text-secondary: #b8b0a6;
       --border-color: rgba(255, 183, 0, 0.2);
       --border-hover: rgba(255, 183, 0, 0.7);
+      --telegram-color: #2AABEE;
+      --whatsapp-color: #25D366;
+      --max-color: #792DFF;
+      --phone-color: #b0a89f;
     }
 
     * { box-sizing: border-box; }
@@ -147,6 +151,12 @@
       padding: 1.5rem;
       margin-top: auto; /* Прижимает блок к низу */
     }
+    .review-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.8rem;
+      font-weight: 500;
+    }
     .project-review-box blockquote {
       margin: 0;
       padding-left: 1rem;
@@ -176,8 +186,9 @@
     .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
     .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
     
-    /* --- ФУТЕР --- */
+    /* --- ФУТЕР И МОДАЛЬНЫЕ ОКНА --- */
     footer { text-align: center; font-size: 0.9rem; color: var(--text-secondary); padding: 2.5rem 0; margin-top: 5rem; border-top: 1px solid var(--border-color); }
+    .modal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}.modal.is-open{opacity:1;pointer-events:auto}.modal-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(26,24,22,.5);backdrop-filter:blur(5px);cursor:pointer}.modal-content{position:relative;z-index:1001;transform:scale(.95);transition:transform .3s ease;max-height:90vh;overflow-y:auto;background:var(--bg-panel-glass);border:1px solid var(--border-color);backdrop-filter:blur(20px) saturate(180%);padding:2.5rem;width:90%;border-radius:20px;box-shadow:0 0 50px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.05)}.modal.is-open .modal-content{transform:scale(1)}.modal-content.single{max-width:400px;text-align:center}.modal-content.main-contacts{max-width:800px}.modal-close{position:absolute;top:15px;right:15px;width:30px;height:30px;font-size:24px;color:var(--text-secondary);background:0 0;border:none;cursor:pointer;line-height:1;transition:.2s ease;z-index:1002}.modal-close:hover{color:var(--accent-warm);transform:rotate(90deg)}.main-contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.modal-qr{margin:16px auto;width:160px;height:160px;border-radius:12px;padding:8px;background:#fff}.modal-qr.placeholder{background:0 0;border:1px solid var(--border-color);display:flex;align-items:center;justify-content:center}.modal-contact-info{font-family:'Exo 2',monospace;font-size:1.2rem;color:#fff;min-height:1.5em;margin:16px 0}.modal-actions{display:flex;gap:12px;justify-content:center;margin-top:24px}
     
     /* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
     .hamburger-menu, .mobile-nav { display: none; }
@@ -189,6 +200,7 @@
       .main-wrapper { padding: 1rem; }
       nav.menu { display: none; }
       .logo-name { display: none; }
+      .main-contact-grid { grid-template-columns: 1fr; }
       .hamburger-menu{display:flex;flex-direction:column;gap:6px;margin-left:auto;background:0 0;border:none;cursor:pointer;padding:8px;z-index:100}.hamburger-menu .bar{width:28px;height:3px;background:var(--text-primary);border-radius:2px;transition:.3s ease}.hamburger-menu.is-active .bar:nth-child(1){transform:translateY(9px) rotate(45deg)}.hamburger-menu.is-active .bar:nth-child(2){opacity:0}.hamburger-menu.is-active .bar:nth-child(3){transform:translateY(-9px) rotate(-45deg)}.mobile-nav{display:block;position:fixed;top:0;right:-100%;z-index:40;width:min(80vw,320px);height:100%;backdrop-filter:blur(16px);background:color-mix(in srgb,var(--bg-panel-glass) 95%,transparent);border-left:1px solid var(--border-color);padding:100px 30px;transition:right .4s cubic-bezier(.25,1,.5,1)}.mobile-nav.is-active{right:0;box-shadow:-10px 0 40px rgba(0,0,0,.5)}.mobile-nav nav.menu{display:flex;flex-direction:column;align-items:flex-start;gap:1.5rem;font-size:1.2rem}
     }
   </style>
@@ -215,7 +227,7 @@
             <a href="index.html" class="magnetic-item">ГЛАВНАЯ</a>
             <a href="portfolio.html" class="active magnetic-item">РАБОТЫ</a>
             <a href="index.html#brief" class="magnetic-item">БРИФ</a>
-            <a data-modal-trigger="main-contact-modal" class="magnetic-item">КОНТАКТЫ</a>
+            <a href="#" data-modal-trigger="main-contact-modal" class="magnetic-item">КОНТАКТЫ</a>
         </nav>
         <button class="hamburger-menu magnetic-item" aria-label="Открыть меню" aria-expanded="false">
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
@@ -246,6 +258,7 @@
                 <span>Дизайн</span><span>Адаптивность</span><span>Интеграция карт</span><span>Копирайтинг</span>
               </div>
               <div class="project-review-box">
+                <p class="review-label">Отзыв заказчика:</p>
                 <blockquote>Теперь у нас есть стильный сайт, который привлекает новых клиентов. Все было сделано быстро и профессионально!</blockquote>
                 <cite>— Управляющая салона "Сапфир"</cite>
               </div>
@@ -267,6 +280,7 @@
                 <span>Минимализм</span><span>Портфолио</span><span>SEO-копирайтинг</span>
               </div>
               <div class="project-review-box">
+                <p class="review-label">Отзыв заказчика:</p>
                 <blockquote>Профессионал своего дела! Редко встречал настолько исполнительных, ответственных и талантливых авторов.</blockquote>
                 <cite>— Эльвег Евгенов, Head of Content Planeta.ru</cite>
               </div>
@@ -278,31 +292,27 @@
           
           
           <div class="project-card animate-on-scroll">
-            <div class="project-preview placeholder">
-                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-warm); opacity: 0.5;"><path d="M10 20H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"></path><path d="M14 16l6-6-6-6"></path></svg>
+            <div class="project-preview">
+              <iframe src="https://alekseybr1999.github.io/bronnikov_sites/index.html#home" scrolling="no" title="Превью сайта alekseybr1999.github.io"></iframe>
             </div>
             <div class="project-details">
               <h3 class="project-title">Алексей Бронников</h3>
-              <p class="project-description">Мой личный сайт-портфолио, который вы сейчас просматриваете. Цель — продемонстрировать навыки в создании современных интерфейсов с использованием эффекта "glassmorphism", bento-grid и плавных анимаций для создания приятного пользовательского опыта.</p>
+              <p class="project-description">Мой личный сайт-портфолио. Цель — продемонстрировать навыки в создании современных интерфейсов с использованием эффекта "glassmorphism", живого фона и плавных анимаций для создания приятного пользовательского опыта.</p>
               <div class="project-tags">
-                <span>Glassmorphism</span><span>Bento Grid</span><span>Анимации</span><span>UI/UX</span>
+                <span>Glassmorphism</span><span>Живой фон</span><span>Анимации</span><span>Адаптивность</span>
               </div>
               <div class="project-review-box">
+                <p class="review-label">Отзыв заказчика:</p>
                 <blockquote>Ну неплохо, сделал как сам захотел.</blockquote>
                 <cite>— Довольный заказчик</cite>
               </div>
               <div class="project-actions">
-                 <a href="index.html" class="btn magnetic-item"><span>Вернуться на главную</span></a>
+                 <a href="https://alekseybr1999.github.io/bronnikov_sites/index.html#home" target="_blank" class="btn magnetic-item"><span>Посетить сайт</span></a>
               </div>
             </div>
           </div>
 
         </div>
-      </section>
-      
-      <section id="category-business" class="content-section">
-        <h2 class="category-title animate-on-scroll">Корпоративные сайты и магазины</h2>
-        <p class="placeholder-text animate-on-scroll">Проекты в этой категории скоро появятся. Идет работа над новыми интересными задачами!</p>
       </section>
         
     </main>
@@ -313,8 +323,49 @@
     </footer>
   </div>
 
+  <div class="modal" id="main-contact-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content main-contacts"><button class="modal-close" data-modal-close>&times;</button>
+    <div class="main-contact-grid">
+        
+        <div>
+          <h3 style="font-family: 'Exo 2', sans-serif; font-size: 1.5rem; letter-spacing: 0.05em; color: var(--telegram-color); margin: 0 0 1rem 0;">Telegram</h3>
+          <div class="modal-contact-info" style="margin: 0 0 1rem 0;">@alexeybronnikov</div>
+          <div class="modal-actions" style="justify-content: flex-start;">
+            <a href="https://t.me/alexeybronnikov" target="_blank" class="btn magnetic-item">Перейти</a>
+            <button class="btn secondary magnetic-item" data-copy-text="@alexeybronnikov">Копировать</button>
+          </div>
+        </div>
+        
+        <div>
+          <h3 style="font-family: 'Exo 2', sans-serif; font-size: 1.5rem; letter-spacing: 0.05em; color: var(--whatsapp-color); margin: 0 0 1rem 0;">WhatsApp</h3>
+          <div class="modal-contact-info" style="margin: 0 0 1rem 0;">+7 (995) 131-28-28</div>
+          <div class="modal-actions" style="justify-content: flex-start;">
+            <a href="https://wa.me/qr/PZNL54WWEV4GI1" target="_blank" class="btn magnetic-item">Перейти</a>
+            <button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button>
+          </div>
+        </div>
+        
+        <div>
+          <h3 style="font-family: 'Exo 2', sans-serif; font-size: 1.5rem; letter-spacing: 0.05em; color: var(--max-color); margin: 0 0 1rem 0;">Max</h3>
+          <div class="modal-contact-info" style="margin: 0 0 1rem 0;">+7 (995) 131-28-28</div>
+          <div class="modal-actions" style="justify-content: flex-start;">
+            <a href="#" class="btn magnetic-item">Перейти</a>
+            <button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button>
+          </div>
+        </div>
+        
+        <div>
+          <h3 style="font-family: 'Exo 2', sans-serif; font-size: 1.5rem; letter-spacing: 0.05em; color: var(--phone-color); margin: 0 0 1rem 0;">Телефон</h3>
+          <div class="modal-contact-info" style="margin: 0 0 1rem 0;">+7 (995) 131-28-28</div>
+          <div class="modal-actions" style="justify-content: flex-start;">
+            <a href="tel:+79951312828" class="btn magnetic-item">Позвонить</a>
+            <button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button>
+          </div>
+        </div>
+    </div>
+  </div></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <script>
-    // Скрипты аналогичны index.html для сохранения функциональности
     document.addEventListener('DOMContentLoaded', () => {
       const isTouchDevice = 'ontouchstart' in window;
 
@@ -359,11 +410,15 @@
         mobileNav.classList.toggle('is-active');
       });
       mobileNavMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
+        link.addEventListener('click', (e) => {
           hamburger.classList.remove('is-active');
           mobileNav.classList.remove('is-active');
+          if (link.dataset.modalTrigger) { e.preventDefault(); setTimeout(() => openModal(link.dataset.modalTrigger), 300); }
         });
       });
+
+      // --- ЛОГИКА МОДАЛЬНЫХ ОКОН ---
+      function openModal(modalId){const modal=document.getElementById(modalId);if(!modal)return;modal.classList.add("is-open"),modal.querySelectorAll("[data-qr-text]").forEach(qrEl=>{qrEl.dataset.generated||(qrEl.innerHTML="",new QRCode(qrEl,{text:qrEl.dataset.qrText,width:144,height:144,colorDark:"#1a1816",colorLight:"#fff",correctLevel:QRCode.CorrectLevel.H}),qrEl.dataset.generated="true")})}document.querySelectorAll("[data-modal-trigger]").forEach(trigger=>trigger.addEventListener("click",e=>{e.preventDefault(),openModal(trigger.dataset.modalTrigger)})),document.querySelectorAll(".modal").forEach(modal=>modal.querySelectorAll("[data-modal-close], .modal-overlay").forEach(el=>el.addEventListener("click",()=>modal.classList.remove("is-open")))),document.addEventListener("keydown",e=>{"Escape"===e.key&&document.querySelector(".modal.is-open")?.classList.remove("is-open")}),document.querySelectorAll("[data-copy-text]").forEach(button=>{button.addEventListener("click",()=>{navigator.clipboard.writeText(button.dataset.copyText).then(()=>{const originalTextEl=button.querySelector("span")||button,originalText=originalTextEl.textContent;originalTextEl.textContent="Скопировано!",setTimeout(()=>{originalTextEl.textContent=originalText},1500)})})});
     });
   </script>
 </body>
