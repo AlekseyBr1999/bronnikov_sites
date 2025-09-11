@@ -5,6 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Алексей Бронников — Сайты для вас и вашего бизнеса</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='Exo 2, sans-serif' font-weight='700' fill='%23ffb700'>Э.</text></svg>">
   <meta name="description" content="Создаю современные сайты-визитки и лендинги под ключ. Дизайн, копирайт, домен и хостинг — все в одном месте." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -210,6 +211,21 @@
       transform: scaleX(0);
     }
 
+    /* НОВЫЙ СТИЛЬ: Анимация свечения для кнопки "Заполнить бриф" */
+    .btn-call-to-action {
+      animation: pulse-glow 2.5s infinite alternate;
+    }
+    @keyframes pulse-glow {
+      from {
+        border-color: var(--border-color);
+        box-shadow: 0 0 10px -5px var(--accent-glow);
+      }
+      to {
+        border-color: var(--border-hover);
+        box-shadow: 0 0 20px 5px var(--accent-glow), 0 0 35px 5px var(--accent-glow);
+      }
+    }
+
     /* --- СЕКЦИЯ ПОРТФОЛИО --- */
     .portfolio-grid {
       display: grid;
@@ -230,7 +246,7 @@
       }
     }
     .portfolio-preview {
-      height: 250px;
+      height: 500px; /* ИЗМЕНЕНО: высота увеличена в 2 раза */
       overflow: hidden;
       position: relative;
     }
@@ -253,7 +269,7 @@
     }
     .portfolio-logo-text {
       font-family: 'Exo 2', sans-serif;
-      font-size: 1.8rem;
+      font-size: 1.6rem; /* ИЗМЕНЕНО: немного уменьшен размер для длинных названий */
       font-weight: 700;
       color: #fff;
       line-height: 40px;
@@ -374,7 +390,7 @@
         <section id="brief" class="bento-card brief-card animate-on-scroll">
           <h2 class="section-title" style="margin-bottom: 1.5rem; font-size: 1.5rem;">Готовы начать проект?</h2>
           <p style="color: var(--text-secondary); margin-top: 0; margin-bottom: 2rem; font-size: 1rem;">Заполните бриф, чтобы я лучше понял вашу задачу.</p>
-          <a href="#" class="btn magnetic-item btn-primary"><span>Заполнить бриф</span></a>
+          <a href="#" class="btn magnetic-item btn-call-to-action"><span>Заполнить бриф</span></a>
         </section>
 
       </div>
@@ -389,7 +405,9 @@
               <iframe src="https://www.sapstudio.ru/" scrolling="no" title="Превью сайта sapstudio.ru"></iframe>
             </div>
             <div class="portfolio-content">
-              <img src="https://www.sapstudio.ru/images/logo.svg" alt="Логотип Сапфир" class="portfolio-logo">
+              <div class="portfolio-logo">
+                <span class="portfolio-logo-text">Студия красоты Сапфир</span>
+              </div>
               <p>Сайт-визитка для салона красоты "Сапфир" в Тольятти. Современный дизайн, удобная навигация и интеграция с Яндекс.Картами.</p>
               <blockquote>
                 Теперь у нас есть стильный сайт, который привлекает новых клиентов. Все было сделано быстро и профессионально!
