@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Заполнить бриф — Алексей Бронников</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='Exo 2, sans-serif' font-weight='700' fill='%23ffb700'>Э.</text></svg>">
+  <meta name="description" content="Заполните бриф для создания современного сайта для вашего бизнеса. Ответьте на несколько вопросов, и я подготовлю идеальное решение." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;700&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-organic-dark: #22201e;
+      --bg-panel-glass: rgba(43, 40, 37, 0.5);
+      --accent-warm: #ffb700;
+      --accent-glow: rgba(255, 183, 0, 0.5);
+      --text-primary: #f0ede9;
+      --text-secondary: #b8b0a6;
+      --border-color: rgba(255, 183, 0, 0.2);
+      --border-hover: rgba(255, 183, 0, 0.7);
+      --telegram-color: #2AABEE;
+      --whatsapp-color: #25D366;
+      --max-color: #792DFF;
+      --phone-color: #b0a89f;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Manrope', sans-serif;
+      color: var(--text-primary);
+      background-color: var(--bg-organic-dark);
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: default;
+    }
+    
+    /* --- ЖИВОЙ ФОН V2.0 --- */
+    #background-wrapper {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%; z-index: -2; overflow: hidden;
+    }
+    #living-glow {
+      position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
+      background: 
+        radial-gradient(circle at 25% 25%, var(--accent-glow) 0%, transparent 30%),
+        radial-gradient(circle at 75% 75%, rgba(121, 45, 255, 0.15) 0%, transparent 35%);
+      animation: living-glow-rotate 40s ease-in-out infinite alternate;
+    }
+    @keyframes living-glow-rotate {
+      from { transform: rotate(0deg) scale(1); }
+      to { transform: rotate(360deg) scale(1.2); }
+    }
+    #particle-container { position: absolute; top:0; left:0; width:100%; height:100%; }
+    .particle { position: absolute; border-radius: 50%; background: var(--accent-warm); opacity: 0; animation: rise 15s infinite ease-in; }
+    @keyframes rise {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.2; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+    .particle:nth-child(1){width:4px;height:4px;left:10%;animation-delay:0s;animation-duration:15s}.particle:nth-child(2){width:2px;height:2px;left:20%;animation-delay:2s;animation-duration:12s}.particle:nth-child(3){width:5px;height:5px;left:30%;animation-delay:4s;animation-duration:18s}.particle:nth-child(4){width:3px;height:3px;left:40%;animation-delay:1s;animation-duration:14s}.particle:nth-child(5){width:2px;height:2px;left:50%;animation-delay:7s;animation-duration:11s}.particle:nth-child(6){width:4px;height:4px;left:60%;animation-delay:3s;animation-duration:16s}.particle:nth-child(7){width:6px;height:6px;left:70%;animation-delay:8s;animation-duration:20s}.particle:nth-child(8){width:2px;height:2px;left:80%;animation-delay:5s;animation-duration:13s}.particle:nth-child(9){width:3px;height:3px;left:90%;animation-delay:6s;animation-duration:17s}.particle:nth-child(10){width:5px;height:5px;left:5%;animation-delay:9s;animation-duration:19s}
+
+    /* --- ОБЩАЯ СТРУКТУРА --- */
+    .main-wrapper { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+
+    /* --- ХЭДЕР --- */
+    .topbar {
+      position: sticky; top: 1rem; z-index: 50;
+      backdrop-filter: blur(16px) saturate(150%);
+      background: var(--bg-panel-glass);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.05);
+    }
+    .topbar-inner { display: flex; align-items: center; padding: 0.8rem 1.5rem; }
+    .logo-link { display: flex; align-items: center; gap: 1rem; text-decoration: none; margin-right: auto; }
+    .brand-logo-char { font-family: 'Exo 2', sans-serif; font-weight: 700; font-size: 2rem; color: var(--accent-warm); text-shadow: 0 0 15px var(--accent-glow); line-height: 1; }
+    .logo-name { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 1.1rem; color: var(--text-primary); }
+    nav.menu { display: flex; gap: 0.5rem; font-family: 'Exo 2', sans-serif; font-size: 0.9rem; font-weight: 500; }
+    nav.menu a { text-decoration: none; padding: 0.5rem 1rem; color: var(--text-secondary); position: relative; transition: color 0.3s ease, text-shadow 0.3s ease; cursor: pointer; }
+    nav.menu a:hover, nav.menu a.active { color: var(--text-primary); text-shadow: 0 0 8px var(--accent-glow); }
+
+    /* --- ГЛАВНЫЙ ЭКРАН BRIEF --- */
+    .brief-hero {
+      text-align: center;
+      padding: 5rem 0;
+    }
+    .brief-title {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      line-height: 1.1;
+      margin: 0 0 1.5rem 0;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .brief-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+    }
+    
+    /* --- CTA КНОПКА --- */
+    .cta-container {
+      text-align: center;
+      margin: 3rem 0;
+    }
+    .cta-title {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+    .cta-button {
+      display: inline-block;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      color: var(--bg-organic-dark);
+      background-color: var(--accent-warm);
+      padding: 1.2rem 3rem;
+      border-radius: 50px;
+      box-shadow: 0 0 30px var(--accent-glow), 0 0 60px rgba(255, 183, 0, 0.3);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .cta-button:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 0 40px var(--accent-glow), 0 0 80px rgba(255, 183, 0, 0.4);
+    }
+    .cta-button:active {
+      transform: translateY(2px) scale(0.98);
+    }
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, #ffc42e, #ffb700);
+      z-index: -1;
+      transform: scale(1.1);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      border-radius: 50px;
+    }
+    .cta-button:hover::before {
+      opacity: 1;
+    }
+    
+    /* --- ПРЕИМУЩЕСТВА --- */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 5rem 0;
+    }
+    .benefit-card {
+      padding: 2rem;
+      border: 1px solid var(--border-color);
+      background: var(--bg-panel-glass);
+      backdrop-filter: blur(16px) saturate(150%);
+      border-radius: 20px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2), 0 0 15px var(--accent-glow);
+    }
+    .benefit-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--accent-warm);
+    }
+    .benefit-title {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+    .benefit-description {
+      color: var(--text-secondary);
+    }
+
+    /* --- ОБЩИЕ СТИЛИ СЕКЦИЙ --- */
+    .content-section { padding: 5rem 0 0 0; }
+    .section-title { font-family: 'Exo 2', sans-serif; font-size: 1.8rem; letter-spacing: 0.05em; color: var(--text-primary); text-align: center; margin: 0 0 3rem 0; position: relative; }
+    .section-title::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -12px; width: 60px; height: 2px; background: var(--accent-warm); box-shadow: 0 0 10px var(--accent-glow); }
+    .contacts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+
+    /* --- АНИМАЦИИ ПОЯВЛЕНИЯ --- */
+    .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+    .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* --- ФУТЕР И МОДАЛЬНЫЕ ОКНА --- */
+    footer { text-align: center; font-size: 0.9rem; color: var(--text-secondary); padding: 2.5rem 0; margin-top: 5rem; border-top: 1px solid var(--border-color); }
+    
+    /* ОПТИМИЗАЦИЯ МОДАЛЬНОГО ОКНА ДЛЯ ТЕЛЕФОНОВ */
+    .modal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}.modal.is-open{opacity:1;pointer-events:auto}.modal-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(26,24,22,.5);backdrop-filter:blur(5px);cursor:pointer}.modal-content{position:relative;z-index:1001;transform:scale(.95);transition:transform .3s ease;max-height:90vh;overflow-y:auto;background:var(--bg-panel-glass);border:1px solid var(--border-color);backdrop-filter:blur(20px) saturate(180%);padding:1.5rem;width:90%;max-width:500px;border-radius:20px;box-shadow:0 0 50px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.05)}.modal.is-open .modal-content{transform:scale(1)}.modal-content.single{text-align:center}.modal-close{position:absolute;top:10px;right:10px;width:30px;height:30px;font-size:24px;color:var(--text-secondary);background:0 0;border:none;cursor:pointer;line-height:1;transition:.2s ease;z-index:1002}.modal-close:hover{color:var(--accent-warm);transform:rotate(90deg)}.main-contact-grid{display:grid;grid-template-columns:1fr;gap:16px}.modal-qr{margin:12px auto;width:120px;height:120px;border-radius:12px;padding:8px;background:#fff}.modal-qr.placeholder{background:0 0;border:1px solid var(--border-color);display:flex;align-items:center;justify-content:center}.modal-contact-info{font-family:'Exo 2',monospace;font-size:1.1rem;color:#fff;min-height:1.5em;margin:12px 0}.modal-actions{display:flex;flex-direction:column;gap:10px;margin-top:20px}.modal-actions .btn{width:100%;text-align:center}
+    
+    @media (min-width: 768px) {
+      .modal-content { padding: 2.5rem; max-width: 800px; }
+      .main-contact-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .modal-actions { flex-direction: row; justify-content: center; }
+      .modal-actions .btn { width: auto; }
+    }
+
+    /* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
+    .hamburger-menu, .mobile-nav { display: none; }
+    @media (max-width: 900px) {
+      .benefits-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .main-wrapper { padding: 1rem; }
+      nav.menu { display: none; }
+      .logo-name { display: none; }
+      .hamburger-menu{display:flex;flex-direction:column;gap:6px;margin-left:auto;background:0 0;border:none;cursor:pointer;padding:8px;z-index:100}.hamburger-menu .bar{width:28px;height:3px;background:var(--text-primary);border-radius:2px;transition:.3s ease}.hamburger-menu.is-active .bar:nth-child(1){transform:translateY(9px) rotate(45deg)}.hamburger-menu.is-active .bar:nth-child(2){opacity:0}.hamburger-menu.is-active .bar:nth-child(3){transform:translateY(-9px) rotate(-45deg)}.mobile-nav{display:block;position:fixed;top:0;right:-100%;z-index:40;width:min(80vw,320px);height:100%;backdrop-filter:blur(16px);background:color-mix(in srgb,var(--bg-panel-glass) 95%,transparent);border-left:1px solid var(--border-color);padding:100px 30px;transition:right .4s cubic-bezier(.25,1,.5,1)}.mobile-nav.is-active{right:0;box-shadow:-10px 0 40px rgba(0,0,0,.5)}.mobile-nav nav.menu{display:flex;flex-direction:column;align-items:flex-start;gap:1.5rem;font-size:1.2rem}
+    }
+  </style>
+</head>
+
+<body>
+  
+  <div id="background-wrapper">
+    <div id="living-glow"></div>
+    <div id="particle-container">
+      <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+      <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    </div>
+  </div>
+
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a href="index.html" class="logo-link magnetic-item">
+          <span class="brand-logo-char">Э.</span>
+          <span class="logo-name">Алексей Бронников</span>
+        </a>
+        <nav class="menu" role="navigation">
+            <a href="index.html" class="magnetic-item">ГЛАВНАЯ</a>
+            <a href="portfolio.html" class="magnetic-item">РАБОТЫ</a>
+            <a href="brief.html" class="active magnetic-item">БРИФ</a>
+            <a href="blog.html" class="magnetic-item">БЛОГ</a>
+            <a data-modal-trigger="main-contact-modal" class="magnetic-item">КОНТАКТЫ</a>
+        </nav>
+        <button class="hamburger-menu magnetic-item" aria-label="Открыть меню" aria-expanded="false">
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+      </div>
+    </header>
+    <div class="mobile-nav"><nav class="menu" role="navigation"></nav></div>
+
+    <main>
+      <section class="brief-hero animate-on-scroll">
+        <h1 class="brief-title">Заполните бриф</h1>
+        <p class="brief-subtitle">Ответьте на несколько вопросов, и я подготовлю идеальное решение для вашего бизнеса. Это займет не более 10 минут.</p>
+      </section>
+
+      <section class="cta-container animate-on-scroll">
+        <h2 class="cta-title">Готовы создать современный сайт?</h2>
+        <a href="https://forms.yandex.ru/u/68c3b56ef47e73606282edf2" target="_blank" class="cta-button magnetic-item">Заполнить бриф</a>
+      </section>
+
+      <section class="benefits-section animate-on-scroll">
+        <h2 class="section-title">Почему стоит заполнить бриф</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">💎</div>
+            <h3 class="benefit-title">Точное понимание задачи</h3>
+            <p class="benefit-description">Чем детальнее вы опишете ваши потребности, тем точнее я смогу предложить решение, которое будет работать на ваш бизнес.</p>
+          </div>
+          
+          <div class="benefit-card">
+            <div class="benefit-icon">⚡</div>
+            <h3 class="benefit-title">Экономия времени</h3>
+            <p class="benefit-description">Заполненный бриф позволяет сразу приступить к работе, без длительных уточнений и согласований на каждом этапе.</p>
+          </div>
+          
+          <div class="benefit-card">
+            <div class="benefit-icon">🎯</div>
+            <h3 class="benefit-title">Предсказуемый результат</h3>
+            <p class="benefit-description">На основе брифа я подготовлю детальное коммерческое предложение с фиксированной стоимостью и сроками.</p>
+          </div>
+        </div>
+      </section>
+        
+    </main>
+
+    <footer class="animate-on-scroll">
+      <p>Сайт разработал Алексей <span class="brand-logo-char">Э.</span> Бронников</p>
+      <p>© 2025</p>
+    </footer>
+  </div>
+
+  <!-- Модальные окна с оптимизацией для мобильных -->
+  <div class="modal" id="main-contact-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content main-contacts"><button class="modal-close" data-modal-close>&times;</button>
+    <div class="main-contact-grid">
+        
+        <div>
+          <h3 style="font-family: 'Exo 2', sans-serif; font-size: 1.3rem; letter-spacing: 0.05em; color: var(--telegram-color); margin: 0 0 1rem 0;">Telegram</h3>
+          <div class="modal-contact-info" style="margin: 0 0 1rem 0;">@alexeybronnikov</div>
+          <div class="modal-actions" style="justify-content: flex-start;">
+            <a href="https://t.me/alexeybronnikov" target="_blank" class="btn magnetic-item">Перейти</a>
+            <button class="btn secondary magnetic-item" data-copy-text="@alexeybronnikov">Копировать</button>
+          </div>
+        </div>
+        
+        <div>
+          <h3 style="font-family: 'Exo 2', sans-serif; font-size: 1.3rem; letter-spacing: 0.05em; color: var(--whatsapp-color); margin: 0 0 1rem 0;">WhatsApp</h3>
+          <div class="modal-contact-info" style="margin: 0 0 1rem 0;">+7 (995) 131-28-28</div>
+          <div class="modal-actions" style="justify-content: flex-start;">
+            <a href="https://wa.me/qr/PZNL54WWEV4GI1" target="_blank" class="btn magnetic-item">Перейти</a>
+            <button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button>
+          </div>
+        </div>
+        
+        <div>
+          <h3 style="font-family: 'Exo 2', sans-serif; font-size: 1.3rem; letter-spacing: 0.05em; color: var(--max-color); margin: 0 0 1rem 0;">Max</h3>
+          <div class="modal-contact-info" style="margin: 0 0 1rem 0;">+7 (995) 131-28-28</div>
+          <div class="modal-actions" style="justify-content: flex-start;">
+            <a href="#" class="btn magnetic-item">Перейти</a>
+            <button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button>
+          </div>
+        </div>
+        
+        <div>
+          <h3 style="font-family: 'Exo 2', sans-serif; font-size: 1.3rem; letter-spacing: 0.05em; color: var(--phone-color); margin: 0 0 1rem 0;">Телефон</h3>
+          <div class="modal-contact-info" style="margin: 0 0 1rem 0;">+7 (995) 131-28-28</div>
+          <div class="modal-actions" style="justify-content: flex-start;">
+            <a href="tel:+79951312828" class="btn magnetic-item">Позвонить</a>
+            <button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button>
+          </div>
+        </div>
+    </div>
+  </div></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const isTouchDevice = 'ontouchstart' in window;
+
+      // --- "МАГНИТНЫЙ" ЭФФЕКТ ---
+      const magneticItems = document.querySelectorAll('.magnetic-item');
+      if (!isTouchDevice) {
+        magneticItems.forEach(item => {
+          item.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            this.style.transition = 'transform 0.1s ease-out';
+            this.style.transform = `translate(${x * 0.3}px, ${y * 0.4}px)`;
+          });
+          item.addEventListener('mouseleave', function() {
+            this.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
+            this.style.transform = 'translate(0,0)';
+          });
+        });
+      }
+
+      // --- АНИМАЦИИ ПРИ СКРОЛЛЕ ---
+      const animatedEls = document.querySelectorAll('.animate-on-scroll');
+      const animationObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      animatedEls.forEach(el => animationObserver.observe(el));
+
+      // --- МОБИЛЬНАЯ НАВИГАЦИЯ ---
+      const hamburger = document.querySelector('.hamburger-menu');
+      const mobileNav = document.querySelector('.mobile-nav');
+      const desktopNavMenu = document.querySelector('.topbar nav.menu');
+      const mobileNavMenu = mobileNav.querySelector('nav.menu');
+      mobileNavMenu.innerHTML = desktopNavMenu.innerHTML;
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('is-active');
+        mobileNav.classList.toggle('is-active');
+      });
+      mobileNavMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          hamburger.classList.remove('is-active');
+          mobileNav.classList.remove('is-active');
+          if (link.dataset.modalTrigger) { e.preventDefault(); setTimeout(() => openModal(link.dataset.modalTrigger), 300); }
+        });
+      });
+
+      // --- ЛОГИКА МОДАЛЬНЫХ ОКОН ---
+      function openModal(modalId){const modal=document.getElementById(modalId);if(!modal)return;modal.classList.add("is-open"),modal.querySelectorAll("[data-qr-text]").forEach(qrEl=>{qrEl.dataset.generated||(qrEl.innerHTML="",new QRCode(qrEl,{text:qrEl.dataset.qrText,width:144,height:144,colorDark:"#1a1816",colorLight:"#fff",correctLevel:QRCode.CorrectLevel.H}),qrEl.dataset.generated="true")})}document.querySelectorAll("[data-modal-trigger]").forEach(trigger=>trigger.addEventListener("click",e=>{e.preventDefault(),openModal(trigger.dataset.modalTrigger)})),document.querySelectorAll(".modal").forEach(modal=>modal.querySelectorAll("[data-modal-close], .modal-overlay").forEach(el=>el.addEventListener("click",()=>modal.classList.remove("is-open")))),document.addEventListener("keydown",e=>{"Escape"===e.key&&document.querySelector(".modal.is-open")?.classList.remove("is-open")}),document.querySelectorAll("[data-copy-text]").forEach(button=>{button.addEventListener("click",()=>{navigator.clipboard.writeText(button.dataset.copyText).then(()=>{const originalTextEl=button.querySelector("span")||button,originalText=originalTextEl.textContent;originalTextEl.textContent="Скопировано!",setTimeout(()=>{originalTextEl.textContent=originalText},1500)})})});
+    });
+  </script>
+</body>
+</html>
