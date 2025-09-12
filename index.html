@@ -229,20 +229,22 @@
     }
     .accordion-card[open] .accordion-title::after { transform: rotate(45deg); }
     .accordion-content { overflow: hidden; margin-top: 1.5rem; }
-    .accordion-content .accordion-content-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+    /* ИЗМЕНЕНО: Добавлена сетка для контента аккордеона */
+    .accordion-content .accordion-content-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
     @media (min-width: 768px) {
-      .accordion-content .accordion-content-grid { grid-template-columns: 1fr 1fr; align-items: center; }
+      .accordion-content .accordion-content-grid { grid-template-columns: 1fr 1fr; align-items: center; gap: 2.5rem; }
     }
-    .accordion-content p { color: var(--text-secondary); margin: 0 0 1.5rem 0; }
+    .accordion-content p { color: var(--text-secondary); margin: 0 0 1.5rem 0; font-size: 0.95rem; }
     .accordion-content p:last-child { margin-bottom: 0; }
     .accordion-chart { text-align: center; }
     .accordion-chart svg { max-width: 100%; height: auto; margin: 0 auto; }
-    .chart-title { font-size: 14px; font-weight: 500; fill: var(--text-primary); }
-    .chart-bar { fill: var(--accent-warm); transition: width 0.5s ease-out; }
+    /* ИЗМЕНЕНО: Уменьшены шрифты диаграмм */
+    .chart-title { font-size: 13px; font-weight: 500; fill: var(--text-primary); }
+    .chart-bar { fill: var(--accent-warm); }
     .chart-bar-bg { fill: rgba(255, 255, 255, 0.1); }
-    .chart-label { font-size: 12px; fill: var(--text-secondary); }
-    .chart-value { font-size: 14px; font-weight: 700; fill: var(--text-primary); }
-    .chart-source { font-size: 0.75rem; color: var(--text-secondary); margin-top: 1rem; opacity: 0.7; }
+    .chart-label { font-size: 11px; fill: var(--text-secondary); }
+    .chart-value { font-size: 12px; font-weight: 700; fill: var(--text-primary); }
+    .chart-source { font-size: 0.7rem; color: var(--text-secondary); margin-top: 0.8rem; opacity: 0.7; }
     .chart-source a { color: var(--text-secondary); text-decoration: underline; transition: color .3s ease; }
     .chart-source a:hover { color: var(--accent-warm); }
     .accordion-action { margin-top: 2rem; }
@@ -395,6 +397,7 @@
         </div>
       </section>
 
+      
       <section id="faq" class="content-section animate-on-scroll" aria-label="Частые вопросы">
         <h2 class="section-title">Частые вопросы</h2>
         <div class="faq-wrapper">
@@ -403,36 +406,36 @@
             <div class="accordion-content">
               <div class="accordion-content-grid">
                 <div>
-                  <p>В 2025 году сайт — это не просто визитка, а круглосуточный менеджер по продажам и главный индикатор доверия к вашему бизнесу. Он работает, пока вы отдыхаете, привлекает новую аудиторию и формирует имидж эксперта в вашей нише.</p>
-                  <p>Качественный сайт снимает основные страхи клиентов: он подробно знакомит с товаром, четко прописывает условия возврата и доказывает надежность компании. Отсутствие сайта сегодня — это упущенные клиенты и проигранная конкуренция.</p>
+                  <p>Главная задача сайта — вызывать доверие. Исследования показывают, что у большинства людей есть страхи перед онлайн-покупками. Они боятся обмана, невозможности проверить товар и сложностей с возвратом.</p>
+                  <p>Профессиональный сайт снимает эти возражения. Он подробно знакомит с товаром, четко прописывает условия и доказывает надежность компании. Это ваш круглосуточный менеджер, который превращает сомнения посетителя в уверенность клиента.</p>
                   <div class="accordion-action">
                      <a href="blog/zachem-nuzhen-sait.html" class="btn magnetic-item">Читать статью</a>
                   </div>
                 </div>
                 <div class="accordion-chart">
-                  <svg viewBox="0 0 250 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="chart1-title">
-                    <title id="chart1-title">Диаграмма: Основные барьеры в онлайн-покупках</title>
-                    <text x="125" y="15" text-anchor="middle" class="chart-title">Основные барьеры в онлайн-покупках</text>
+                  <svg viewBox="0 0 250 155" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="chart1-title">
+                    <title id="chart1-title">Что мешает людям покупать онлайн?</title>
+                    <text x="125" y="12" text-anchor="middle" class="chart-title">Что мешает людям покупать онлайн?</text>
                     
-                    <g transform="translate(0, 40)">
-                      <text x="5" y="15" text-anchor="start" class="chart-label">Боязнь обмана</text>
-                      <text x="245" y="15" text-anchor="end" class="chart-value">49%</text>
-                      <rect x="5" y="22" width="240" height="12" rx="3" class="chart-bar-bg"></rect>
-                      <rect x="5" y="22" width="118" height="12" rx="3" class="chart-bar"></rect> 
+                    <g transform="translate(0, 30)">
+                      <text x="5" y="12" text-anchor="start" class="chart-label">Боязнь обмана</text>
+                      <text x="245" y="12" text-anchor="end" class="chart-value">49%</text>
+                      <rect x="5" y="18" width="240" height="10" rx="3" class="chart-bar-bg"></rect>
+                      <rect x="5" y="18" width="118" height="10" rx="3" class="chart-bar"></rect> 
                     </g>
                     
-                    <g transform="translate(0, 80)">
-                      <text x="5" y="15" text-anchor="start" class="chart-label">Нельзя проверить товар</text>
-                      <text x="245" y="15" text-anchor="end" class="chart-value">45%</text>
-                      <rect x="5" y="22" width="240" height="12" rx="3" class="chart-bar-bg"></rect>
-                      <rect x="5" y="22" width="108" height="12" rx="3" class="chart-bar"></rect> 
+                    <g transform="translate(0, 70)">
+                      <text x="5" y="12" text-anchor="start" class="chart-label">Нельзя проверить товар</text>
+                      <text x="245" y="12" text-anchor="end" class="chart-value">45%</text>
+                      <rect x="5" y="18" width="240" height="10" rx="3" class="chart-bar-bg"></rect>
+                      <rect x="5" y="18" width="108" height="10" rx="3" class="chart-bar"></rect> 
                     </g>
 
-                    <g transform="translate(0, 120)">
-                       <text x="5" y="15" text-anchor="start" class="chart-label">Сложный возврат</text>
-                       <text x="245" y="15" text-anchor="end" class="chart-value">34%</text>
-                       <rect x="5" y="22" width="240" height="12" rx="3" class="chart-bar-bg"></rect>
-                       <rect x="5" y="22" width="82" height="12" rx="3" class="chart-bar"></rect> 
+                    <g transform="translate(0, 110)">
+                       <text x="5" y="12" text-anchor="start" class="chart-label">Сложный возврат</text>
+                       <text x="245" y="12" text-anchor="end" class="chart-value">34%</text>
+                       <rect x="5" y="18" width="240" height="10" rx="3" class="chart-bar-bg"></rect>
+                       <rect x="5" y="18" width="82" height="10" rx="3" class="chart-bar"></rect> 
                     </g>
                   </svg>
                   <p class="chart-source">Источник: <a href="https://www.kp.ru/daily/26970/4025868/" target="_blank" rel="noopener noreferrer">исследование Ромир (via KP.ru)</a></p>
@@ -446,30 +449,19 @@
             <div class="accordion-content">
               <div class="accordion-content-grid">
                 <div>
-                  <p>Абсолютно. Соцсети — это "арендованная земля", где вы зависите от чужих правил и рискуете потерять все в один миг. Сайт — это ваша собственная цифровая недвижимость. Только здесь вы полностью контролируете бренд, пользовательский опыт и прямой контакт с аудиторией.</p>
-                  <p>Более того, большинство пользователей доверяют именно результатам органического поиска, а не рекламе. Сайт — это главный инструмент для привлечения этого "теплого" и качественного трафика, работающий на вас в долгосрочной перспективе.</p>
+                  <p>Более чем. Соцсети — это "арендованная земля", где вы зависите от чужих правил. Сайт — ваша собственность и цифровой актив. Но главное — это основной критерий оценки вашего бизнеса.</p>
+                  <p>Как показывают данные, 75% пользователей судят о надежности компании по дизайну ее сайта. Это первое, на что обращают внимание, прежде чем доверить вам свои деньги. В эпоху, когда каждый может создать страницу в соцсети, именно качественный сайт отличает серьезный бизнес от однодневки.</p>
                    <div class="accordion-action">
                      <a href="blog/sait-v-2025-godu.html" class="btn magnetic-item">Читать статью</a>
                   </div>
                 </div>
                 <div class="accordion-chart">
-                  <svg viewBox="0 0 250 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="chart2-title">
-                    <title id="chart2-title">Диаграмма: Фокус пользователей в поиске</title>
-                    <text x="125" y="15" text-anchor="middle" class="chart-title">Фокус пользователей в поиске</text>
-                    
-                    <g transform="translate(0, 40)">
-                      <text x="5" y="15" text-anchor="start" class="chart-label">Органические результаты</text>
-                      <text x="245" y="15" text-anchor="end" class="chart-value">75%</text>
-                      <rect x="5" y="22" width="240" height="12" rx="3" class="chart-bar-bg"></rect>
-                      <rect x="5" y="22" width="180" height="12" rx="3" class="chart-bar"></rect> 
-                    </g>
-                    
-                    <g transform="translate(0, 80)">
-                       <text x="5" y="15" text-anchor="start" class="chart-label">Платная реклама</text>
-                       <text x="245" y="15" text-anchor="end" class="chart-value">25%</text>
-                       <rect x="5" y="22" width="240" height="12" rx="3" class="chart-bar-bg"></rect>
-                       <rect x="5" y="22" width="60" height="12" rx="3" class="chart-bar"></rect> 
-                    </g>
+                  <svg viewBox="0 0 250 155" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="chart2-title">
+                      <title id="chart2-title">75% пользователей судят о доверии к компании по дизайну сайта</title>
+                      <circle cx="125" cy="70" r="50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="15"></circle>
+                      <circle cx="125" cy="70" r="50" fill="none" stroke="var(--accent-warm)" stroke-width="15" stroke-linecap="round" stroke-dasharray="235.6" stroke-dashoffset="0" transform="rotate(-90 125 70)"></circle>
+                      <text x="125" y="75" text-anchor="middle" font-family="Exo 2, sans-serif" font-size="28" font-weight="700" fill="var(--text-primary)">75%</text>
+                      <text x="125" y="145" text-anchor="middle" class="chart-title">...судят о доверии к компании по сайту</text>
                   </svg>
                   <p class="chart-source">Источник: <a href="https://cropink.com/business-statistics" target="_blank" rel="noopener noreferrer">Business Website Statistics</a></p>
                 </div>
@@ -478,6 +470,7 @@
           </details>
         </div>
       </section>
+      
 
       <section id="contacts" class="content-section animate-on-scroll" aria-label="Контакты">
         <h2 class="section-title">Контакты</h2>
