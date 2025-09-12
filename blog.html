@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Блог — Алексей Бронников</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='Exo 2, sans-serif' font-weight='700' fill='%23ffb700'>Э.</text></svg>">
+  <meta name="description" content="Мысли о веб-разработке, дизайне, технологиях и о том, как создать сайт, который решает задачи бизнеса." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;700&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-organic-dark: #22201e;
+      --bg-panel-glass: rgba(43, 40, 37, 0.5);
+      --accent-warm: #ffb700;
+      --accent-glow: rgba(255, 183, 0, 0.5);
+      --text-primary: #f0ede9;
+      --text-secondary: #b8b0a6;
+      --border-color: rgba(255, 183, 0, 0.2);
+      --border-hover: rgba(255, 183, 0, 0.7);
+      --telegram-color: #2AABEE;
+      --whatsapp-color: #25D366;
+      --max-color: #792DFF;
+      --phone-color: #b0a89f;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Manrope', sans-serif;
+      color: var(--text-primary);
+      background-color: var(--bg-organic-dark);
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: default;
+    }
+    
+    /* --- КАСТОМНЫЙ СКРОЛЛ-БАР --- */
+    body::-webkit-scrollbar { width: 8px; }
+    body::-webkit-scrollbar-track { background: var(--bg-organic-dark); }
+    body::-webkit-scrollbar-thumb { background-color: var(--accent-warm); border-radius: 10px; border: 2px solid var(--bg-organic-dark); }
+
+    /* --- ЖИВОЙ ФОН --- */
+    #background-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden; }
+    #living-glow { position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background: radial-gradient(circle at 25% 25%, var(--accent-glow) 0%, transparent 30%), radial-gradient(circle at 75% 75%, rgba(121, 45, 255, 0.15) 0%, transparent 35%); animation: living-glow-rotate 40s ease-in-out infinite alternate; }
+    @keyframes living-glow-rotate { from { transform: rotate(0deg) scale(1); } to { transform: rotate(360deg) scale(1.2); } }
+    #particle-container { position: absolute; top:0; left:0; width:100%; height:100%; }
+    .particle { position: absolute; border-radius: 50%; background: var(--accent-warm); opacity: 0; animation: rise 15s infinite ease-in; }
+    @keyframes rise { 0% { transform: translateY(100vh) scale(0.5); opacity: 0; } 10% { opacity: 0.6; } 90% { opacity: 0.2; } 100% { transform: translateY(-10vh) scale(1); opacity: 0; } }
+    .particle:nth-child(1){width:4px;height:4px;left:10%;animation-delay:0s;animation-duration:15s}.particle:nth-child(2){width:2px;height:2px;left:20%;animation-delay:2s;animation-duration:12s}.particle:nth-child(3){width:5px;height:5px;left:30%;animation-delay:4s;animation-duration:18s}.particle:nth-child(4){width:3px;height:3px;left:40%;animation-delay:1s;animation-duration:14s}.particle:nth-child(5){width:2px;height:2px;left:50%;animation-delay:7s;animation-duration:11s}.particle:nth-child(6){width:4px;height:4px;left:60%;animation-delay:3s;animation-duration:16s}.particle:nth-child(7){width:6px;height:6px;left:70%;animation-delay:8s;animation-duration:20s}.particle:nth-child(8){width:2px;height:2px;left:80%;animation-delay:5s;animation-duration:13s}.particle:nth-child(9){width:3px;height:3px;left:90%;animation-delay:6s;animation-duration:17s}.particle:nth-child(10){width:5px;height:5px;left:5%;animation-delay:9s;animation-duration:19s}
+
+    /* --- ОБЩАЯ СТРУКТУРА И ХЭДЕР --- */
+    .main-wrapper { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+    .topbar { position: sticky; top: 1rem; z-index: 50; backdrop-filter: blur(16px) saturate(150%); background: var(--bg-panel-glass); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 4px 30px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.05); }
+    .topbar-inner { display: flex; align-items: center; padding: 0.8rem 1.5rem; }
+    .logo-link { display: flex; align-items: center; gap: 1rem; text-decoration: none; margin-right: auto; }
+    .brand-logo-char { font-family: 'Exo 2', sans-serif; font-weight: 700; font-size: 2rem; color: var(--accent-warm); text-shadow: 0 0 15px var(--accent-glow); line-height: 1; }
+    .logo-name { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 1.1rem; color: var(--text-primary); }
+    nav.menu { display: flex; gap: 0.5rem; font-family: 'Exo 2', sans-serif; font-size: 0.9rem; font-weight: 500; }
+    nav.menu a { text-decoration: none; padding: 0.5rem 1rem; color: var(--text-secondary); position: relative; transition: color 0.3s ease, text-shadow 0.3s ease; cursor: pointer; }
+    nav.menu a:hover, nav.menu a.active { color: var(--text-primary); text-shadow: 0 0 8px var(--accent-glow); }
+    
+    /* --- СТИЛИ СТРАНИЦЫ БЛОГА --- */
+    .blog-hero { text-align: center; padding: 4rem 0; }
+    .section-title { font-family: 'Exo 2', sans-serif; font-size: 2.5rem; letter-spacing: 0.05em; color: var(--text-primary); text-align: center; margin: 0 0 1rem 0; }
+    .subtitle { font-family: 'Manrope', sans-serif; font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+    .content-section { padding-top: 2rem; }
+    
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .blog-card {
+      text-decoration: none;
+      background: var(--bg-panel-glass);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.05);
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+    .blog-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3), 0 0 25px var(--accent-glow);
+      border-color: var(--border-hover);
+    }
+    .card-image-wrapper {
+      height: 200px;
+      background-color: rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-warm);
+    }
+    .card-image-wrapper svg {
+      width: 64px;
+      height: 64px;
+      opacity: 0.5;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .blog-card:hover .card-image-wrapper svg {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    .card-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .card-category {
+      font-weight: 500;
+      color: var(--accent-warm);
+    }
+    .card-title {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0 0 1rem 0;
+      line-height: 1.3;
+    }
+    .card-excerpt {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin: 0;
+      flex-grow: 1;
+    }
+    .read-more {
+      margin-top: 1.5rem;
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 500;
+      color: var(--text-primary);
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .blog-card:hover .read-more {
+      color: var(--accent-warm);
+      text-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    /* --- АНИМАЦИИ ПОЯВЛЕНИЯ --- */
+    .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+    .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+    
+    /* --- ФУТЕР --- */
+    footer { text-align: center; font-size: 0.9rem; color: var(--text-secondary); padding: 2.5rem 0; margin-top: 5rem; border-top: 1px solid var(--border-color); }
+    
+    /* --- УЛУЧШЕННЫЕ МОДАЛЬНЫЕ ОКНА --- */
+    .modal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}.modal.is-open{opacity:1;pointer-events:auto}.modal-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(26,24,22,.5);backdrop-filter:blur(5px);cursor:pointer}.modal-content{position:relative;z-index:1001;transform:scale(.95);transition:transform .3s ease;max-height:90vh;overflow-y:auto;background:var(--bg-panel-glass);border:1px solid var(--border-color);backdrop-filter:blur(20px) saturate(180%);padding:2.5rem;width:90%;border-radius:20px;box-shadow:0 0 50px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.05)}.modal.is-open .modal-content{transform:scale(1)}.modal-content.main-contacts{max-width:900px}.modal-close{position:absolute;top:15px;right:15px;width:30px;height:30px;font-size:24px;color:var(--text-secondary);background:0 0;border:none;cursor:pointer;line-height:1;transition:.2s ease;z-index:1002}.modal-close:hover{color:var(--accent-warm);transform:rotate(90deg)}.main-contact-grid{display:grid;grid-template-columns:1fr;gap:1.5rem}.modal-contact-item{display:flex;align-items:center;gap:1.5rem}.modal-qr{display:none;width:120px;height:120px;border-radius:12px;padding:8px;background:#fff;flex-shrink:0}.modal-qr.placeholder{background:0 0;border:1px solid var(--border-color);align-items:center;justify-content:center}.modal-contact-details{display:flex;flex-direction:column;width:100%}.modal-contact-title{font-family:'Exo 2',sans-serif;font-size:1.3rem;letter-spacing:.05em;margin:0 0 .5rem 0}.modal-contact-info{font-family:'Exo 2',monospace;font-size:1.1rem;color:#fff;margin:0 0 1rem 0}.modal-actions{display:flex;gap:10px;margin-top:auto}
+    .modal .btn { padding: 0.45rem 1rem; font-size: 0.85rem; }
+
+    /* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
+    .hamburger-menu, .mobile-nav { display: none; }
+    @media (max-width: 768px) {
+      .main-wrapper { padding: 1rem; }
+      nav.menu { display: none; }
+      .logo-name { display: none; }
+      .modal-content { padding: 1.5rem; }
+      .hamburger-menu{display:flex;flex-direction:column;gap:6px;margin-left:auto;background:0 0;border:none;cursor:pointer;padding:8px;z-index:100}.hamburger-menu .bar{width:28px;height:3px;background:var(--text-primary);border-radius:2px;transition:.3s ease}.hamburger-menu.is-active .bar:nth-child(1){transform:translateY(9px) rotate(45deg)}.hamburger-menu.is-active .bar:nth-child(2){opacity:0}.hamburger-menu.is-active .bar:nth-child(3){transform:translateY(-9px) rotate(-45deg)}.mobile-nav{display:block;position:fixed;top:0;right:-100%;z-index:40;width:min(80vw,320px);height:100%;backdrop-filter:blur(16px);background:color-mix(in srgb,var(--bg-panel-glass) 95%,transparent);border-left:1px solid var(--border-color);padding:100px 30px;transition:right .4s cubic-bezier(.25,1,.5,1)}.mobile-nav.is-active{right:0;box-shadow:-10px 0 40px rgba(0,0,0,.5)}.mobile-nav nav.menu{display:flex;flex-direction:column;align-items:flex-start;gap:1.5rem;font-size:1.2rem}
+    }
+    @media (min-width: 992px) {
+      .main-contact-grid { grid-template-columns: 1fr 1fr; }
+      .modal-qr { display: flex; }
+    }
+  </style>
+</head>
+
+<body>
+  
+  <div id="background-wrapper">
+    <div id="living-glow"></div>
+    <div id="particle-container">
+      <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+      <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    </div>
+  </div>
+
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a href="index.html" class="logo-link magnetic-item">
+          <span class="brand-logo-char">Э.</span>
+          <span class="logo-name">Алексей Бронников</span>
+        </a>
+        <nav class="menu" role="navigation">
+            <a href="index.html" class="magnetic-item">ГЛАВНАЯ</a>
+            <a href="portfolio.html" class="magnetic-item">РАБОТЫ</a>
+            <a href="brief.html" class="magnetic-item">БРИФ</a>
+            <a href="blog.html" class="active magnetic-item">БЛОГ</a>
+            <a data-modal-trigger="main-contact-modal" class="magnetic-item">КОНТАКТЫ</a>
+        </nav>
+        <button class="hamburger-menu magnetic-item" aria-label="Открыть меню" aria-expanded="false">
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+      </div>
+    </header>
+    <div class="mobile-nav"><nav class="menu" role="navigation"></nav></div>
+
+    <main>
+      <section class="blog-hero animate-on-scroll">
+        <h1 class="section-title">Блог</h1>
+        <p class="subtitle">Здесь я делюсь мыслями о веб-разработке, дизайне и технологиях, которые помогают бизнесу расти и привлекать клиентов.</p>
+      </section>
+
+      <section class="content-section">
+        <div class="blog-grid">
+
+          <a href="blog/zachem-nuzhen-sait.html" class="blog-card animate-on-scroll">
+            <div class="card-image-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            </div>
+            <div class="card-content">
+              <div class="card-meta">
+                <span class="card-category">Бизнес</span>
+                <span class="card-date">12 сентября 2025</span>
+              </div>
+              <h3 class="card-title">Зачем вашему бизнесу сайт в 2025 году?</h3>
+              <p class="card-excerpt">Профессиональный сайт — это не просто визитка, а круглосуточный менеджер, который вызывает доверие, снимает возражения и превращает посетителей в клиентов.</p>
+              <span class="read-more">Читать далее &rarr;</span>
+            </div>
+          </a>
+
+          <a href="blog/sait-v-2025-godu.html" class="blog-card animate-on-scroll" style="animation-delay: 0.1s;">
+            <div class="card-image-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>
+            </div>
+            <div class="card-content">
+              <div class="card-meta">
+                <span class="card-category">Аналитика</span>
+                <span class="card-date">11 сентября 2025</span>
+              </div>
+              <h3 class="card-title">Актуальны ли сайты, когда есть соцсети?</h3>
+              <p class="card-excerpt">Соцсети — это "арендованная земля", а сайт — ваша собственность. 75% пользователей судят о надежности компании по дизайну её сайта. Это главный критерий оценки.</p>
+              <span class="read-more">Читать далее &rarr;</span>
+            </div>
+          </a>
+
+          <a href="blog/custom-vs-template.html" class="blog-card animate-on-scroll" style="animation-delay: 0.2s;">
+            <div class="card-image-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            </div>
+            <div class="card-content">
+              <div class="card-meta">
+                <span class="card-category">Технологии</span>
+                <span class="card-date">10 сентября 2025</span>
+              </div>
+              <h3 class="card-title">Кастомный сайт vs. Конструктор: почему шаблон — это ловушка</h3>
+              <p class="card-excerpt">Шаблонный сайт — это кассир, который просто пробивает товар. Кастомный лендинг — опытный консультант, который ведет к покупке. В этом и кроется разница в конверсии.</p>
+              <span class="read-more">Читать далее &rarr;</span>
+            </div>
+          </a>
+
+        </div>
+      </section>
+        
+    </main>
+
+    <footer class="animate-on-scroll">
+      <p>Сайт разработал Алексей <span class="brand-logo-char">Э.</span> Бронников</p>
+      <p>© 2025</p>
+    </footer>
+  </div>
+
+  <div class="modal" id="main-contact-modal">
+    <div class="modal-overlay" data-modal-close></div>
+    <div class="modal-content main-contacts">
+      <button class="modal-close" data-modal-close>&times;</button>
+      <div class="main-contact-grid">
+          
+          <div class="modal-contact-item">
+            <div class="modal-qr" data-qr-text="https://t.me/alexeybronnikov"></div>
+            <div class="modal-contact-details">
+              <h3 class="modal-contact-title" style="color: var(--telegram-color);">Telegram</h3>
+              <div class="modal-contact-info">@alexeybronnikov</div>
+              <div class="modal-actions">
+                <a href="https://t.me/alexeybronnikov" target="_blank" class="btn magnetic-item">Перейти</a>
+                <button class="btn secondary magnetic-item" data-copy-text="@alexeybronnikov">Копировать</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="modal-contact-item">
+            <div class="modal-qr" data-qr-text="https://wa.me/qr/PZNL54WWEV4GI1"></div>
+            <div class="modal-contact-details">
+              <h3 class="modal-contact-title" style="color: var(--whatsapp-color);">WhatsApp</h3>
+              <div class="modal-contact-info">+7 (995) 131-28-28</div>
+              <div class="modal-actions">
+                <a href="https://wa.me/qr/PZNL54WWEV4GI1" target="_blank" class="btn magnetic-item">Перейти</a>
+                <button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="modal-contact-item">
+            <div class="modal-qr" data-qr-text="+79951312828"></div>
+            <div class="modal-contact-details">
+              <h3 class="modal-contact-title" style="color: var(--max-color);">Max</h3>
+              <div class="modal-contact-info">+7 (995) 131-28-28</div>
+              <div class="modal-actions">
+                <a href="#" class="btn magnetic-item">Перейти</a>
+                <button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-contact-item">
+            <div class="modal-qr placeholder"><svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-secondary);"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
+            <div class="modal-contact-details">
+              <h3 class="modal-contact-title" style="color: var(--phone-color);">Телефон</h3>
+              <div class="modal-contact-info">+7 (995) 131-28-28</div>
+              <div class="modal-actions">
+                <a href="tel:+79951312828" class="btn magnetic-item">Позвонить</a>
+                <button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button>
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const isTouchDevice = 'ontouchstart' in window;
+
+      // --- "МАГНИТНЫЙ" ЭФФЕКТ ---
+      const magneticItems = document.querySelectorAll('.magnetic-item');
+      if (!isTouchDevice) {
+        magneticItems.forEach(item => {
+          item.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            this.style.transition = 'transform 0.1s ease-out';
+            this.style.transform = `translate(${x * 0.3}px, ${y * 0.4}px)`;
+          });
+          item.addEventListener('mouseleave', function() {
+            this.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
+            this.style.transform = 'translate(0,0)';
+          });
+        });
+      }
+
+      // --- АНИМАЦИИ ПРИ СКРОЛЛЕ ---
+      const animatedEls = document.querySelectorAll('.animate-on-scroll');
+      const animationObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      animatedEls.forEach(el => animationObserver.observe(el));
+
+      // --- МОБИЛЬНАЯ НАВИГАЦИЯ ---
+      const hamburger = document.querySelector('.hamburger-menu');
+      const mobileNav = document.querySelector('.mobile-nav');
+      const desktopNavMenu = document.querySelector('.topbar nav.menu');
+      const mobileNavMenu = mobileNav.querySelector('nav.menu');
+      mobileNavMenu.innerHTML = desktopNavMenu.innerHTML;
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('is-active');
+        mobileNav.classList.toggle('is-active');
+      });
+      mobileNavMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          hamburger.classList.remove('is-active');
+          mobileNav.classList.remove('is-active');
+          if (link.dataset.modalTrigger) { e.preventDefault(); setTimeout(() => openModal(link.dataset.modalTrigger), 300); }
+        });
+      });
+
+      // --- ЛОГИКА МОДАЛЬНЫХ ОКОН ---
+      function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+        modal.classList.add("is-open");
+        modal.querySelectorAll("[data-qr-text]").forEach(qrEl => {
+          if (!qrEl.dataset.generated) {
+            qrEl.innerHTML = "";
+            new QRCode(qrEl, {
+              text: qrEl.dataset.qrText,
+              width: 104,
+              height: 104,
+              colorDark: "#1a1816",
+              colorLight: "#ffffff",
+              correctLevel: QRCode.CorrectLevel.H
+            });
+            qrEl.dataset.generated = "true";
+          }
+        });
+      }
+
+      function closeModal(modal) {
+        if (!modal) return;
+        modal.classList.remove("is-open");
+      }
+
+      document.querySelectorAll("[data-modal-trigger]").forEach(trigger => {
+        trigger.addEventListener("click", e => {
+          e.preventDefault();
+          openModal(trigger.dataset.modalTrigger);
+        });
+      });
+
+      document.querySelectorAll(".modal").forEach(modal => {
+        modal.querySelectorAll("[data-modal-close], .modal-overlay").forEach(el => {
+          el.addEventListener("click", () => closeModal(modal));
+        });
+      });
+
+      document.addEventListener("keydown", e => {
+        if (e.key === "Escape") {
+          document.querySelectorAll(".modal.is-open").forEach(closeModal);
+        }
+      });
+
+      document.querySelectorAll("[data-copy-text]").forEach(button => {
+        button.addEventListener("click", () => {
+          navigator.clipboard.writeText(button.dataset.copyText).then(() => {
+            const originalText = button.textContent;
+            button.textContent = "Скопировано!";
+            setTimeout(() => {
+              button.textContent = originalText;
+            }, 1500);
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
