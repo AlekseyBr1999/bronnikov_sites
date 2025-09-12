@@ -44,7 +44,7 @@
     body::-webkit-scrollbar-track { background: var(--bg-organic-dark); }
     body::-webkit-scrollbar-thumb { background-color: var(--accent-warm); border-radius: 10px; border: 2px solid var(--bg-organic-dark); }
 
-    /* --- ЖИВОЙ ФОН V2.0 (ИСПРАВЛЕН) --- */
+    /* --- ЖИВОЙ ФОН V2.0 --- */
     #background-wrapper {
       position: fixed; top: 0; left: 0;
       width: 100%; height: 100%; z-index: -2; overflow: hidden;
@@ -195,16 +195,14 @@
     /* --- ФУТЕР --- */
     footer { text-align: center; font-size: 0.9rem; color: var(--text-secondary); padding: 2.5rem 0; margin-top: 5rem; border-top: 1px solid var(--border-color); }
     
-    /* --- МОДАЛЬНЫЕ ОКНА (ИСПРАВЛЕНА АДАПТИВНОСТЬ) --- */
-    .modal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}.modal.is-open{opacity:1;pointer-events:auto}.modal-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(26,24,22,.5);backdrop-filter:blur(5px);cursor:pointer}.modal-content{position:relative;z-index:1001;transform:scale(.95);transition:transform .3s ease;max-height:90vh;overflow-y:auto;background:var(--bg-panel-glass);border:1px solid var(--border-color);backdrop-filter:blur(20px) saturate(180%);padding:2.5rem;width:90%;border-radius:20px;box-shadow:0 0 50px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.05)}.modal.is-open .modal-content{transform:scale(1)}.modal-content.main-contacts{max-width:900px}.modal-close{position:absolute;top:15px;right:15px;width:30px;height:30px;font-size:24px;color:var(--text-secondary);background:0 0;border:none;cursor:pointer;line-height:1;transition:.2s ease;z-index:1002}.modal-close:hover{color:var(--accent-warm);transform:rotate(90deg)}.main-contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:1.5rem}.modal-contact-item{display:flex;align-items:center;gap:1.5rem}.modal-qr{width:120px;height:120px;border-radius:12px;padding:8px;background:#fff;flex-shrink:0}.modal-qr.placeholder{background:0 0;border:1px solid var(--border-color);display:flex;align-items:center;justify-content:center}.modal-contact-details{display:flex;flex-direction:column;width:100%}.modal-contact-title{font-family:'Exo 2',sans-serif;font-size:1.3rem;letter-spacing:.05em;margin:0 0 .8rem 0}.modal-contact-info{font-family:'Exo 2',monospace;font-size:1.1rem;color:#fff;margin:0 0 1rem 0}.modal-actions{display:flex;gap:12px;margin-top:auto}
+    /* --- МОДАЛЬНЫЕ ОКНА (ФИНАЛЬНАЯ ИСПРАВЛЕННАЯ ВЕРСИЯ) --- */
+    .modal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}.modal.is-open{opacity:1;pointer-events:auto}.modal-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(26,24,22,.5);backdrop-filter:blur(5px);cursor:pointer}.modal-content{position:relative;z-index:1001;transform:scale(.95);transition:transform .3s ease;max-height:90vh;overflow-y:auto;background:var(--bg-panel-glass);border:1px solid var(--border-color);backdrop-filter:blur(20px) saturate(180%);padding:2.5rem;width:90%;border-radius:20px;box-shadow:0 0 50px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.05)}.modal.is-open .modal-content{transform:scale(1)}.modal-content.main-contacts{max-width:900px}.modal-close{position:absolute;top:15px;right:15px;width:30px;height:30px;font-size:24px;color:var(--text-secondary);background:0 0;border:none;cursor:pointer;line-height:1;transition:.2s ease;z-index:1002}.modal-close:hover{color:var(--accent-warm);transform:rotate(90deg)}.main-contact-grid{display:grid;grid-template-columns:1fr;gap:1.5rem}.modal-contact-item{display:flex;align-items:center;gap:1.5rem}.modal-qr{display:none;width:120px;height:120px;border-radius:12px;padding:8px;background:#fff;flex-shrink:0}.modal-qr.placeholder{background:0 0;border:1px solid var(--border-color);align-items:center;justify-content:center}.modal-contact-details{display:flex;flex-direction:column;width:100%}.modal-contact-title{font-family:'Exo 2',sans-serif;font-size:1.3rem;letter-spacing:.05em;margin:0 0 .8rem 0}.modal-contact-info{font-family:'Exo 2',monospace;font-size:1.1rem;color:#fff;margin:0 0 1rem 0}.modal-actions{display:flex;gap:12px;margin-top:auto}
 
     /* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
     .hamburger-menu, .mobile-nav { display: none; }
-    @media (max-width: 900px) {
+    @media (max-width: 991px) {
       .brief-grid { grid-template-columns: 1fr; }
       .main-cta-card, .how-it-works-card, .consult-card, .brief-intro-card { grid-column: auto; grid-row: auto; }
-      /* Скрываем QR-коды, чтобы освободить место */
-      .modal-qr { display: none; }
     }
     @media (max-width: 768px) {
       .main-wrapper { padding: 1rem; }
@@ -212,6 +210,15 @@
       .logo-name { display: none; }
       .modal-content { padding: 1.5rem; }
       .hamburger-menu{display:flex;flex-direction:column;gap:6px;margin-left:auto;background:0 0;border:none;cursor:pointer;padding:8px;z-index:100}.hamburger-menu .bar{width:28px;height:3px;background:var(--text-primary);border-radius:2px;transition:.3s ease}.hamburger-menu.is-active .bar:nth-child(1){transform:translateY(9px) rotate(45deg)}.hamburger-menu.is-active .bar:nth-child(2){opacity:0}.hamburger-menu.is-active .bar:nth-child(3){transform:translateY(-9px) rotate(-45deg)}.mobile-nav{display:block;position:fixed;top:0;right:-100%;z-index:40;width:min(80vw,320px);height:100%;backdrop-filter:blur(16px);background:color-mix(in srgb,var(--bg-panel-glass) 95%,transparent);border-left:1px solid var(--border-color);padding:100px 30px;transition:right .4s cubic-bezier(.25,1,.5,1)}.mobile-nav.is-active{right:0;box-shadow:-10px 0 40px rgba(0,0,0,.5)}.mobile-nav nav.menu{display:flex;flex-direction:column;align-items:flex-start;gap:1.5rem;font-size:1.2rem}
+    }
+    /* Медиа-запрос для больших экранов */
+    @media (min-width: 992px) {
+      .main-contact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .modal-qr {
+        display: flex; /* Показываем QR-коды */
+      }
     }
   </style>
 </head>
