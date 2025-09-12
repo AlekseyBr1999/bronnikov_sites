@@ -229,7 +229,6 @@
     }
     .accordion-card[open] .accordion-title::after { transform: rotate(45deg); }
     .accordion-content { overflow: hidden; margin-top: 1.5rem; }
-    /* ИЗМЕНЕНО: Добавлена сетка для контента аккордеона */
     .accordion-content .accordion-content-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
     @media (min-width: 768px) {
       .accordion-content .accordion-content-grid { grid-template-columns: 1fr 1fr; align-items: center; gap: 2.5rem; }
@@ -238,7 +237,6 @@
     .accordion-content p:last-child { margin-bottom: 0; }
     .accordion-chart { text-align: center; }
     .accordion-chart svg { max-width: 100%; height: auto; margin: 0 auto; }
-    /* ИЗМЕНЕНО: Уменьшены шрифты диаграмм */
     .chart-title { font-size: 13px; font-weight: 500; fill: var(--text-primary); }
     .chart-bar { fill: var(--accent-warm); }
     .chart-bar-bg { fill: rgba(255, 255, 255, 0.1); }
@@ -397,7 +395,6 @@
         </div>
       </section>
 
-      
       <section id="faq" class="content-section animate-on-scroll" aria-label="Частые вопросы">
         <h2 class="section-title">Частые вопросы</h2>
         <div class="faq-wrapper">
@@ -468,9 +465,44 @@
               </div>
             </div>
           </details>
+          
+          
+          <details class="accordion-card animate-on-scroll" style="animation-delay: 0.4s;">
+            <summary class="accordion-title">Зачем лендинг, если есть Wix?</summary>
+            <div class="accordion-content">
+              <div class="accordion-content-grid">
+                <div>
+                  <p>Шаблоны кажутся ловушкой "быстро и дешево". Но в мире, где первое впечатление на 94% зависит от дизайна, шаблон — это риск выглядеть как все и затеряться среди конкурентов.</p>
+                  <p>Представьте, что ваш сайт — это продавец. Шаблон — это кассир, который просто пробивает товар. Кастомный лендинг — это опытный консультант, который знает ваш продукт, понимает клиента и ведет его к покупке. Именно поэтому уникальные решения показывают в разы более высокую конверсию.</p>
+                   <div class="accordion-action">
+                     <a href="blog/custom-vs-template.html" class="btn magnetic-item">Читать статью</a>
+                  </div>
+                </div>
+                <div class="accordion-chart">
+                  <svg viewBox="0 0 250 155" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="chart3-title">
+                      <title id="chart3-title">Сравнение эффективности конверсии: Шаблонный сайт против Кастомного лендинга</title>
+                      <text x="125" y="12" text-anchor="middle" class="chart-title">Эффективность конверсии</text>
+                      <g transform="translate(0, 30)">
+                          
+                          <rect x="40" y="100" width="60" height="20" rx="3" class="chart-bar-bg"></rect>
+                          <text x="70" y="95" text-anchor="middle" class="chart-value">1x</text>
+                          <text x="70" y="135" text-anchor="middle" class="chart-label">Шаблонный сайт</text>
+                          
+                          
+                          <rect x="150" y="20" width="60" height="100" rx="3" class="chart-bar"></rect>
+                          <text x="180" y="15" text-anchor="middle" class="chart-value">до 5x</text>
+                          <text x="180" y="135" text-anchor="middle" class="chart-label">Кастомный лендинг</text>
+                      </g>
+                  </svg>
+                  <p class="chart-source">Источник: <a href="https://www.linkedin.com/pulse/custom-vs-template-ecommerce-design-which-better-boosting-nqn6f" target="_blank" rel="noopener noreferrer">Аналитика LinkedIn & Exprance</a></p>
+                </div>
+              </div>
+            </div>
+          </details>
+          
+
         </div>
       </section>
-      
 
       <section id="contacts" class="content-section animate-on-scroll" aria-label="Контакты">
         <h2 class="section-title">Контакты</h2>
