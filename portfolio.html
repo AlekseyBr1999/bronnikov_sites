@@ -39,7 +39,12 @@
       cursor: default;
     }
     
-    /* --- ЖИВОЙ ФОН (аналогично index.html) --- */
+    /* --- КАСТОМНЫЙ СКРОЛЛ-БАР --- */
+    body::-webkit-scrollbar { width: 8px; }
+    body::-webkit-scrollbar-track { background: var(--bg-organic-dark); }
+    body::-webkit-scrollbar-thumb { background-color: var(--accent-warm); border-radius: 10px; border: 2px solid var(--bg-organic-dark); }
+
+    /* --- ЖИВОЙ ФОН --- */
     #background-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden; }
     #living-glow { position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background: radial-gradient(circle at 25% 25%, var(--accent-glow) 0%, transparent 30%), radial-gradient(circle at 75% 75%, rgba(121, 45, 255, 0.15) 0%, transparent 35%); animation: living-glow-rotate 40s ease-in-out infinite alternate; }
     @keyframes living-glow-rotate { from { transform: rotate(0deg) scale(1); } to { transform: rotate(360deg) scale(1.2); } }
@@ -48,7 +53,7 @@
     @keyframes rise { 0% { transform: translateY(100vh) scale(0.5); opacity: 0; } 10% { opacity: 0.6; } 90% { opacity: 0.2; } 100% { transform: translateY(-10vh) scale(1); opacity: 0; } }
     .particle:nth-child(1){width:4px;height:4px;left:10%;animation-delay:0s;animation-duration:15s}.particle:nth-child(2){width:2px;height:2px;left:20%;animation-delay:2s;animation-duration:12s}.particle:nth-child(3){width:5px;height:5px;left:30%;animation-delay:4s;animation-duration:18s}.particle:nth-child(4){width:3px;height:3px;left:40%;animation-delay:1s;animation-duration:14s}.particle:nth-child(5){width:2px;height:2px;left:50%;animation-delay:7s;animation-duration:11s}.particle:nth-child(6){width:4px;height:4px;left:60%;animation-delay:3s;animation-duration:16s}.particle:nth-child(7){width:6px;height:6px;left:70%;animation-delay:8s;animation-duration:20s}.particle:nth-child(8){width:2px;height:2px;left:80%;animation-delay:5s;animation-duration:13s}.particle:nth-child(9){width:3px;height:3px;left:90%;animation-delay:6s;animation-duration:17s}.particle:nth-child(10){width:5px;height:5px;left:5%;animation-delay:9s;animation-duration:19s}
 
-    /* --- ОБЩАЯ СТРУКТУРА И ХЭДЕР (аналогично index.html) --- */
+    /* --- ОБЩАЯ СТРУКТУРА И ХЭДЕР --- */
     .main-wrapper { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
     .topbar { position: sticky; top: 1rem; z-index: 50; backdrop-filter: blur(16px) saturate(150%); background: var(--bg-panel-glass); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 4px 30px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.05); }
     .topbar-inner { display: flex; align-items: center; padding: 0.8rem 1.5rem; }
@@ -58,138 +63,69 @@
     nav.menu { display: flex; gap: 0.5rem; font-family: 'Exo 2', sans-serif; font-size: 0.9rem; font-weight: 500; }
     nav.menu a { text-decoration: none; padding: 0.5rem 1rem; color: var(--text-secondary); position: relative; transition: color 0.3s ease, text-shadow 0.3s ease; cursor: pointer; }
     nav.menu a:hover, nav.menu a.active { color: var(--text-primary); text-shadow: 0 0 8px var(--accent-glow); }
+    
+    /* --- ОБЩИЕ СТИЛИ КНОПОК --- */
     .btn { display: inline-flex; align-items: center; justify-content: center; font-family: 'Exo 2', sans-serif; font-size: 1rem; font-weight: 500; text-decoration: none; text-transform: uppercase; color: var(--text-primary); border: 1px solid var(--border-color); background-color: transparent; padding: 0.9rem 2rem; border-radius: 50px; position: relative; overflow: hidden; transition: all 0.4s ease; z-index: 1; cursor: pointer; }
     .btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--accent-warm); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: -1; }
     .btn:hover, .btn:focus { color: var(--bg-organic-dark); border-color: var(--accent-warm); box-shadow: 0 0 25px var(--accent-glow); }
     .btn:hover::before { transform: scaleX(1); }
+    .btn.secondary { background-color: transparent; color: var(--text-secondary); border-color: var(--border-color); }
+    .btn.secondary:hover { color: var(--text-primary); border-color: var(--accent-warm); background-color: rgba(255, 183, 0, 0.1); box-shadow: 0 0 15px rgba(255, 183, 0, 0.3); }
+    .btn.secondary:hover::before { transform: scaleX(0); }
     .btn:active { transform: translateY(1px) scale(0.98); }
 
-    /* --- НОВЫЕ СТИЛИ ДЛЯ СТРАНИЦЫ ПОРТФОЛИО --- */
-    .portfolio-hero {
-      text-align: center;
-      padding: 4rem 0;
-    }
+    /* --- СТИЛИ СТРАНИЦЫ ПОРТФОЛИО --- */
+    .portfolio-hero { text-align: center; padding: 4rem 0; }
     .section-title { font-family: 'Exo 2', sans-serif; font-size: 2.5rem; letter-spacing: 0.05em; color: var(--text-primary); text-align: center; margin: 0 0 1rem 0; }
     .subtitle { font-family: 'Manrope', sans-serif; font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
     .content-section { padding-top: 4rem; }
-    .category-title {
-      font-family: 'Exo 2', sans-serif;
-      font-size: 1.8rem;
-      letter-spacing: 0.05em;
-      color: var(--text-primary);
-      margin: 0 0 2.5rem 0;
-      padding-bottom: 0.8rem;
-      border-bottom: 1px solid var(--border-color);
-    }
-    .project-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
-    }
-    .project-card {
-      background: var(--bg-panel-glass);
+    .category-title { font-family: 'Exo 2', sans-serif; font-size: 1.8rem; letter-spacing: 0.05em; color: var(--text-primary); margin: 0 0 2.5rem 0; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border-color); }
+    .project-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+    .project-card { background: var(--bg-panel-glass); border: 1px solid var(--border-color); border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; gap: 0; transition: box-shadow 0.4s ease; }
+    @media (hover: hover) and (pointer: fine) { .project-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px var(--accent-glow); } }
+    .project-preview { min-height: 450px; overflow: hidden; position: relative; }
+    .project-preview iframe { width: 100%; height: 100%; border: 0; transform: scale(0.8); transform-origin: top left; width: 125%; height: 125%; pointer-events: none; }
+    .project-details { padding: 2.5rem; display: flex; flex-direction: column; }
+    .project-title { font-family: 'Exo 2', sans-serif; font-size: 2rem; font-weight: 700; margin: 0 0 1rem 0; }
+    .project-description { font-size: 1rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem; flex-grow: 1; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+    .project-tags span { font-size: 0.8rem; font-weight: 500; background: rgba(255, 183, 0, 0.1); color: var(--accent-warm); padding: 0.3rem 0.8rem; border-radius: 20px; border: 1px solid rgba(255, 183, 0, 0.2); }
+    .project-review-box { background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; }
+    .review-label { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.8rem; font-weight: 500; }
+    .project-review-box blockquote { margin: 0; padding-left: 1rem; border-left: 2px solid var(--accent-warm); font-style: italic; font-size: 1rem; color: var(--text-primary); }
+    .project-review-box cite { display: block; margin-top: 0.8rem; font-style: normal; font-weight: 500; font-size: 0.9rem; color: var(--text-secondary); text-align: right; }
+    .project-actions { margin-top: auto; }
+    
+    /* --- ДОБАВЛЕНО: Секция CTA --- */
+    .cta-card {
+      margin-top: 5rem;
+      padding: 3rem 2rem;
+      text-align: center;
       border: 1px solid var(--border-color);
+      background: var(--bg-panel-glass) linear-gradient(135deg, rgba(255,183,0,0.1) 0%, rgba(255,183,0,0) 50%);
+      backdrop-filter: blur(16px) saturate(150%);
       border-radius: 24px;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      transition: box-shadow 0.4s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.05);
     }
-    @media (hover: hover) and (pointer: fine) {
-      .project-card:hover {
-        box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px var(--accent-glow);
-      }
-    }
-    .project-preview {
-      min-height: 450px;
-      overflow: hidden;
-      position: relative;
-    }
-    .project-preview iframe {
-      width: 100%; height: 100%; border: 0; transform: scale(0.8); transform-origin: top left; width: 125%; height: 125%; pointer-events: none;
-    }
-    .project-preview .placeholder {
-        display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: rgba(0,0,0,0.2);
-    }
-    .project-details {
-      padding: 2.5rem;
-      display: flex;
-      flex-direction: column;
-    }
-    .project-title {
-      font-family: 'Exo 2', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      margin: 0 0 1rem 0;
-    }
-    .project-description {
-      font-size: 1rem;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-    }
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
-    }
-    .project-tags span {
-      font-size: 0.8rem;
-      font-weight: 500;
-      background: rgba(255, 183, 0, 0.1);
-      color: var(--accent-warm);
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 183, 0, 0.2);
-    }
-    .project-review-box {
-      background: rgba(0,0,0,0.2);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-top: auto; /* Прижимает блок к низу */
-    }
-    .review-label {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.8rem;
-      font-weight: 500;
-    }
-    .project-review-box blockquote {
-      margin: 0;
-      padding-left: 1rem;
-      border-left: 2px solid var(--accent-warm);
-      font-style: italic;
-      font-size: 1rem;
-      color: var(--text-primary);
-    }
-    .project-review-box cite {
-      display: block;
-      margin-top: 0.8rem;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      text-align: right;
-    }
-    .project-actions {
-      margin-top: 2rem;
-    }
-    .placeholder-text {
-        color: var(--text-secondary);
-        font-style: italic;
+    .cta-card h2 { font-family: 'Exo 2', sans-serif; font-size: 1.8rem; margin: 0 0 1rem 0; }
+    .cta-card p { color: var(--text-secondary); max-width: 500px; margin: 0 auto 2rem auto; }
+    .btn-call-to-action { animation: pulse-glow 2.5s infinite alternate; }
+    @keyframes pulse-glow {
+      from { border-color: var(--border-color); box-shadow: 0 0 10px -5px var(--accent-glow); }
+      to { border-color: var(--border-hover); box-shadow: 0 0 20px 5px var(--accent-glow), 0 0 35px 5px var(--accent-glow); }
     }
 
     /* --- АНИМАЦИИ ПОЯВЛЕНИЯ --- */
     .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
     .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
     
-    /* --- ФУТЕР И МОДАЛЬНЫЕ ОКНА --- */
+    /* --- ФУТЕР --- */
     footer { text-align: center; font-size: 0.9rem; color: var(--text-secondary); padding: 2.5rem 0; margin-top: 5rem; border-top: 1px solid var(--border-color); }
-    .modal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}.modal.is-open{opacity:1;pointer-events:auto}.modal-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(26,24,22,.5);backdrop-filter:blur(5px);cursor:pointer}.modal-content{position:relative;z-index:1001;transform:scale(.95);transition:transform .3s ease;max-height:90vh;overflow-y:auto;background:var(--bg-panel-glass);border:1px solid var(--border-color);backdrop-filter:blur(20px) saturate(180%);padding:2.5rem;width:90%;border-radius:20px;box-shadow:0 0 50px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.05)}.modal.is-open .modal-content{transform:scale(1)}.modal-content.single{max-width:400px;text-align:center}.modal-content.main-contacts{max-width:800px}.modal-close{position:absolute;top:15px;right:15px;width:30px;height:30px;font-size:24px;color:var(--text-secondary);background:0 0;border:none;cursor:pointer;line-height:1;transition:.2s ease;z-index:1002}.modal-close:hover{color:var(--accent-warm);transform:rotate(90deg)}.main-contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.modal-qr{margin:16px auto;width:160px;height:160px;border-radius:12px;padding:8px;background:#fff}.modal-qr.placeholder{background:0 0;border:1px solid var(--border-color);display:flex;align-items:center;justify-content:center}.modal-contact-info{font-family:'Exo 2',monospace;font-size:1.2rem;color:#fff;min-height:1.5em;margin:16px 0}.modal-actions{display:flex;gap:12px;justify-content:center;margin-top:24px}
     
+    /* --- ИСПРАВЛЕНО: УЛУЧШЕННЫЕ МОДАЛЬНЫЕ ОКНА --- */
+    .modal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}.modal.is-open{opacity:1;pointer-events:auto}.modal-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(26,24,22,.5);backdrop-filter:blur(5px);cursor:pointer}.modal-content{position:relative;z-index:1001;transform:scale(.95);transition:transform .3s ease;max-height:90vh;overflow-y:auto;background:var(--bg-panel-glass);border:1px solid var(--border-color);backdrop-filter:blur(20px) saturate(180%);padding:2.5rem;width:90%;border-radius:20px;box-shadow:0 0 50px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.05)}.modal.is-open .modal-content{transform:scale(1)}.modal-content.main-contacts{max-width:900px}.modal-close{position:absolute;top:15px;right:15px;width:30px;height:30px;font-size:24px;color:var(--text-secondary);background:0 0;border:none;cursor:pointer;line-height:1;transition:.2s ease;z-index:1002}.modal-close:hover{color:var(--accent-warm);transform:rotate(90deg)}.main-contact-grid{display:grid;grid-template-columns:1fr;gap:1.5rem}.modal-contact-item{display:flex;align-items:center;gap:1.5rem}.modal-qr{display:none;width:120px;height:120px;border-radius:12px;padding:8px;background:#fff;flex-shrink:0}.modal-qr.placeholder{background:0 0;border:1px solid var(--border-color);align-items:center;justify-content:center}.modal-contact-details{display:flex;flex-direction:column;width:100%}.modal-contact-title{font-family:'Exo 2',sans-serif;font-size:1.3rem;letter-spacing:.05em;margin:0 0 .5rem 0}.modal-contact-info{font-family:'Exo 2',monospace;font-size:1.1rem;color:#fff;margin:0 0 1rem 0}.modal-actions{display:flex;gap:10px;margin-top:auto}
+    .modal .btn { padding: 0.45rem 1rem; font-size: 0.85rem; }
+
     /* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
     .hamburger-menu, .mobile-nav { display: none; }
     @media (max-width: 900px) {
@@ -200,8 +136,12 @@
       .main-wrapper { padding: 1rem; }
       nav.menu { display: none; }
       .logo-name { display: none; }
-      .main-contact-grid { grid-template-columns: 1fr; }
+      .modal-content { padding: 1.5rem; }
       .hamburger-menu{display:flex;flex-direction:column;gap:6px;margin-left:auto;background:0 0;border:none;cursor:pointer;padding:8px;z-index:100}.hamburger-menu .bar{width:28px;height:3px;background:var(--text-primary);border-radius:2px;transition:.3s ease}.hamburger-menu.is-active .bar:nth-child(1){transform:translateY(9px) rotate(45deg)}.hamburger-menu.is-active .bar:nth-child(2){opacity:0}.hamburger-menu.is-active .bar:nth-child(3){transform:translateY(-9px) rotate(-45deg)}.mobile-nav{display:block;position:fixed;top:0;right:-100%;z-index:40;width:min(80vw,320px);height:100%;backdrop-filter:blur(16px);background:color-mix(in srgb,var(--bg-panel-glass) 95%,transparent);border-left:1px solid var(--border-color);padding:100px 30px;transition:right .4s cubic-bezier(.25,1,.5,1)}.mobile-nav.is-active{right:0;box-shadow:-10px 0 40px rgba(0,0,0,.5)}.mobile-nav nav.menu{display:flex;flex-direction:column;align-items:flex-start;gap:1.5rem;font-size:1.2rem}
+    }
+    @media (min-width: 992px) {
+      .main-contact-grid { grid-template-columns: 1fr 1fr; }
+      .modal-qr { display: flex; }
     }
   </style>
 </head>
@@ -223,11 +163,13 @@
           <span class="brand-logo-char">Э.</span>
           <span class="logo-name">Алексей Бронников</span>
         </a>
+        
         <nav class="menu" role="navigation">
             <a href="index.html" class="magnetic-item">ГЛАВНАЯ</a>
             <a href="portfolio.html" class="active magnetic-item">РАБОТЫ</a>
-            <a href="index.html#brief" class="magnetic-item">БРИФ</a>
-            <a href="#" data-modal-trigger="main-contact-modal" class="magnetic-item">КОНТАКТЫ</a>
+            <a href="brief.html" class="magnetic-item">БРИФ</a>
+            <a href="blog.html" class="magnetic-item">БЛОГ</a>
+            <a data-modal-trigger="main-contact-modal" class="magnetic-item">КОНТАКТЫ</a>
         </nav>
         <button class="hamburger-menu magnetic-item" aria-label="Открыть меню" aria-expanded="false">
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
@@ -246,7 +188,6 @@
         <h2 class="category-title animate-on-scroll">Сайты-визитки и портфолио</h2>
         <div class="project-grid">
 
-          
           <div class="project-card animate-on-scroll">
             <div class="project-preview">
               <iframe src="https://www.sapstudio.ru/" scrolling="no" title="Превью сайта sapstudio.ru"></iframe>
@@ -268,8 +209,7 @@
             </div>
           </div>
 
-          
-          <div class="project-card animate-on-scroll">
+          <div class="project-card animate-on-scroll" style="animation-delay: 0.1s;">
             <div class="project-preview">
               <iframe src="https://www.arinanett.ru/" scrolling="no" title="Превью сайта arinanett.ru"></iframe>
             </div>
@@ -290,8 +230,7 @@
             </div>
           </div>
           
-          
-          <div class="project-card animate-on-scroll">
+          <div class="project-card animate-on-scroll" style="animation-delay: 0.2s;">
             <div class="project-preview">
               <iframe src="https://alekseybr1999.github.io/bronnikov_sites/index.html#home" scrolling="no" title="Превью сайта alekseybr1999.github.io"></iframe>
             </div>
@@ -314,6 +253,13 @@
 
         </div>
       </section>
+
+      
+      <section class="cta-card animate-on-scroll">
+        <h2>Понравились работы?</h2>
+        <p>Давайте создадим нечто похожее для вашего бизнеса. Заполните бриф, и я подготовлю для вас персональное предложение.</p>
+        <a href="brief.html" class="btn btn-call-to-action magnetic-item">Начать проект</a>
+      </section>
         
     </main>
 
@@ -323,48 +269,67 @@
     </footer>
   </div>
 
-  <div class="modal" id="main-contact-modal"><div class="modal-overlay" data-modal-close></div><div class="modal-content main-contacts"><button class="modal-close" data-modal-close>&times;</button>
-    <div class="main-contact-grid">
-        
-        <div>
-          <h3 style="font-family: 'Exo 2', sans-serif; font-size: 1.5rem; letter-spacing: 0.05em; color: var(--telegram-color); margin: 0 0 1rem 0;">Telegram</h3>
-          <div class="modal-contact-info" style="margin: 0 0 1rem 0;">@alexeybronnikov</div>
-          <div class="modal-actions" style="justify-content: flex-start;">
-            <a href="https://t.me/alexeybronnikov" target="_blank" class="btn magnetic-item">Перейти</a>
-            <button class="btn secondary magnetic-item" data-copy-text="@alexeybronnikov">Копировать</button>
+  
+  <div class="modal" id="main-contact-modal">
+    <div class="modal-overlay" data-modal-close></div>
+    <div class="modal-content main-contacts">
+      <button class="modal-close" data-modal-close>&times;</button>
+      <div class="main-contact-grid">
+          
+          <div class="modal-contact-item">
+            <div class="modal-qr" data-qr-text="https://t.me/alexeybronnikov"></div>
+            <div class="modal-contact-details">
+              <h3 class="modal-contact-title" style="color: var(--telegram-color);">Telegram</h3>
+              <div class="modal-contact-info">@alexeybronnikov</div>
+              <div class="modal-actions">
+                <a href="https://t.me/alexeybronnikov" target="_blank" class="btn magnetic-item">Перейти</a>
+                <button class="btn secondary magnetic-item" data-copy-text="@alexeybronnikov">Копировать</button>
+              </div>
+            </div>
           </div>
-        </div>
-        
-        <div>
-          <h3 style="font-family: 'Exo 2', sans-serif; font-size: 1.5rem; letter-spacing: 0.05em; color: var(--whatsapp-color); margin: 0 0 1rem 0;">WhatsApp</h3>
-          <div class="modal-contact-info" style="margin: 0 0 1rem 0;">+7 (995) 131-28-28</div>
-          <div class="modal-actions" style="justify-content: flex-start;">
-            <a href="https://wa.me/qr/PZNL54WWEV4GI1" target="_blank" class="btn magnetic-item">Перейти</a>
-            <button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button>
+          
+          <div class="modal-contact-item">
+            <div class="modal-qr" data-qr-text="https://wa.me/qr/PZNL54WWEV4GI1"></div>
+            <div class="modal-contact-details">
+              <h3 class="modal-contact-title" style="color: var(--whatsapp-color);">WhatsApp</h3>
+              <div class="modal-contact-info">+7 (995) 131-28-28</div>
+              <div class="modal-actions">
+                <a href="https://wa.me/qr/PZNL54WWEV4GI1" target="_blank" class="btn magnetic-item">Перейти</a>
+                <button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button>
+              </div>
+            </div>
           </div>
-        </div>
-        
-        <div>
-          <h3 style="font-family: 'Exo 2', sans-serif; font-size: 1.5rem; letter-spacing: 0.05em; color: var(--max-color); margin: 0 0 1rem 0;">Max</h3>
-          <div class="modal-contact-info" style="margin: 0 0 1rem 0;">+7 (995) 131-28-28</div>
-          <div class="modal-actions" style="justify-content: flex-start;">
-            <a href="#" class="btn magnetic-item">Перейти</a>
-            <button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button>
+          
+          <div class="modal-contact-item">
+            <div class="modal-qr" data-qr-text="+79951312828"></div>
+            <div class="modal-contact-details">
+              <h3 class="modal-contact-title" style="color: var(--max-color);">Max</h3>
+              <div class="modal-contact-info">+7 (995) 131-28-28</div>
+              <div class="modal-actions">
+                <a href="#" class="btn magnetic-item">Перейти</a>
+                <button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button>
+              </div>
+            </div>
           </div>
-        </div>
-        
-        <div>
-          <h3 style="font-family: 'Exo 2', sans-serif; font-size: 1.5rem; letter-spacing: 0.05em; color: var(--phone-color); margin: 0 0 1rem 0;">Телефон</h3>
-          <div class="modal-contact-info" style="margin: 0 0 1rem 0;">+7 (995) 131-28-28</div>
-          <div class="modal-actions" style="justify-content: flex-start;">
-            <a href="tel:+79951312828" class="btn magnetic-item">Позвонить</a>
-            <button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button>
-          </div>
-        </div>
-    </div>
-  </div></div>
 
+          <div class="modal-contact-item">
+            <div class="modal-qr placeholder"><svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-secondary);"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
+            <div class="modal-contact-details">
+              <h3 class="modal-contact-title" style="color: var(--phone-color);">Телефон</h3>
+              <div class="modal-contact-info">+7 (995) 131-28-28</div>
+              <div class="modal-actions">
+                <a href="tel:+79951312828" class="btn magnetic-item">Позвонить</a>
+                <button class="btn secondary magnetic-item" data-copy-text="+79951312828">Копировать</button>
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+  
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const isTouchDevice = 'ontouchstart' in window;
@@ -402,7 +367,7 @@
       // --- МОБИЛЬНАЯ НАВИГАЦИЯ ---
       const hamburger = document.querySelector('.hamburger-menu');
       const mobileNav = document.querySelector('.mobile-nav');
-      const desktopNavMenu = document.querySelector('header nav.menu');
+      const desktopNavMenu = document.querySelector('.topbar nav.menu');
       const mobileNavMenu = mobileNav.querySelector('nav.menu');
       mobileNavMenu.innerHTML = desktopNavMenu.innerHTML;
       hamburger.addEventListener('click', () => {
@@ -418,7 +383,62 @@
       });
 
       // --- ЛОГИКА МОДАЛЬНЫХ ОКОН ---
-      function openModal(modalId){const modal=document.getElementById(modalId);if(!modal)return;modal.classList.add("is-open"),modal.querySelectorAll("[data-qr-text]").forEach(qrEl=>{qrEl.dataset.generated||(qrEl.innerHTML="",new QRCode(qrEl,{text:qrEl.dataset.qrText,width:144,height:144,colorDark:"#1a1816",colorLight:"#fff",correctLevel:QRCode.CorrectLevel.H}),qrEl.dataset.generated="true")})}document.querySelectorAll("[data-modal-trigger]").forEach(trigger=>trigger.addEventListener("click",e=>{e.preventDefault(),openModal(trigger.dataset.modalTrigger)})),document.querySelectorAll(".modal").forEach(modal=>modal.querySelectorAll("[data-modal-close], .modal-overlay").forEach(el=>el.addEventListener("click",()=>modal.classList.remove("is-open")))),document.addEventListener("keydown",e=>{"Escape"===e.key&&document.querySelector(".modal.is-open")?.classList.remove("is-open")}),document.querySelectorAll("[data-copy-text]").forEach(button=>{button.addEventListener("click",()=>{navigator.clipboard.writeText(button.dataset.copyText).then(()=>{const originalTextEl=button.querySelector("span")||button,originalText=originalTextEl.textContent;originalTextEl.textContent="Скопировано!",setTimeout(()=>{originalTextEl.textContent=originalText},1500)})})});
+      function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+        modal.classList.add("is-open");
+        // Генерация QR кодов при открытии
+        modal.querySelectorAll("[data-qr-text]").forEach(qrEl => {
+          if (!qrEl.dataset.generated) {
+            qrEl.innerHTML = "";
+            new QRCode(qrEl, {
+              text: qrEl.dataset.qrText,
+              width: 104,
+              height: 104,
+              colorDark: "#1a1816",
+              colorLight: "#ffffff",
+              correctLevel: QRCode.CorrectLevel.H
+            });
+            qrEl.dataset.generated = "true";
+          }
+        });
+      }
+
+      function closeModal(modal) {
+        if (!modal) return;
+        modal.classList.remove("is-open");
+      }
+
+      document.querySelectorAll("[data-modal-trigger]").forEach(trigger => {
+        trigger.addEventListener("click", e => {
+          e.preventDefault();
+          openModal(trigger.dataset.modalTrigger);
+        });
+      });
+
+      document.querySelectorAll(".modal").forEach(modal => {
+        modal.querySelectorAll("[data-modal-close], .modal-overlay").forEach(el => {
+          el.addEventListener("click", () => closeModal(modal));
+        });
+      });
+
+      document.addEventListener("keydown", e => {
+        if (e.key === "Escape") {
+          document.querySelectorAll(".modal.is-open").forEach(closeModal);
+        }
+      });
+
+      document.querySelectorAll("[data-copy-text]").forEach(button => {
+        button.addEventListener("click", () => {
+          navigator.clipboard.writeText(button.dataset.copyText).then(() => {
+            const originalText = button.textContent;
+            button.textContent = "Скопировано!";
+            setTimeout(() => {
+              button.textContent = originalText;
+            }, 1500);
+          });
+        });
+      });
     });
   </script>
 </body>
