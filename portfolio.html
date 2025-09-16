@@ -75,7 +75,16 @@
     .btn:active { transform: translateY(1px) scale(0.98); }
 
     /* --- СТИЛИ СТРАНИЦЫ ПОРТФОЛИО --- */
-    .portfolio-hero { text-align: center; padding: 4rem 0; }
+    .portfolio-hero {
+      text-align: center;
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+      background: var(--bg-panel-glass);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      backdrop-filter: blur(16px) saturate(150%);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.05);
+    }
     .section-title { font-family: 'Exo 2', sans-serif; font-size: 2.5rem; letter-spacing: 0.05em; color: var(--text-primary); text-align: center; margin: 0 0 1rem 0; }
     .subtitle { font-family: 'Manrope', sans-serif; font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
     .content-section { padding-top: 4rem; }
@@ -180,7 +189,7 @@
 
     <main>
       <section class="portfolio-hero animate-on-scroll">
-        <h1 class="section-title">Портфолио</h1>
+        <h1 class="section-title">ПОРТФОЛИО</h1>
         <p class="subtitle">Все работы. Публикуется абсолютно каждый отзыв заказчика.</p>
       </section>
 
