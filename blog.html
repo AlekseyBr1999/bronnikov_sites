@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Блог — Алексей Бронников</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='Exo 2, sans-serif' font-weight='700' fill='%23ffb700'>Э.</text></svg>">
-  <meta name="description" content="Мысли о веб-разработке, дизайне, технологиях и о том, как создать сайт, который решает задачи бизнеса." />
+  <meta name="description" content="Аналитические SEO-статьи о веб-разработке, дизайне и технологиях. Материалы, основанные на исследованиях, для создания эффективных сайтов." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;700&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
@@ -65,10 +65,19 @@
     nav.menu a:hover, nav.menu a.active { color: var(--text-primary); text-shadow: 0 0 8px var(--accent-glow); }
     
     /* --- СТИЛИ СТРАНИЦЫ БЛОГА --- */
-    .blog-hero { text-align: center; padding: 4rem 0; }
+    .blog-hero {
+      text-align: center;
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+      background: var(--bg-panel-glass);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      backdrop-filter: blur(16px) saturate(150%);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.05);
+    }
     .section-title { font-family: 'Exo 2', sans-serif; font-size: 2.5rem; letter-spacing: 0.05em; color: var(--text-primary); text-align: center; margin: 0 0 1rem 0; }
     .subtitle { font-family: 'Manrope', sans-serif; font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
-    .content-section { padding-top: 2rem; }
+    .content-section { padding-top: 4rem; }
     
     .blog-grid {
       display: grid;
@@ -214,8 +223,8 @@
 
     <main>
       <section class="blog-hero animate-on-scroll">
-        <h1 class="section-title">Блог</h1>
-        <p class="subtitle">Здесь я делюсь мыслями о веб-разработке, дизайне и технологиях, которые помогают бизнесу расти и привлекать клиентов.</p>
+        <h1 class="section-title">БЛОГ</h1>
+        <p class="subtitle">Аналитические статьи о веб-разработке, дизайне и SEO. Материалы основаны на актуальных исследованиях и данных для создания сайтов, которые решают задачи бизнеса.</p>
       </section>
 
       <section class="content-section">
