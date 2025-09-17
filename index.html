@@ -494,22 +494,24 @@
                 </div>
                 <div class="accordion-chart">
                   <svg viewBox="0 0 250 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="chart3-title">
-                    <title id="chart3-title">Сравнение подходов: Конструктор против Кастомной разработки</title>
-                    <text x="125" y="15" text-anchor="middle" class="chart-title">Сравнение подходов</text>
-                    <line x1="125" y1="30" x2="125" y2="115" stroke="var(--border-color)" stroke-width="1" stroke-dasharray="3"/>
-                    <text x="62.5" y="45" text-anchor="middle" class="chart-value">Конструктор</text>
-                    <text x="187.5" y="45" text-anchor="middle" class="chart-value">Кастом</text>
-                    <g>
-                        <rect x="40" y="60" width="45" height="15" rx="2" fill="rgba(255,255,255,0.1)"/>
-                        <text x="62.5" y="85" text-anchor="middle" class="chart-label">Шаблон</text>
-                        <rect x="35" y="90" width="55" height="15" rx="2" fill="rgba(255,255,255,0.1)"/>
-                        <text x="62.5" y="112" text-anchor="middle" class="chart-label">Ограничения</text>
+                    <title id="chart3-title">Сравнение подходов: Конструктор (шаблон) против Кастомного сайта (уникальная структура)</title>
+                    <text x="62.5" y="25" text-anchor="middle" class="chart-title">Конструктор</text>
+                    <text x="187.5" y="25" text-anchor="middle" class="chart-title">Кастомный сайт</text>
+                    
+                    <g id="constructor-side">
+                      <rect x="25" y="40" width="75" height="55" fill="none" stroke="var(--border-color)" stroke-width="1" stroke-dasharray="2 3"/>
+                      <rect x="35" y="50" width="25" height="15" rx="2" fill="rgba(255,255,255,0.1)"/>
+                      <rect x="65" y="50" width="25" height="15" rx="2" fill="rgba(255,255,255,0.1)"/>
+                      <rect x="35" y="70" width="55" height="15" rx="2" fill="rgba(255,255,255,0.1)"/>
+                      <text x="62.5" y="110" text-anchor="middle" class="chart-label">Жесткие шаблоны</text>
                     </g>
-                    <g>
-                        <path d="M160 68 Q 187.5 55, 215 68" stroke="var(--accent-warm)" stroke-width="1.5" fill="none"/>
-                        <text x="187.5" y="85" text-anchor="middle" class="chart-label">Уникальность</text>
-                        <path d="M160 98 Q 187.5 110, 215 98" stroke="var(--accent-warm)" stroke-width="1.5" fill="none"/>
-                        <text x="187.5" y="112" text-anchor="middle" class="chart-label">Гибкость</text>
+                    
+                    <g id="custom-side">
+                      <path d="M150 75 C 165 45, 200 45, 215 75" stroke="var(--accent-warm)" stroke-width="1.5" fill="none"/>
+                      <circle cx="150" cy="75" r="2.5" fill="var(--accent-warm)"/>
+                      <circle cx="182.5" cy="52" r="2.5" fill="var(--accent-warm)"/>
+                      <circle cx="215" cy="75" r="2.5" fill="var(--accent-warm)"/>
+                      <text x="187.5" y="110" text-anchor="middle" class="chart-label">Уникальная структура</text>
                     </g>
                   </svg>
                 </div>
