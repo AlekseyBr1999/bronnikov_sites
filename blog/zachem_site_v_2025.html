@@ -103,7 +103,7 @@
     .article-container {
       max-width: 800px;
       padding-top: 3rem;
-      padding-bottom: 5rem;
+      padding-bottom: 2rem; /* Уменьшил отступ для футера */
     }
     
     .back-button {
@@ -252,12 +252,32 @@
       background: rgba(0,0,0,0.2);
       border-radius: 12px;
     }
+    .next-article-cta p {
+      color: var(--text-secondary);
+      margin: 0;
+      font-size: 1.1rem;
+    }
     .next-article-cta a {
       font-family: 'Exo 2', sans-serif;
       font-size: 1.2rem;
       font-weight: 500;
+      color: var(--accent-warm);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    .next-article-cta a:hover {
+      border-color: var(--accent-warm);
     }
     
+    .page-footer {
+        text-align: center;
+        padding: 2rem 1rem 1rem;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        opacity: 0.6;
+    }
+
     @media (max-width: 768px) {
       .article-container { padding: 2rem 1rem 3rem 1rem; }
       .article-content h1 { font-size: 1.8rem; }
@@ -299,7 +319,7 @@
               <circle cx="100" cy="65" r="50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="15"></circle>
               <circle cx="100" cy="65" r="50" fill="none" stroke="var(--accent-warm)" stroke-width="15" stroke-linecap="round" stroke-dasharray="206.4 314" stroke-dashoffset="0" transform="rotate(-90 100 65)"></circle>
               <text x="100" y="70" text-anchor="middle" font-family="Exo 2, sans-serif" font-size="28" font-weight="700" fill="var(--text-primary)">65.7%</text>
-              <text x="100" y="140" class="chart-title">...населения планеты пользуются соцсетями</text>
+              <text x="100" y="140" class="chart-title">Пользуются соцсетями</text>
           </svg>
           <p class="chart-source">Источник: <a href="https://datareportal.com/social-media-users" target="_blank" rel="noopener noreferrer">Kepios, Digital 2024 Global Overview Report</a></p>
       </div>
@@ -329,7 +349,7 @@
 
           <g transform="translate(0, 120)">
              <text x="0" y="12" text-anchor="start" class="chart-label">Социальные сети</text>
-             <text x="295" y="12" text-anchor="end" class="chart-value">~30%</text>
+             <text x="295" y="12" text-anchor="end" class="chart-value">&lt;30% и падает</text>
              <rect x="0" y="18" width="295" height="12" rx="3" class="chart-bar-bg"></rect>
              <rect x="0" y="18" width="88" height="12" rx="3" class="chart-bar"></rect> 
           </g>
@@ -343,7 +363,7 @@
 
       <p>Социальные сети — это, грубо говоря, «частная лавочка», у которой есть своя политика. Вы абсолютно никак не застрахованы от неудачных решений таких компаний, которые могут доставить проблемы и испортить вам всю информационку.</p>
 
-      <p>Или Instagram* в 2022 году решил (<a href="https://www.rt.com/russia/552405-russia-ban-facebook-instagram/" target="_blank" rel="noopener noreferrer">согласно сообщениям СМИ</a>), что призывы к уничтожению людей на основе их гражданства — допустимая информационная политика. Итог — блокировка на территории России. Люди потеряли деньги. (*деятельность Meta (соцсети Facebook и Instagram) запрещена в России как экстремистская)</p>
+      <p><a href="https://www.rt.com/russia/552405-russia-ban-facebook-instagram/" target="_blank" rel="noopener noreferrer">В 2022 году Instagram* решил</a>, что призывы к уничтожению людей на основе их гражданства — допустимая информационная политика. Итог — блокировка на территории России. Люди потеряли деньги.</p>
 
       <p>Имея свой собственный сайт, вы получаете возможность напрямую говорить с клиентом, делать это по своим правилам, не находясь в условиях, когда вам приходится зависеть от решений других людей.</p>
 
@@ -373,6 +393,10 @@
     </div>
 
   </div>
+
+  <footer class="page-footer">
+    <p>*Деятельность Meta (соцсети Facebook и Instagram) запрещена в России как экстремистская.</p>
+  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
