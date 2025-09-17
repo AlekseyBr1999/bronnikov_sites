@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <title>Зачем вашему бизнесу сайт в 2025 году?</title>
+  <meta name="description" content="Зачем нужны сайты, когда есть соцсети? Почему люди больше не доверяют соцсетям и возвращаются к сайтам? Как сайт делает вас автономным и независимым?" />
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='Exo 2, sans-serif' font-weight='700' fill='%23ffb700'>Э.</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;700&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    /* --- СТИЛИ С ГЛАВНОЙ СТРАНИЦЫ --- */
+    :root {
+      --bg-organic-dark: #22201e;
+      --bg-panel-glass: rgba(43, 40, 37, 0.5);
+      --accent-warm: #ffb700;
+      --accent-glow: rgba(255, 183, 0, 0.5);
+      --text-primary: #f0ede9;
+      --text-secondary: #b8b0a6;
+      --border-color: rgba(255, 183, 0, 0.2);
+      --border-hover: rgba(255, 183, 0, 0.7);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Manrope', sans-serif;
+      color: var(--text-primary);
+      background-color: var(--bg-organic-dark);
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: default;
+    }
+    
+    body::-webkit-scrollbar { width: 8px; }
+    body::-webkit-scrollbar-track { background: var(--bg-organic-dark); }
+    body::-webkit-scrollbar-thumb { background-color: var(--accent-warm); border-radius: 10px; border: 2px solid var(--bg-organic-dark); }
+
+    #background-wrapper {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%; z-index: -2; overflow: hidden;
+    }
+    #living-glow {
+      position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
+      background: 
+        radial-gradient(circle at 25% 25%, var(--accent-glow) 0%, transparent 30%),
+        radial-gradient(circle at 75% 75%, rgba(121, 45, 255, 0.15) 0%, transparent 35%);
+      animation: living-glow-rotate 40s ease-in-out infinite alternate;
+    }
+    @keyframes living-glow-rotate {
+      from { transform: rotate(0deg) scale(1); }
+      to { transform: rotate(360deg) scale(1.2); }
+    }
+    #particle-container { position: absolute; top:0; left:0; width:100%; height:100%; }
+    .particle { position: absolute; border-radius: 50%; background: var(--accent-warm); opacity: 0; animation: rise 15s infinite ease-in; }
+    @keyframes rise {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.2; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+    .particle:nth-child(1){width:4px;height:4px;left:10%;animation-delay:0s;animation-duration:15s}.particle:nth-child(2){width:2px;height:2px;left:20%;animation-delay:2s;animation-duration:12s}.particle:nth-child(3){width:5px;height:5px;left:30%;animation-delay:4s;animation-duration:18s}.particle:nth-child(4){width:3px;height:3px;left:40%;animation-delay:1s;animation-duration:14s}.particle:nth-child(5){width:2px;height:2px;left:50%;animation-delay:7s;animation-duration:11s}.particle:nth-child(6){width:4px;height:4px;left:60%;animation-delay:3s;animation-duration:16s}.particle:nth-child(7){width:6px;height:6px;left:70%;animation-delay:8s;animation-duration:20s}.particle:nth-child(8){width:2px;height:2px;left:80%;animation-delay:5s;animation-duration:13s}.particle:nth-child(9){width:3px;height:3px;left:90%;animation-delay:6s;animation-duration:17s}.particle:nth-child(10){width:5px;height:5px;left:5%;animation-delay:9s;animation-duration:19s}
+
+    .main-wrapper { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+
+    /* --- СТИЛИ КНОПОК --- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: 'Exo 2', sans-serif; font-size: 1rem; font-weight: 500;
+      text-decoration: none; text-transform: uppercase; color: var(--text-primary);
+      border: 1px solid var(--border-color); background-color: transparent;
+      padding: 0.9rem 2rem; border-radius: 50px; position: relative;
+      overflow: hidden; transition: all 0.4s ease; z-index: 1; cursor: pointer;
+    }
+    .btn::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background-color: var(--accent-warm); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: -1;
+    }
+    .btn:hover, .btn:focus {
+      color: var(--bg-organic-dark); border-color: var(--accent-warm); box-shadow: 0 0 25px var(--accent-glow);
+    }
+    .btn:hover::before { transform: scaleX(1); }
+    .btn.secondary { background-color: transparent; color: var(--text-secondary); border-color: var(--border-color); }
+    .btn.secondary:hover { color: var(--text-primary); border-color: var(--accent-warm); background-color: rgba(255, 183, 0, 0.1); box-shadow: 0 0 15px rgba(255, 183, 0, 0.3); }
+    .btn.secondary:hover::before { transform: scaleX(0); }
+    .btn-call-to-action { animation: pulse-glow 2.5s infinite alternate; }
+    @keyframes pulse-glow {
+      from { border-color: var(--border-color); box-shadow: 0 0 10px -5px var(--accent-glow); }
+      to { border-color: var(--border-hover); box-shadow: 0 0 20px 5px var(--accent-glow), 0 0 35px 5px var(--accent-glow); }
+    }
+    
+    .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+    .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* --- НОВЫЕ СТИЛИ ДЛЯ СТРАНИЦЫ СТАТЬИ --- */
+    .article-container {
+      max-width: 800px;
+      padding-top: 3rem;
+      padding-bottom: 5rem;
+    }
+    
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Exo 2', sans-serif;
+      text-decoration: none;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .back-button:hover {
+      color: var(--accent-warm);
+      transform: translateX(-5px);
+    }
+
+    .article-content h1 {
+      font-family: 'Exo 2', sans-serif;
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 2rem 0;
+      color: var(--text-primary);
+      text-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .article-content h2 {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.8rem;
+      margin: 3rem 0 1.5rem 0;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-primary);
+    }
+
+    .article-content p, .article-content li {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+    
+    .article-content ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .article-content li {
+      padding-left: 2rem;
+      position: relative;
+    }
+    .article-content li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 10px;
+      height: 10px;
+      background-color: var(--accent-warm);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .article-content a {
+      color: var(--accent-warm);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    .article-content a:hover {
+      border-color: var(--accent-warm);
+    }
+
+    .infographic-card {
+      padding: 2.5rem;
+      margin: 2.5rem 0;
+      border: 1px solid var(--border-color);
+      background: var(--bg-panel-glass);
+      backdrop-filter: blur(16px) saturate(150%);
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .infographic-card svg {
+      max-width: 100%;
+      height: auto;
+    }
+    .chart-title { font-size: 14px; font-family: 'Exo 2', sans-serif; font-weight: 500; fill: var(--text-primary); text-anchor: middle; }
+    .chart-bar { fill: var(--accent-warm); }
+    .chart-bar-bg { fill: rgba(255, 255, 255, 0.1); }
+    .chart-label { font-size: 13px; fill: var(--text-secondary); }
+    .chart-value { font-size: 13px; font-weight: 700; fill: var(--text-primary); }
+    .chart-source { font-size: 0.8rem; color: var(--text-secondary); opacity: 0.7; }
+    .chart-source a { color: var(--text-secondary); }
+
+    .cta-section {
+      text-align: center;
+      margin-top: 5rem;
+      padding: 3rem 2rem;
+      border-radius: 24px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-panel-glass);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      animation: cta-glow-spin 20s linear infinite;
+      opacity: 0.7;
+    }
+    @keyframes cta-glow-spin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+    
+    .cta-content { position: relative; z-index: 1; }
+    .cta-content h2 {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 2rem;
+      color: var(--text-primary);
+      margin: 0 0 1rem 0;
+      border-bottom: none;
+    }
+    .cta-content p {
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 2rem auto;
+      font-size: 1.1rem;
+    }
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .next-article-cta {
+      margin-top: 3rem;
+      padding: 1.5rem;
+      text-align: center;
+      background: rgba(0,0,0,0.2);
+      border-radius: 12px;
+    }
+    .next-article-cta a {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+    
+    @media (max-width: 768px) {
+      .article-container { padding: 2rem 1rem 3rem 1rem; }
+      .article-content h1 { font-size: 1.8rem; }
+      .article-content h2 { font-size: 1.5rem; }
+      .article-content p, .article-content li { font-size: 1rem; }
+      .infographic-card { padding: 1.5rem; }
+      .cta-content h2 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+
+<body>
+  
+  <div id="background-wrapper">
+    <div id="living-glow"></div>
+    <div id="particle-container">
+      <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+      <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    </div>
+  </div>
+
+  <div class="main-wrapper article-container">
+    <a href="../blog.html" class="back-button">&larr; Назад в блог</a>
+
+    <article class="article-content">
+      <h1>Сайт в 2025 году: нужен ли?</h1>
+
+      <p>В эпоху тотального и безоговорочного доминирования соцсетей может показаться, что сайты — вымирающий вид. Ну еще бы: пока трафик на сайты приходит в основном из поисковой выдачи и через сканирование QR-кодов, у соцсетей есть хитрые алгоритмы, которые специально написаны для того, чтобы показывать сайт незнакомым людям.</p>
+
+      <p>Но это очень поверхностный взгляд. Давайте заглянем чуть глубже и посмотрим на социологию и исследования.</p>
+
+      <h2>Доверие к соцсетям и сайтам</h2>
+
+      <p>Практически у всех нас есть профили в социальных сетях. Согласно данным агентства <a href="https://datareportal.com/social-media-users" target="_blank" rel="noopener noreferrer">Kepios</a>, на сегодняшний день пользователями соцсетей являются 5.41 миллиарда человек, это 65,7% от общей численности населения планеты. С каждым годом это число растет. Люди все больше потребляют контент именно оттуда.</p>
+
+      <div class="infographic-card animate-on-scroll">
+          <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="chart1-title">
+              <title id="chart1-title">65.7% населения планеты пользуются соцсетями</title>
+              <circle cx="100" cy="65" r="50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="15"></circle>
+              <circle cx="100" cy="65" r="50" fill="none" stroke="var(--accent-warm)" stroke-width="15" stroke-linecap="round" stroke-dasharray="206.4 314" stroke-dashoffset="0" transform="rotate(-90 100 65)"></circle>
+              <text x="100" y="70" text-anchor="middle" font-family="Exo 2, sans-serif" font-size="28" font-weight="700" fill="var(--text-primary)">65.7%</text>
+              <text x="100" y="140" class="chart-title">...населения планеты пользуются соцсетями</text>
+          </svg>
+          <p class="chart-source">Источник: <a href="https://datareportal.com/social-media-users" target="_blank" rel="noopener noreferrer">Kepios, Digital 2024 Global Overview Report</a></p>
+      </div>
+
+      <p>Парадоксально, но в то же время доверие к информации из социальных сетей с каждым годом падает и сейчас находится на рекордно низком уровне. Эту тенденцию опубликовали в докладе <a href="https://www.edelman.com/trust/2017-trust-barometer" target="_blank" rel="noopener noreferrer">Edelman Trust Barometer 2018</a> почти 10 лет назад и с тех пор доверие к социальным сетям только продолжает снижаться.</p>
+
+      <p>Исследователи опросили 33 тыс. человек из 28 стран, включая Россию. Согласно информации из доклада, 7 из 10 опрошенных сказали, что не доверяют информации из социальных сетей, при этом доверие к традиционным СМИ, включая сайты, выросло до рекордных 59%. Доверие к сайтам бизнеса составило 52% — все еще намного выше, чем к соцсетям.</p>
+      
+      <div class="infographic-card animate-on-scroll">
+        <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="chart2-title">
+          <title id="chart2-title">Уровень доверия к разным источникам информации (2018)</title>
+          <text x="150" y="15" class="chart-title">Уровень доверия к источникам информации</text>
+          
+          <g transform="translate(0, 40)">
+            <text x="0" y="12" text-anchor="start" class="chart-label">Традиционные СМИ (и сайты)</text>
+            <text x="295" y="12" text-anchor="end" class="chart-value">59%</text>
+            <rect x="0" y="18" width="295" height="12" rx="3" class="chart-bar-bg"></rect>
+            <rect x="0" y="18" width="174" height="12" rx="3" class="chart-bar"></rect> 
+          </g>
+          
+          <g transform="translate(0, 80)">
+            <text x="0" y="12" text-anchor="start" class="chart-label">Сайты бизнеса</text>
+            <text x="295" y="12" text-anchor="end" class="chart-value">52%</text>
+            <rect x="0" y="18" width="295" height="12" rx="3" class="chart-bar-bg"></rect>
+            <rect x="0" y="18" width="153" height="12" rx="3" class="chart-bar"></rect> 
+          </g>
+
+          <g transform="translate(0, 120)">
+             <text x="0" y="12" text-anchor="start" class="chart-label">Социальные сети</text>
+             <text x="295" y="12" text-anchor="end" class="chart-value">~30%</text>
+             <rect x="0" y="18" width="295" height="12" rx="3" class="chart-bar-bg"></rect>
+             <rect x="0" y="18" width="88" height="12" rx="3" class="chart-bar"></rect> 
+          </g>
+        </svg>
+        <p class="chart-source">Источник: <a href="https://www.edelman.com/trust/2017-trust-barometer" target="_blank" rel="noopener noreferrer">Edelman Trust Barometer 2018</a></p>
+      </div>
+      
+      <p>Недавний доклад <a href="https://www.edelman.com/trust/2024/trust-barometer" target="_blank" rel="noopener noreferrer">Edelman Trust Barometer 2024</a> показал, что эта тенденция продолжается: сегодня еще больше людей недоверяют соцсетям, хотя доверие к традиционным СМИ тоже снизилось.</p>
+
+      <h2>Сайты — это независимость</h2>
+
+      <p>Социальные сети — это, грубо говоря, «частная лавочка», у которой есть своя политика. Вы абсолютно никак не застрахованы от неудачных решений таких компаний, которые могут доставить проблемы и испортить вам всю информационку.</p>
+
+      <p>Или Instagram* в 2022 году решил (<a href="https://www.rt.com/russia/552405-russia-ban-facebook-instagram/" target="_blank" rel="noopener noreferrer">согласно сообщениям СМИ</a>), что призывы к уничтожению людей на основе их гражданства — допустимая информационная политика. Итог — блокировка на территории России. Люди потеряли деньги. (*деятельность Meta (соцсети Facebook и Instagram) запрещена в России как экстремистская)</p>
+
+      <p>Имея свой собственный сайт, вы получаете возможность напрямую говорить с клиентом, делать это по своим правилам, не находясь в условиях, когда вам приходится зависеть от решений других людей.</p>
+
+      <h2>Что делать? Отказываться от соцсетей в пользу сайтов?</h2>
+
+      <p>Нет. Соцсети остаются очень мощным инструментом продвижения вашего бизнеса. Самый рациональный подход — сочетать использование соцсетей и сайта.</p>
+      
+      <ul>
+        <li>Соцсети обладают мощными алгоритмами, которые, при верном использовании, смогут привести трафик на ваш сайт и увеличить количество заказов.</li>
+        <li>Сайт создаст ощущение экспертности (вы будете выглядеть не как случайный фрилансер, который пытается продать услуги в ВК, а как серьезный человек и профессионал), позволит в удобной форме познакомить потенциального заказчика с вашими услугами.</li>
+      </ul>
+    </article>
+    
+    <section class="cta-section animate-on-scroll">
+      <div class="cta-content">
+        <h2>Превратим идею в реальность?</h2>
+        <p>Заполните бриф или свяжитесь со мной. Мы обсудим проект вашего будущего сайта, и я сформирую коммерческое предложение, идеально подходящее для вашего бизнеса.</p>
+        <div class="cta-buttons">
+          <a href="../brief.html" class="btn btn-call-to-action"><span>Заполнить бриф</span></a>
+          <a href="../index.html#contacts" class="btn secondary"><span>Связаться со мной</span></a>
+        </div>
+      </div>
+    </section>
+
+    <div class="next-article-cta animate-on-scroll">
+      <p>Читать далее: <a href="custom-vs-template.html">Почему кастомные сайты с уникальным дизайном лучше, чем решения, созданные на конструкторе?</a></p>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- АНИМАЦИИ ПРИ СКРОЛЛЕ ---
+      const animatedEls = document.querySelectorAll('.animate-on-scroll');
+      if (animatedEls.length > 0) {
+        const animationObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        animatedEls.forEach(el => animationObserver.observe(el));
+      }
+    });
+  </script>
+</body>
+</html>
